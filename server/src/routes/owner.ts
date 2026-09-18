@@ -422,8 +422,12 @@ router.patch('/products/:id/availability', async (req: AuthenticatedRequest, res
     const { id } = req.params;
     const { availability } = req.body;
 
-    if (availability !== 'AVAILABLE' && availability !== 'UNAVAILABLE') {
-      res.status(400).json({ success: false, message: 'Invalid availability state.' });
+    const VALID_STATES = ['AVAILABLE', 'UNAVAILABLE', 'HIDDEN'];
+    if (!VALID_STATES.includes(availability)) {
+      res.status(400).json({
+        success: false,
+        message: `Invalid availability state. Must be one of: ${VALID_STATES.join(', ')}.`,
+      });
       return;
     }
 
@@ -513,6 +517,110 @@ router.get('/categories', async (req: AuthenticatedRequest, res: Response) => {
     }));
 
     res.json({ success: true, data: formatted });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// GET /api/owner/catalogue-stats
+// Returns real DB counts: total products, by availability, by category, variants
+// ---------------------------------------------------------------------------
+
+router.get('/catalogue-stats', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    // Product counts by availability
+    const { data: products, error: pErr } = await supabase
+      .from('products')
+      .select('id, availability, category_id');
+
+    if (pErr) {
+      res.status(500).json({ success: false, message: pErr.message });
+      return;
+    }
+
+    // Variant count
+    const { count: variantCount, error: vErr } = await supabase
+      .from('product_variants')
+      .select('id', { count: 'exact', head: true });
+
+    if (vErr) {
+      res.status(500).json({ success: false, message: vErr.message });
+      return;
+    }
+
+    // Categories with names
+    const { data: categories, error: cErr } = await supabase
+      .from('categories')
+      .select('id, name, display_order')
+      .eq('is_active', true)
+      .order('display_order');
+
+    if (cErr) {
+      res.status(500).json({ success: false, message: cErr.message });
+      return;
+    }
+
+    const total = products?.length || 0;
+    const available = products?.filter((p) => p.availability === 'AVAILABLE').length || 0;
+    const unavailable = products?.filter((p) => p.availability === 'UNAVAILABLE').length || 0;
+    const hidden = products?.filter((p) => p.availability === 'HIDDEN').length || 0;
+
+    // Per-category breakdown
+    const categoryBreakdown = (categories || []).map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+      count: products?.filter((p) => p.category_id === cat.id).length || 0,
+    })).filter((c) => c.count > 0);
+
+    res.json({
+      success: true,
+      data: {
+        total,
+        available,
+        unavailable,
+        hidden,
+        variants: variantCount || 0,
+        categories: categories?.length || 0,
+        category_breakdown: categoryBreakdown,
+      },
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// PATCH /api/owner/variants/:id/availability
+// ---------------------------------------------------------------------------
+
+router.patch('/variants/:id/availability', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { availability } = req.body;
+
+    const VALID_STATES = ['AVAILABLE', 'UNAVAILABLE', 'HIDDEN'];
+    if (!VALID_STATES.includes(availability)) {
+      res.status(400).json({
+        success: false,
+        message: `Invalid availability state. Must be one of: ${VALID_STATES.join(', ')}.`,
+      });
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('product_variants')
+      .update({ availability, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      res.status(500).json({ success: false, message: error.message });
+      return;
+    }
+
+    res.json({ success: true, message: 'Variant availability updated.', data });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });
   }

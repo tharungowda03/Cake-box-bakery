@@ -37,9 +37,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart((prev) => {
       const existingIndex = prev.findIndex((i) => i.variant_id === item.variant_id);
       if (existingIndex > -1) {
-        const updated = [...prev];
-        updated[existingIndex].quantity += item.quantity;
-        return updated;
+        // Create a NEW array with a NEW object at the matching index —
+        // never mutate objects inside a shallow-copied array or React
+        // may not detect the state change and skip the re-render.
+        return prev.map((cartItem, idx) =>
+          idx === existingIndex
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
+        );
       }
       return [...prev, { ...item, id: `${item.variant_id}_${Date.now()}` }];
     });

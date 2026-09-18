@@ -425,7 +425,7 @@ export const ownerService = {
     return json.data || [];
   },
 
-  async updateProductAvailability(id: string, availability: 'AVAILABLE' | 'UNAVAILABLE'): Promise<any> {
+  async updateProductAvailability(id: string, availability: 'AVAILABLE' | 'UNAVAILABLE' | 'HIDDEN'): Promise<any> {
     const token = await getAuthToken();
     const res = await fetch(`${API_BASE}/owner/products/${id}/availability`, {
       method: 'PATCH',
@@ -463,6 +463,39 @@ export const ownerService = {
     const json = await res.json();
     if (!json.success) throw new Error(json.message);
     return json.data || [];
+  },
+
+  async getCatalogueStats(): Promise<{
+    total: number;
+    available: number;
+    unavailable: number;
+    hidden: number;
+    variants: number;
+    categories: number;
+    category_breakdown: { id: string; name: string; count: number }[];
+  }> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/catalogue-stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async updateVariantAvailability(id: string, availability: 'AVAILABLE' | 'UNAVAILABLE' | 'HIDDEN'): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/variants/${id}/availability`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ availability }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
   },
 
   async getCustomers(): Promise<any[]> {

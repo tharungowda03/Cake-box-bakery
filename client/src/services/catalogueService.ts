@@ -34,6 +34,7 @@ export const catalogueService = {
         product_variants (*),
         product_images (*)
       `)
+      .neq('availability', 'HIDDEN')
       .order('name', { ascending: true });
 
     if (categoryId) {
@@ -61,7 +62,8 @@ export const catalogueService = {
         category:categories (*),
         product_variants (*),
         product_images (*)
-      `);
+      `)
+      .neq('availability', 'HIDDEN');
 
     if (isUuid) {
       query = query.eq('id', idOrSlug);
@@ -90,6 +92,7 @@ export const catalogueService = {
         product_variants (*),
         product_images (*)
       `)
+      .neq('availability', 'HIDDEN')
       .ilike('name', `%${searchTerm}%`)
       .order('name', { ascending: true });
 

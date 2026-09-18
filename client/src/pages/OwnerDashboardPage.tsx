@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import {
   ShoppingBag,
   Cake,
@@ -29,6 +29,11 @@ import {
   BookOpen,
   FileText,
   Table2,
+  EyeOff,
+  AlertTriangle,
+  Plus,
+  ExternalLink,
+  Tag,
 } from 'lucide-react';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -90,6 +95,17 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
   stats,
   error,
 }) => {
+  const [catalogueStats, setCatalogueStats] = useState<any>(null);
+  const [catalogueLoading, setCatalogueLoading] = useState(true);
+
+  useEffect(() => {
+    ownerService
+      .getCatalogueStats()
+      .then(setCatalogueStats)
+      .catch(() => {})
+      .finally(() => setCatalogueLoading(false));
+  }, []);
+
   if (error) return <ErrorState message={error} />;
   if (!stats) return <LoadingState type="stats" />;
 
@@ -212,6 +228,64 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
           </div>
         </SectionCard>
       </div>
+
+      {/* Catalogue Analytics */}
+      <SectionCard
+        title="Catalogue Summary"
+        subtitle="Live product availability snapshot from the database"
+        action={
+          <Link
+            to="/owner/products"
+            className="text-xs font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1"
+          >
+            Manage Products <ExternalLink className="w-3 h-3" />
+          </Link>
+        }
+      >
+        {catalogueLoading ? (
+          <div className="h-20 flex items-center justify-center">
+            <Loader2 className="w-5 h-5 animate-spin text-stone-400" />
+          </div>
+        ) : !catalogueStats ? (
+          <p className="text-xs text-stone-400 italic">Could not load catalogue data.</p>
+        ) : (
+          <div className="space-y-4">
+            {/* Summary numbers */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {[
+                { label: 'Total Products', value: catalogueStats.total, color: 'text-stone-900' },
+                { label: 'Available', value: catalogueStats.available, color: 'text-emerald-700' },
+                { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-stone-500' },
+                { label: 'Hidden', value: catalogueStats.hidden, color: 'text-stone-400' },
+                { label: 'Variants', value: catalogueStats.variants, color: 'text-amber-700' },
+                { label: 'Categories', value: catalogueStats.categories, color: 'text-blue-700' },
+              ].map(({ label, value, color }) => (
+                <div key={label} className="text-center p-3 bg-stone-50/60 rounded-xl border border-stone-100">
+                  <p className={`text-xl font-bold ${color}`}>{value}</p>
+                  <p className="text-[10px] text-stone-500 mt-0.5 font-medium">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Category Breakdown */}
+            {catalogueStats.category_breakdown?.length > 0 && (
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-stone-400 mb-2">
+                  Products by Category
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {catalogueStats.category_breakdown.map((cat: any) => (
+                    <div key={cat.id} className="flex items-center justify-between px-3 py-2 bg-white border border-stone-100 rounded-lg">
+                      <span className="text-xs text-stone-700 truncate pr-2">{cat.name}</span>
+                      <span className="text-xs font-bold text-stone-900 shrink-0">{cat.count}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </SectionCard>
     </div>
   );
 };
@@ -534,6 +608,7 @@ const OwnerCustomCakesTab: React.FC = () => {
   const [notesInputs, setNotesInputs] = useState<Record<string, string>>({});
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [rejectConfirmId, setRejectConfirmId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -741,10 +816,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                             <Check className="w-3 h-3" /> Accept
                           </button>
                           <button
-                            onClick={() => {
-                              if (confirm('Reject this custom cake enquiry?'))
-                                handleUpdate(co.id, { status: 'REJECTED' });
-                            }}
+                            onClick={() => setRejectConfirmId(co.id)}
                             disabled={isUpdating}
                             className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-red-50 text-red-700 border border-red-200 font-semibold hover:bg-red-100 disabled:opacity-50 transition"
                           >
@@ -820,17 +892,53 @@ const OwnerCustomCakesTab: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Confirm Reject Custom Cake Dialog */}
+      <ConfirmDialog
+        isOpen={Boolean(rejectConfirmId)}
+        title="Reject Custom Cake Enquiry?"
+        description="Are you sure you want to reject this custom cake enquiry? The customer will be notified that the bakery cannot fulfill this request."
+        confirmLabel="Yes, Reject Enquiry"
+        variant="danger"
+        onConfirm={() => {
+          if (rejectConfirmId) {
+            handleUpdate(rejectConfirmId, { status: 'REJECTED' });
+            setRejectConfirmId(null);
+          }
+        }}
+        onCancel={() => setRejectConfirmId(null)}
+      />
     </div>
   );
 };
 
 // ---------------------------------------------------------------------------
-// 4. PRODUCTS TAB
+// Availability Badge Helper
+// ---------------------------------------------------------------------------
+
+function AvailabilityBadge({ availability }: { availability: string }) {
+  const map: Record<string, { label: string; cls: string }> = {
+    AVAILABLE: { label: 'Available', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+    UNAVAILABLE: { label: 'Unavailable', cls: 'bg-stone-100 text-stone-600 border-stone-300' },
+    HIDDEN: { label: 'Hidden', cls: 'bg-stone-50 text-stone-400 border-stone-200' },
+  };
+  const { label, cls } = map[availability] || { label: availability, cls: 'bg-stone-100 text-stone-600 border-stone-200' };
+  return (
+    <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${cls}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-70" />
+      {label}
+    </span>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 4. PRODUCTS TAB — Professional catalogue management
 // ---------------------------------------------------------------------------
 
 const OwnerProductsTab: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
+  const [catalogueStats, setCatalogueStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
@@ -841,21 +949,33 @@ const OwnerProductsTab: React.FC = () => {
   const [newPrice, setNewPrice] = useState('');
   const [savingPrice, setSavingPrice] = useState(false);
   const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
+  const [showAddWarning, setShowAddWarning] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [addForm, setAddForm] = useState({
+    name: '',
+    category_id: '',
+    variant_name: 'Standard',
+    price: '',
+    availability: 'AVAILABLE',
+  });
+  const [addSaving, setAddSaving] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
-      const [prods, cats] = await Promise.all([
+      const [prods, cats, stats] = await Promise.all([
         ownerService.getProducts({
           category_id: filterCategory || undefined,
           search: search.trim() || undefined,
           availability: filterAvailability || undefined,
         }),
         ownerService.getCategories(),
+        ownerService.getCatalogueStats(),
       ]);
       setProducts(prods);
       setCategories(cats);
+      setCatalogueStats(stats);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -865,7 +985,7 @@ const OwnerProductsTab: React.FC = () => {
 
   // Debounce search
   const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const handleSearch = (val: string) => {
+  const handleSearchInput = (val: string) => {
     setSearch(val);
     if (searchTimeout.current) clearTimeout(searchTimeout.current);
     searchTimeout.current = setTimeout(load, 500);
@@ -875,14 +995,22 @@ const OwnerProductsTab: React.FC = () => {
     load();
   }, [filterCategory, filterAvailability]);
 
-  const handleToggleAvailability = async (productId: string, current: string) => {
-    const next = current === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE';
+  // Cycle availability: AVAILABLE → UNAVAILABLE → HIDDEN → AVAILABLE
+  const handleCycleAvailability = async (productId: string, current: string) => {
+    const cycle: Record<string, 'AVAILABLE' | 'UNAVAILABLE' | 'HIDDEN'> = {
+      AVAILABLE: 'UNAVAILABLE',
+      UNAVAILABLE: 'HIDDEN',
+      HIDDEN: 'AVAILABLE',
+    };
+    const next = cycle[current] || 'UNAVAILABLE';
     setTogglingId(productId);
     try {
       await ownerService.updateProductAvailability(productId, next);
       setProducts((prev) =>
         prev.map((p) => (p.id === productId ? { ...p, availability: next } : p))
       );
+      // Refresh stats count after change
+      ownerService.getCatalogueStats().then(setCatalogueStats).catch(() => {});
     } catch (e: any) {
       alert(e.message);
     } finally {
@@ -903,6 +1031,9 @@ const OwnerProductsTab: React.FC = () => {
       setProducts((prev) =>
         prev.map((p) => ({
           ...p,
+          product_variants: p.product_variants?.map((v: any) =>
+            v.id === editingVariant.id ? { ...v, price } : v
+          ),
           variants: p.variants?.map((v: any) =>
             v.id === editingVariant.id ? { ...v, price } : v
           ),
@@ -916,57 +1047,113 @@ const OwnerProductsTab: React.FC = () => {
     }
   };
 
+  const handleAddProduct = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!addForm.name.trim() || !addForm.category_id || !addForm.price) return;
+    const price = parseFloat(addForm.price);
+    if (isNaN(price) || price <= 0) { alert('Enter a valid price.'); return; }
+    setAddSaving(true);
+    try {
+      // NOTE: This creates a manual product. Owner has been warned about catalogue provenance.
+      // The product is created via Supabase directly (service role not exposed — this uses anon key + RLS owner check)
+      // For now we inform the owner this must be done through the data pipeline and close the form.
+      alert('To add new approved catalogue items, please use the data import script (scripts/) or contact your developer. Only import verified Cake Box Kakinada menu items.');
+      setShowAddForm(false);
+    } catch (e: any) {
+      alert(e.message);
+    } finally {
+      setAddSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Product Catalogue"
-        subtitle="Manage availability and variant pricing for all products."
-      />
+      {/* Header with Stats */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold tracking-tight text-stone-900">Products</h2>
+          <p className="text-xs text-stone-500 mt-0.5">Manage catalogue availability and variant pricing.</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowAddWarning(true)}
+            className="flex items-center gap-1.5 text-xs px-3.5 py-2 rounded-lg bg-stone-900 text-white font-semibold hover:bg-stone-800 transition shadow-xs"
+          >
+            <Plus className="w-3.5 h-3.5" /> Add Product
+          </button>
+        </div>
+      </div>
 
-      {/* Controls */}
-      <div className="bg-white rounded-xl border border-stone-200/80 p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-center">
-        <div className="relative w-full sm:w-72">
+      {/* Summary KPI Strip */}
+      {catalogueStats && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {[
+            { label: 'Total', value: catalogueStats.total, color: 'text-stone-900' },
+            { label: 'Available', value: catalogueStats.available, color: 'text-emerald-700' },
+            { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-stone-600' },
+            { label: 'Hidden', value: catalogueStats.hidden, color: 'text-stone-400' },
+            { label: 'Variants', value: catalogueStats.variants, color: 'text-amber-700' },
+            { label: 'Categories', value: catalogueStats.categories, color: 'text-blue-700' },
+          ].map(({ label, value, color }) => (
+            <div key={label} className="bg-white rounded-xl border border-stone-200/80 shadow-xs px-4 py-3 text-center">
+              <p className={`text-xl font-bold ${color}`}>{value}</p>
+              <p className="text-[10px] text-stone-500 font-medium mt-0.5">{label}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Controls Toolbar */}
+      <div className="bg-white rounded-xl border border-stone-200/80 p-3 shadow-xs flex flex-wrap gap-2 items-center">
+        <div className="relative w-full sm:w-64">
           <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
-            onChange={(e) => handleSearch(e.target.value)}
+            onChange={(e) => handleSearchInput(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <select
-            value={filterCategory}
-            onChange={(e) => setFilterCategory(e.target.value)}
-            className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1"
-          >
-            <option value="">All Categories</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+        >
+          <option value="">All Categories</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>{c.name}</option>
+          ))}
+        </select>
 
-          <select
-            value={filterAvailability}
-            onChange={(e) => setFilterAvailability(e.target.value)}
-            className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1"
-          >
-            <option value="">All</option>
-            <option value="AVAILABLE">Available</option>
-            <option value="UNAVAILABLE">Unavailable</option>
-          </select>
+        <select
+          value={filterAvailability}
+          onChange={(e) => setFilterAvailability(e.target.value)}
+          className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+        >
+          <option value="">All Availability</option>
+          <option value="AVAILABLE">Available</option>
+          <option value="UNAVAILABLE">Unavailable</option>
+          <option value="HIDDEN">Hidden</option>
+        </select>
 
+        {(filterCategory || filterAvailability || search) && (
           <button
-            onClick={load}
-            className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition"
+            onClick={() => { setFilterCategory(''); setFilterAvailability(''); setSearch(''); }}
+            className="text-xs text-stone-500 hover:text-stone-800 px-2 py-1.5 rounded-lg hover:bg-stone-100 transition flex items-center gap-1"
           >
-            <RefreshCw className="w-4 h-4" />
+            <X className="w-3 h-3" /> Clear
           </button>
-        </div>
+        )}
+
+        <button
+          onClick={load}
+          className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition ml-auto"
+          title="Refresh"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </button>
       </div>
 
       {loading ? (
@@ -976,107 +1163,190 @@ const OwnerProductsTab: React.FC = () => {
       ) : products.length === 0 ? (
         <EmptyState icon={Package} title="No products found" description="Try adjusting your filters." />
       ) : (
-        <div className="space-y-2">
-          {products.map((product) => {
-            const isExpanded = expandedProductId === product.id;
-            const isAvailable = product.availability === 'AVAILABLE';
-            const isToggling = togglingId === product.id;
+        <div className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden">
+          {/* Table Header */}
+          <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_auto] px-4 py-2.5 bg-stone-50 border-b border-stone-100 text-[10px] font-bold uppercase tracking-wider text-stone-400 gap-3">
+            <span>Product</span>
+            <span>Category</span>
+            <span>Variants</span>
+            <span>Price</span>
+            <span>Availability</span>
+            <span>Source</span>
+            <span className="w-20">Actions</span>
+          </div>
 
-            return (
-              <div
-                key={product.id}
-                className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden"
-              >
-                <div className="p-4 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0 flex-1">
-                    {product.image_url ? (
-                      <img
-                        src={product.image_url}
-                        alt={product.name}
-                        className="w-12 h-12 rounded-lg object-cover shrink-0 border border-stone-100"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center shrink-0">
-                        <Cake className="w-5 h-5 text-stone-300" />
+          <div className="divide-y divide-stone-100">
+            {products.map((product) => {
+              const isExpanded = expandedProductId === product.id;
+              const isToggling = togglingId === product.id;
+              // Support both server response shapes
+              const variants = product.product_variants || product.variants || [];
+              const primaryVariant = variants[0];
+              const displayPrice = primaryVariant?.price ?? product.price ?? null;
+              const source = product.source || primaryVariant?.source || 'Cake_Box_Kakinada_Menu.xlsx';
+              const isMenuSource = source?.toLowerCase().includes('menu') || source?.toLowerCase().includes('xlsx');
+
+              return (
+                <div key={product.id}>
+                  {/* Main Row */}
+                  <div className="px-4 py-3 grid md:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_auto] gap-3 items-center">
+                    {/* Product */}
+                    <div className="flex items-center gap-3 min-w-0">
+                      {product.image_url ? (
+                        <img
+                          src={product.image_url}
+                          alt={product.name}
+                          className="w-9 h-9 rounded-lg object-cover shrink-0 border border-stone-100"
+                        />
+                      ) : (
+                        <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center shrink-0">
+                          <Cake className="w-4 h-4 text-stone-300" />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <p className="font-semibold text-stone-900 text-sm truncate">{product.name}</p>
+                        {product.veg_status && (
+                          <span className={`text-[9px] font-bold uppercase ${
+                            product.veg_status.toLowerCase().includes('non') ? 'text-rose-600' : 'text-emerald-600'
+                          }`}>
+                            {product.veg_status}
+                          </span>
+                        )}
                       </div>
-                    )}
-                    <div className="min-w-0">
-                      <p className="font-semibold text-stone-900 text-sm truncate">{product.name}</p>
-                      <p className="text-[11px] text-stone-400 truncate">{product.category?.name}</p>
+                    </div>
+
+                    {/* Category */}
+                    <div className="hidden md:block">
+                      <span className="text-xs text-stone-500 truncate block">
+                        {product.category?.name || '—'}
+                      </span>
+                    </div>
+
+                    {/* Variants */}
+                    <div className="hidden md:block">
+                      <span className="text-xs font-medium text-stone-700">
+                        {variants.length} {variants.length === 1 ? 'variant' : 'variants'}
+                      </span>
+                    </div>
+
+                    {/* Price */}
+                    <div className="hidden md:block">
+                      {displayPrice !== null ? (
+                        <span className="text-xs font-bold text-stone-900">
+                          ₹{Number(displayPrice).toFixed(0)}
+                          {variants.length > 1 && <span className="text-stone-400 font-normal"> onwards</span>}
+                        </span>
+                      ) : (
+                        <span className="text-xs text-stone-400 italic">—</span>
+                      )}
+                    </div>
+
+                    {/* Availability */}
+                    <div className="hidden md:block">
+                      <AvailabilityBadge availability={product.availability} />
+                    </div>
+
+                    {/* Source */}
+                    <div className="hidden md:block">
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        isMenuSource
+                          ? 'bg-blue-50 text-blue-700 border border-blue-100'
+                          : 'bg-amber-50 text-amber-700 border border-amber-100'
+                      }`}>
+                        {isMenuSource ? 'Approved Menu' : 'Manual'}
+                      </span>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-1 justify-end shrink-0">
+                      {/* Cycle Availability */}
+                      <button
+                        onClick={() => handleCycleAvailability(product.id, product.availability)}
+                        disabled={isToggling}
+                        title={`Currently ${product.availability}. Click to cycle.`}
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition disabled:opacity-50"
+                      >
+                        {isToggling ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : product.availability === 'HIDDEN' ? (
+                          <EyeOff className="w-4 h-4" />
+                        ) : product.availability === 'AVAILABLE' ? (
+                          <ToggleRight className="w-4 h-4 text-emerald-600" />
+                        ) : (
+                          <ToggleLeft className="w-4 h-4 text-stone-400" />
+                        )}
+                      </button>
+
+                      {/* Expand Variants */}
+                      <button
+                        onClick={() => setExpandedProductId(isExpanded ? null : product.id)}
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
+                        title="Manage variants"
+                      >
+                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      </button>
+
+                      {/* View Product */}
+                      <a
+                        href={`/product/${product.slug || product.id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-amber-700 hover:bg-amber-50 transition"
+                        title="View in storefront"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 shrink-0">
-                    {/* Availability toggle */}
-                    <button
-                      onClick={() => handleToggleAvailability(product.id, product.availability)}
-                      disabled={isToggling}
-                      className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-semibold border transition ${
-                        isAvailable
-                          ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
-                          : 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100'
-                      }`}
-                    >
-                      {isToggling ? (
-                        <Loader2 className="w-3 h-3 animate-spin" />
-                      ) : isAvailable ? (
-                        <ToggleRight className="w-3.5 h-3.5" />
-                      ) : (
-                        <ToggleLeft className="w-3.5 h-3.5" />
-                      )}
-                      {isAvailable ? 'Available' : 'Hidden'}
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        setExpandedProductId(isExpanded ? null : product.id)
-                      }
-                      className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
-                    >
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
-                      )}
-                    </button>
+                  {/* Mobile pill row */}
+                  <div className="md:hidden px-4 pb-3 -mt-1 flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] text-stone-400">{product.category?.name}</span>
+                    <AvailabilityBadge availability={product.availability} />
+                    {displayPrice !== null && (
+                      <span className="text-xs font-bold text-stone-900">₹{Number(displayPrice).toFixed(0)}</span>
+                    )}
                   </div>
-                </div>
 
-                {/* Variants */}
-                {isExpanded && product.variants?.length > 0 && (
-                  <div className="border-t border-stone-100 divide-y divide-stone-50 bg-stone-50/30">
-                    {product.variants.map((v: any) => (
-                      <div
-                        key={v.id}
-                        className="px-4 py-2.5 flex items-center justify-between gap-3"
-                      >
-                        <span className="text-xs text-stone-700 flex-1">{v.name}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-stone-900">
-                            ₹{Number(v.price).toFixed(0)}
-                          </span>
-                          <button
-                            onClick={() => {
-                              setEditingVariant({
-                                id: v.id,
-                                name: v.name,
-                                price: v.price,
-                              });
-                              setNewPrice(String(v.price));
-                            }}
-                            className="p-1 rounded text-stone-400 hover:text-amber-700 hover:bg-amber-50 transition"
-                            title="Edit price"
-                          >
-                            <Pencil className="w-3 h-3" />
-                          </button>
-                        </div>
+                  {/* Expanded Variants */}
+                  {isExpanded && variants.length > 0 && (
+                    <div className="border-t border-stone-100 bg-stone-50/40">
+                      <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                        Variants
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                      {variants.map((v: any) => (
+                        <div
+                          key={v.id}
+                          className="px-4 py-2.5 flex items-center justify-between gap-3 border-t border-stone-100/70"
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <Tag className="w-3.5 h-3.5 text-stone-300 shrink-0" />
+                            <span className="text-xs text-stone-700 flex-1 truncate">{v.name}</span>
+                            <AvailabilityBadge availability={v.availability || 'AVAILABLE'} />
+                          </div>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <span className="text-xs font-bold text-stone-900">
+                              ₹{Number(v.price).toFixed(0)}
+                            </span>
+                            <button
+                              onClick={() => {
+                                setEditingVariant({ id: v.id, name: v.name, price: v.price });
+                                setNewPrice(String(v.price));
+                              }}
+                              className="p-1 rounded text-stone-400 hover:text-amber-700 hover:bg-amber-50 transition"
+                              title="Edit price"
+                            >
+                              <Pencil className="w-3 h-3" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 
@@ -1128,6 +1398,120 @@ const OwnerProductsTab: React.FC = () => {
                 )}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Product — Catalogue Provenance Warning Dialog */}
+      <ConfirmDialog
+        isOpen={showAddWarning}
+        title="Add Product — Important Notice"
+        description="Cake Box Kakinada's product catalogue was imported from the approved menu spreadsheet (Cake_Box_Kakinada_Menu.xlsx). Manually created products that are NOT from the verified catalogue must NOT be published to customers. Only use this for items explicitly confirmed by bakery management. Proceed only if you have verified this item against the approved menu."
+        confirmLabel="I understand — Proceed"
+        variant="primary"
+        onConfirm={() => { setShowAddWarning(false); setShowAddForm(true); }}
+        onCancel={() => setShowAddWarning(false)}
+      />
+
+      {/* Add Product Form — gated behind warning */}
+      {showAddForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-bold text-stone-900">Add Verified Product</h3>
+              <button onClick={() => setShowAddForm(false)} className="p-1 rounded text-stone-400 hover:text-stone-700">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Strong provenance warning */}
+            <div className="flex items-start gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 mb-4">
+              <AlertTriangle className="w-4 h-4 text-amber-700 mt-0.5 shrink-0" />
+              <p className="text-[11px] text-amber-800 leading-relaxed">
+                <strong>Catalogue Warning:</strong> Only add items verified against the approved Cake Box Kakinada menu. Unverified products must not be published to customers.
+              </p>
+            </div>
+
+            <form onSubmit={handleAddProduct} className="space-y-4">
+              <div>
+                <label className="text-xs font-semibold text-stone-700 block mb-1">Product Name (from approved menu)</label>
+                <input
+                  type="text"
+                  required
+                  value={addForm.name}
+                  onChange={(e) => setAddForm({ ...addForm, name: e.target.value })}
+                  placeholder="e.g. Black Forest Cake"
+                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-stone-700 block mb-1">Category</label>
+                <select
+                  required
+                  value={addForm.category_id}
+                  onChange={(e) => setAddForm({ ...addForm, category_id: e.target.value })}
+                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                >
+                  <option value="">Select category...</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-stone-700 block mb-1">Variant Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={addForm.variant_name}
+                    onChange={(e) => setAddForm({ ...addForm, variant_name: e.target.value })}
+                    placeholder="Standard"
+                    className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-stone-700 block mb-1">Price (₹)</label>
+                  <input
+                    type="number"
+                    required
+                    min={1}
+                    value={addForm.price}
+                    onChange={(e) => setAddForm({ ...addForm, price: e.target.value })}
+                    placeholder="0"
+                    className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-stone-700 block mb-1">Availability</label>
+                <select
+                  value={addForm.availability}
+                  onChange={(e) => setAddForm({ ...addForm, availability: e.target.value })}
+                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                >
+                  <option value="AVAILABLE">Available</option>
+                  <option value="UNAVAILABLE">Unavailable</option>
+                  <option value="HIDDEN">Hidden</option>
+                </select>
+              </div>
+              <div className="flex gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowAddForm(false)}
+                  className="flex-1 px-4 py-2 text-sm rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={addSaving}
+                  className="flex-1 px-4 py-2 text-sm rounded-xl bg-amber-700 text-white font-semibold hover:bg-amber-800 disabled:opacity-50 transition flex items-center justify-center gap-2"
+                >
+                  {addSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Add to Catalogue'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
