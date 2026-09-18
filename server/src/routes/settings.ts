@@ -102,12 +102,7 @@ router.get('/business-rules', (_req: Request, res: Response) => {
         statusTransitions: CUSTOM_CAKE_RULES.statusTransitions,
         pricingRules: CUSTOM_CAKE_RULES.pricingRules,
       },
-      cancellationPolicy: {
-        displayText: CANCELLATION_POLICY.displayText,
-        cancellationEnabled: CANCELLATION_POLICY.cancellationEnabled,
-        configuredRules: CANCELLATION_POLICY.configuredRules,
-        notes: CANCELLATION_POLICY.notes,
-      },
+      cancellationPolicy: CANCELLATION_POLICY,
     },
   });
 });

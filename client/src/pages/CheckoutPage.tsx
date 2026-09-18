@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AlertCircle, MapPin, Truck, ArrowLeft } from 'lucide-react';
+import { AlertCircle, MapPin, Truck, Store, ArrowLeft } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { addressService, orderService, settingsService } from '../services/apiService';
 import type { Address } from '../types';
@@ -11,7 +11,7 @@ export const CheckoutPage: React.FC = () => {
   const { cart, subtotal, clearCart } = useCart();
   const navigate = useNavigate();
 
-  const deliveryType: 'DELIVERY' | 'PICKUP' = 'DELIVERY';
+  const [deliveryType, setDeliveryType] = useState<'DELIVERY' | 'PICKUP'>('DELIVERY');
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<string>('');
   const [customerNotes, setCustomerNotes] = useState('');
@@ -180,18 +180,64 @@ export const CheckoutPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Left Column: Delivery & Address */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Fulfilment Method */}
+          {/* Fulfilment Method Selector */}
           <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-3">
             <label className="text-xs font-bold uppercase tracking-wider text-stone-700 block">
               Fulfilment Method
             </label>
-            <div className="p-4 rounded-xl border border-amber-800 bg-amber-50/50 ring-1 ring-amber-700/20 flex items-center gap-3">
-              <Truck className="w-5 h-5 text-amber-800" />
-              <div>
-                <span className="text-sm font-bold text-stone-900 block">Home Delivery</span>
-                <span className="text-[11px] text-stone-500 block">Delivered directly within our verified service area in Kakinada</span>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setDeliveryType('DELIVERY')}
+                className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
+                  deliveryType === 'DELIVERY'
+                    ? 'border-amber-800 bg-amber-50/50 ring-1 ring-amber-700/20'
+                    : 'border-stone-200 hover:bg-stone-50'
+                }`}
+              >
+                <Truck className={`w-5 h-5 mt-0.5 ${deliveryType === 'DELIVERY' ? 'text-amber-800' : 'text-stone-400'}`} />
+                <div>
+                  <span className="text-sm font-bold text-stone-900 block">Home Delivery</span>
+                  <span className="text-[11px] text-stone-500 block">
+                    Delivered to your doorstep within 10 km (₹7/km)
+                  </span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setDeliveryType('PICKUP');
+                  setDeliveryFee(0);
+                  setServiceable(true);
+                  setServiceError(null);
+                }}
+                className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
+                  deliveryType === 'PICKUP'
+                    ? 'border-amber-800 bg-amber-50/50 ring-1 ring-amber-700/20'
+                    : 'border-stone-200 hover:bg-stone-50'
+                }`}
+              >
+                <Store className={`w-5 h-5 mt-0.5 ${deliveryType === 'PICKUP' ? 'text-amber-800' : 'text-stone-400'}`} />
+                <div>
+                  <span className="text-sm font-bold text-stone-900 block">Bakery Pickup</span>
+                  <span className="text-[11px] text-stone-500 block">
+                    Collect in person from Cake Box Kakinada (Free)
+                  </span>
+                </div>
+              </button>
             </div>
+
+            {deliveryType === 'PICKUP' && (
+              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 text-xs text-stone-700 space-y-1">
+                <span className="font-bold text-stone-900 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-amber-800" /> Pickup Location:
+                </span>
+                <p className="text-stone-600 pl-5">
+                  Cake Box Kakinada, Pulavarthi Vari St / Digimarthi Vari St, Kakinada. Please collect your order from our bakery counter once ready.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Delivery Address Section */}
@@ -405,7 +451,7 @@ export const CheckoutPage: React.FC = () => {
               </label>
               <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 flex items-center justify-between text-xs">
                 <span className="font-semibold text-stone-800">
-                  💵 Cash on Delivery
+                  {deliveryType === 'DELIVERY' ? '💵 Cash on Delivery' : '💵 Cash on Pickup'}
                 </span>
                 <span className="text-[10px] text-amber-800 font-bold uppercase tracking-wide">
                   Default MVP
@@ -416,7 +462,7 @@ export const CheckoutPage: React.FC = () => {
             {/* Cancellation Notice Banner */}
             <div className="p-3 bg-amber-50 rounded-xl border border-amber-200/60 text-[11px] text-amber-900 leading-relaxed">
               <span className="font-bold block mb-0.5">Cancellation Policy:</span>
-              Cancellation policy to be confirmed by Cake Box Kakinada.
+              Standard items: 100% refund if cancelled 24+ hrs prior; non-refundable within 24 hrs. Perishable items prepared cannot be returned. Transport responsibility passes to customer upon handover. Approved refunds processed in 5–10 business days.
             </div>
 
             <Button

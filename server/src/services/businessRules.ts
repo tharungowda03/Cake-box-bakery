@@ -58,7 +58,48 @@ export const REGULAR_ORDER_RULES = {
     'customer_id',
     'branch_id',
   ] as const,
+
+  /**
+   * Allowed status transitions by fulfilment type:
+   *
+   * DELIVERY:
+   *   CONFIRMED → PREPARING → OUT_FOR_DELIVERY → DELIVERED
+   *
+   * PICKUP:
+   *   CONFIRMED → PREPARING → READY → PICKED_UP
+   *
+   * Delivery orders CANNOT transition to READY or PICKED_UP.
+   * Pickup orders CANNOT transition to OUT_FOR_DELIVERY or DELIVERED.
+   * Both can transition to CANCELLED from non-terminal states.
+   */
+  statusTransitions: {
+    DELIVERY: {
+      CONFIRMED: ['PREPARING', 'CANCELLED'] as const,
+      PREPARING: ['OUT_FOR_DELIVERY', 'CANCELLED'] as const,
+      OUT_FOR_DELIVERY: ['DELIVERED', 'CANCELLED'] as const,
+      DELIVERED: [] as const,
+      CANCELLED: [] as const,
+    },
+    PICKUP: {
+      CONFIRMED: ['PREPARING', 'CANCELLED'] as const,
+      PREPARING: ['READY', 'CANCELLED'] as const,
+      READY: ['PICKED_UP', 'CANCELLED'] as const,
+      PICKED_UP: [] as const,
+      CANCELLED: [] as const,
+    },
+  },
 } as const;
+
+export function isValidOrderStatusTransition(
+  deliveryType: 'DELIVERY' | 'PICKUP',
+  currentStatus: string,
+  targetStatus: string
+): boolean {
+  const transitions = REGULAR_ORDER_RULES.statusTransitions[deliveryType];
+  if (!transitions) return false;
+  const allowed = (transitions as Record<string, readonly string[]>)[currentStatus];
+  return allowed ? allowed.includes(targetStatus) : false;
+}
 
 // ---------------------------------------------------------------------------
 // Custom Cake Order Rules
@@ -146,61 +187,53 @@ export const CUSTOM_CAKE_RULES = {
 // ---------------------------------------------------------------------------
 
 /**
- * Cancellation policy for Cake Box Kakinada MVP.
- *
- * The owner indicated cancellation should follow a policy similar to
- * mainstream food-delivery platforms. Exact terms (refund percentages,
- * time windows, penalties) have NOT yet been confirmed.
- *
- * DO NOT invent or hard-code specific percentages or windows.
- * The owner must confirm and configure the final policy.
- *
- * Structure: configurable so the owner can define terms later without
- * architectural changes.
+ * Confirmed Cancellation Policy for Cake Box Kakinada.
+ * Single source of truth for cancellation rules, timelines, and terms.
  */
 export const CANCELLATION_POLICY = {
-  /**
-   * Human-readable policy description shown to customers until the owner
-   * confirms exact terms.
-   */
   displayText:
-    'Cancellation policy to be confirmed by Cake Box Kakinada.',
+    'Standard Retail Items: 100% refund if cancelled at least 24 hours prior; non-refundable within 24 hours. Custom Cakes: Full refund (less deposit) if cancelled 14+ days prior; 50% refund or store credit 7–13 days prior; non-refundable within 7 days. Deposits are non-refundable. Transport liability passes to customer upon pickup/delivery handover. Approved refunds processed in 5–10 business days.',
 
-  /**
-   * Whether cancellations are currently allowed at all for regular orders.
-   * Owner can set this to false to disable cancellations entirely.
-   */
-  cancellationEnabled: true,
-
-  /**
-   * Placeholder for future owner-configured rules.
-   * Keys are intentionally undefined until the owner confirms terms.
-   *
-   * Example structure (DO NOT populate until owner confirms):
-   * {
-   *   windowMinutes: number,          // cancellation allowed within N minutes of order
-   *   refundPercentage: number,       // 0–100
-   *   allowedStatuses: OrderStatus[], // which statuses allow cancellation
-   * }
-   */
-  configuredRules: null as null | {
-    windowMinutes: number;
-    refundPercentage: number;
-    allowedStatuses: string[];
+  standardItems: {
+    noticeWindowHours: 24,
+    eligibleRefundPercentage: 100,
+    lateCancellationRefundPercentage: 0,
+    policyText:
+      'Cancellations made at least 24 hours prior to scheduled pickup or delivery are eligible for a 100% refund. Cancellations made less than 24 hours prior will not receive a monetary refund, as baking preparation may have already begun.',
   },
 
-  /**
-   * Regular orders: cancellation is only possible while in CONFIRMED status
-   * (before PREPARING begins). Owner must confirm exact window.
-   *
-   * Custom orders: PENDING/ACCEPTED requests may be cancelled by the customer.
-   * QUOTED orders may be declined (not confirmed) by the customer.
-   * CONFIRMED custom orders follow the owner's policy.
-   */
-  notes: [
-    'Regular order cancellation window not yet confirmed by owner.',
-    'Custom cake requests in PENDING/ACCEPTED status may be withdrawn by customer.',
-    'QUOTED custom orders may be declined by customer (do not confirm).',
-    'Refund terms and penalties must be confirmed and configured by Cake Box Kakinada owner.',
-  ],
+  customOrders: {
+    fourteenDaysOrMore: 'Full refund minus a non-refundable deposit/administrative fee.',
+    sevenToThirteenDays: '50% refund OR store credit.',
+    lessThanSevenDays: 'Non-refundable.',
+    policyText:
+      'Cancellations made 14 days or more before the scheduled event date receive a full refund minus a non-refundable deposit/administrative fee. Cancellations made 7–13 days prior receive a 50% refund OR store credit. Cancellations made less than 7 days prior are non-refundable.',
+  },
+
+  deposits: {
+    nonRefundable: true,
+    policyText:
+      'All custom cake initial deposits (typically 20–50%) are non-refundable. Perishable items that have already been prepared, baked, decorated, or picked up cannot be returned or refunded due to health and safety standards. (Note: MVP uses cash on delivery/pickup).',
+  },
+
+  returnsAndQuality: {
+    notificationWindowHours: 24,
+    requiredEvidence: 'Order receipt and photographs within 2–24 hours of receipt.',
+    tasteOrAppearanceDiscrepancies:
+      'Handcrafted baked goods may have minor visual variations. For verified quality deficits (such as severe underbaking or incorrect filling), return at least 75% of unconsumed product within 24 hours for evaluation (remedies: partial refund, replacement, or store credit).',
+  },
+
+  transportLiability: {
+    policyText:
+      'Once an order leaves the premises through customer pickup or verified third-party delivery, the customer assumes responsibility for transport, handling, and proper temperature storage. The bakery is not liable for damage caused by improper handling, warm vehicle transport, or poor storage after handover.',
+  },
+
+  refundMethod: {
+    processingTimeDays: '5–10 business days',
+    policyText:
+      'Approved refunds are credited back to the original payment method within 5–10 business days (owner-operated for cash transactions).',
+  },
+
+  cancellationEnabled: true,
 } as const;
+

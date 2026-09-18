@@ -83,14 +83,14 @@ export const Footer: React.FC = () => {
           {/* Service & MVP Policies */}
           <div>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-4 font-serif">
-              Ordering & Delivery
+              Ordering & Fulfilment
             </h4>
             <p className="text-xs text-stone-400 leading-relaxed mb-3">
-              Home delivery available within 10 km from our Kakinada branch. Cash on Delivery supported.
+              Home delivery within 10 km & Bakery Pickup available at our Kakinada store. Cash payment supported.
             </p>
-            <div className="p-3 bg-stone-800/80 rounded-lg border border-stone-700/60 text-xs text-amber-200">
-              <span className="font-semibold block mb-1">Cancellation Notice:</span>
-              Cancellation policy to be confirmed by Cake Box Kakinada.
+            <div className="p-3 bg-stone-800/80 rounded-lg border border-stone-700/60 text-xs text-amber-200 leading-relaxed">
+              <span className="font-semibold block mb-1">Cancellation Policy:</span>
+              Standard items: 100% refund if cancelled 24h prior. Custom cakes: Full refund (less deposit) if cancelled 14+ days prior. Handover passes transport liability to customer.
             </div>
           </div>
         </div>

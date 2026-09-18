@@ -107,7 +107,7 @@ export interface Order {
   order_number: string;
   customer_id: string;
   branch_id: string;
-  status: 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED';
+  status: 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'PICKED_UP' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED';
   payment_method: 'CASH';
   payment_status: 'PENDING' | 'PAID' | 'FAILED';
   subtotal: number;

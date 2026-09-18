@@ -20,14 +20,12 @@ import { supabase } from '../config/supabase';
 export interface BranchLocation {
   /**
    * Latitude of the Cake Box branch.
-   * NOTE: Current value (16.9891) is a provisional Kakinada city-center coordinate.
-   * TODO: Owner must verify and confirm the exact Cake Box Google Maps pin before launch.
+   * Exact coordinates resolved from owner-provided Google Maps pin (https://maps.app.goo.gl/Zpfa6LRS7dbnaV4i7): 16.9487634
    */
   latitude: number;
   /**
    * Longitude of the Cake Box branch.
-   * NOTE: Current value (82.2475) is a provisional Kakinada city-center coordinate.
-   * TODO: Owner must verify and confirm the exact Cake Box Google Maps pin before launch.
+   * Exact coordinates resolved from owner-provided Google Maps pin (https://maps.app.goo.gl/Zpfa6LRS7dbnaV4i7): 82.2331297
    */
   longitude: number;
 }

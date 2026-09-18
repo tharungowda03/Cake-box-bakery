@@ -53,22 +53,23 @@ export const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Delivery zone callout */}
+        {/* Fulfilment & Delivery zone callout */}
         <div className="bg-amber-50/60 p-6 rounded-2xl border border-amber-200/70 flex flex-col justify-between space-y-4">
           <div className="space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-amber-900">
-              Home Delivery Information
+              Fulfilment Information
             </span>
             <h3 className="text-lg font-bold font-serif text-stone-900">
-              Delivering Across Kakinada
+              Home Delivery & Bakery Pickup
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              We service all major neighborhoods in Kakinada within our 10 km radius. Delivery charges are calculated based on your address distance.
+              We deliver across Kakinada within our 10 km radius (₹7/km), or you can choose Bakery Pickup to collect directly from our store with zero delivery fee.
             </p>
           </div>
 
-          <div className="p-3 bg-white rounded-xl border border-amber-200 text-xs text-stone-700">
-            <strong>Cancellation Notice:</strong> Cancellation policy to be confirmed by Cake Box Kakinada.
+          <div className="p-3 bg-white rounded-xl border border-amber-200 text-xs text-stone-700 leading-relaxed">
+            <strong className="text-amber-900 block mb-1">Cancellation Policy:</strong>
+            Standard retail items are eligible for 100% refund if cancelled at least 24 hours prior. Custom cakes receive full refund (less deposit) if cancelled 14+ days prior. Handover transfers transport responsibility to the customer.
           </div>
         </div>
       </div>

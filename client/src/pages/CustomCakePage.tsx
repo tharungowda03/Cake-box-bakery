@@ -16,7 +16,7 @@ export const CustomCakePage: React.FC = () => {
   const [cakeMessage, setCakeMessage] = useState('');
   const [requiredDate, setRequiredDate] = useState('');
   const [preferredTime, setPreferredTime] = useState('');
-  const deliveryType: 'DELIVERY' | 'PICKUP' = 'DELIVERY';
+  const [deliveryType, setDeliveryType] = useState<'DELIVERY' | 'PICKUP'>('DELIVERY');
   const [mobileNumber, setMobileNumber] = useState('');
   const [additionalReq, setAdditionalReq] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -228,8 +228,29 @@ export const CustomCakePage: React.FC = () => {
               <label className="text-xs font-bold uppercase tracking-wider text-stone-700 block mb-1">
                 Fulfilment Method
               </label>
-              <div className="p-2.5 bg-stone-50 rounded-xl border border-stone-200 text-xs font-semibold text-stone-800">
-                Home Delivery (Within Kakinada service radius)
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setDeliveryType('DELIVERY')}
+                  className={`p-2.5 rounded-xl border text-xs font-semibold text-center transition-all cursor-pointer ${
+                    deliveryType === 'DELIVERY'
+                      ? 'border-amber-800 bg-amber-50 text-amber-900 ring-1 ring-amber-800'
+                      : 'border-stone-200 text-stone-600 hover:bg-stone-50'
+                  }`}
+                >
+                  Home Delivery
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDeliveryType('PICKUP')}
+                  className={`p-2.5 rounded-xl border text-xs font-semibold text-center transition-all cursor-pointer ${
+                    deliveryType === 'PICKUP'
+                      ? 'border-amber-800 bg-amber-50 text-amber-900 ring-1 ring-amber-800'
+                      : 'border-stone-200 text-stone-600 hover:bg-stone-50'
+                  }`}
+                >
+                  Bakery Pickup
+                </button>
               </div>
             </div>
           </div>
@@ -290,11 +311,12 @@ export const CustomCakePage: React.FC = () => {
 
           {/* Rules disclosure */}
           <div className="p-4 bg-amber-50 rounded-xl border border-amber-200/60 text-xs text-amber-900 space-y-1">
-            <p className="font-semibold">💡 Custom Cake Ordering Process:</p>
+            <p className="font-semibold">💡 Custom Cake Ordering Process & Cancellation Rules:</p>
             <ul className="list-disc pl-4 space-y-0.5 text-[11px] text-stone-600">
               <li>Your submission starts in <strong>PENDING</strong> status.</li>
               <li>Our team reviews the design and replies with a confirmed quotation (<strong>QUOTED</strong>).</li>
               <li>You can then review the price and confirm your order directly from your account.</li>
+              <li>Cancellations 14+ days prior receive full refund (less deposit); 7–13 days receive 50% refund or store credit; less than 7 days are non-refundable.</li>
             </ul>
           </div>
 

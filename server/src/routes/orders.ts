@@ -2,7 +2,7 @@ import { Router, Response } from 'express';
 import { supabase } from '../config/supabase';
 import { requireAuth, AuthenticatedRequest } from '../middleware/auth';
 import { checkServiceabilityLive } from '../services/deliveryService';
-import { REGULAR_ORDER_RULES } from '../services/businessRules';
+import { REGULAR_ORDER_RULES, isValidOrderStatusTransition } from '../services/businessRules';
 
 const router = Router();
 
@@ -295,6 +295,99 @@ router.get('/:id', requireAuth, async (req: AuthenticatedRequest, res: Response)
     }
 
     res.json({ success: true, data });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * PATCH /api/orders/:id/status
+ * Owner/Admin endpoint to update order status.
+ * Enforces separate lifecycles:
+ *   - DELIVERY: CONFIRMED → PREPARING → OUT_FOR_DELIVERY → DELIVERED
+ *   - PICKUP:   CONFIRMED → PREPARING → READY → PICKED_UP
+ */
+router.patch('/:id/status', requireAuth, async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userRole = req.user?.role;
+    if (userRole !== 'OWNER' && userRole !== 'ADMIN') {
+      res.status(403).json({
+        success: false,
+        message: 'Forbidden. Only the bakery owner or admin can update order status.',
+      });
+      return;
+    }
+
+    const { id } = req.params;
+    const { status: targetStatus } = req.body;
+
+    if (!targetStatus || typeof targetStatus !== 'string') {
+      res.status(400).json({ success: false, message: 'Target status is required.' });
+      return;
+    }
+
+    // 1. Fetch current order
+    const { data: order, error: fetchErr } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (fetchErr || !order) {
+      res.status(404).json({ success: false, message: 'Order not found.' });
+      return;
+    }
+
+    // 2. Validate transition against delivery_type
+    const deliveryType = order.delivery_type as 'DELIVERY' | 'PICKUP';
+    const isValid = isValidOrderStatusTransition(deliveryType, order.status, targetStatus);
+
+    if (!isValid) {
+      if (deliveryType === 'DELIVERY' && (targetStatus === 'READY' || targetStatus === 'PICKED_UP')) {
+        res.status(400).json({
+          success: false,
+          message: `Delivery orders cannot transition to "${targetStatus}". Allowed delivery lifecycle: CONFIRMED → PREPARING → OUT_FOR_DELIVERY → DELIVERED.`,
+        });
+        return;
+      }
+
+      if (deliveryType === 'PICKUP' && (targetStatus === 'OUT_FOR_DELIVERY' || targetStatus === 'DELIVERED')) {
+        res.status(400).json({
+          success: false,
+          message: `Pickup orders cannot transition to "${targetStatus}". Allowed pickup lifecycle: CONFIRMED → PREPARING → READY → PICKED_UP.`,
+        });
+        return;
+      }
+
+      res.status(400).json({
+        success: false,
+        message: `Invalid status transition for ${deliveryType} order from "${order.status}" to "${targetStatus}".`,
+      });
+      return;
+    }
+
+    // 3. Update status in database
+    const { data: updated, error: updateErr } = await supabase
+      .from('orders')
+      .update({
+        status: targetStatus,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (updateErr) {
+      console.error('Failed to update order status:', updateErr);
+      res.status(500).json({ success: false, message: updateErr.message });
+      return;
+    }
+
+    res.json({
+      success: true,
+      message: `Order status updated to ${targetStatus}.`,
+      data: updated,
+    });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });
   }

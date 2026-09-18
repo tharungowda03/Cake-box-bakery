@@ -140,6 +140,21 @@ export const orderService = {
     if (!json.success) throw new Error(json.message);
     return json.data;
   },
+
+  async updateOrderStatus(id: string, status: string): Promise<Order> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/orders/${id}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
 };
 
 // ---------------------------------------------------------------------------

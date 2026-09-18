@@ -155,9 +155,9 @@ export const OrderDetailPage: React.FC = () => {
         </div>
 
         {/* Cancellation Notice Banner */}
-        <div className="p-4 bg-amber-50 rounded-xl border border-amber-200/60 text-xs text-amber-900">
-          <span className="font-bold block mb-0.5">Cancellation Policy Note:</span>
-          Cancellation policy to be confirmed by Cake Box Kakinada.
+        <div className="p-4 bg-amber-50 rounded-xl border border-amber-200/60 text-xs text-amber-900 leading-relaxed">
+          <span className="font-bold block mb-1">Cancellation & Refund Terms:</span>
+          Standard items: Cancellations made at least 24 hours prior to scheduled fulfilment are eligible for 100% refund. Cancellations made less than 24 hours prior are non-refundable as baking has begun. Approved refunds are processed in 5–10 business days.
         </div>
       </div>
     </div>
