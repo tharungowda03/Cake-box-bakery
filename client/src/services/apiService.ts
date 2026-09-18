@@ -230,3 +230,228 @@ export const customCakeService = {
     return filePath;
   },
 };
+
+// ---------------------------------------------------------------------------
+// Chat (AI Chatbot)
+// ---------------------------------------------------------------------------
+
+export interface ChatMessage {
+  role: 'user' | 'model';
+  content: string;
+}
+
+export const chatService = {
+  async sendMessage(
+    message: string,
+    history: ChatMessage[] = []
+  ): Promise<string> {
+    const res = await fetch(`${API_BASE}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, history }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message || 'Chat request failed.');
+    return json.data.reply;
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Owner Dashboard API
+// ---------------------------------------------------------------------------
+
+export interface OwnerStats {
+  orders: {
+    total: number;
+    by_status: Record<string, number>;
+    today_revenue: number;
+    total_revenue: number;
+  };
+  custom_orders: {
+    total: number;
+    by_status: Record<string, number>;
+  };
+}
+
+export const ownerService = {
+  async getStats(): Promise<OwnerStats> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async getOrders(params?: {
+    status?: string;
+    delivery_type?: string;
+    date?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<any[]> {
+    const token = await getAuthToken();
+    const qs = new URLSearchParams();
+    if (params?.status) qs.set('status', params.status);
+    if (params?.delivery_type) qs.set('delivery_type', params.delivery_type);
+    if (params?.date) qs.set('date', params.date);
+    if (params?.page) qs.set('page', String(params.page));
+    if (params?.limit) qs.set('limit', String(params.limit));
+
+    const res = await fetch(`${API_BASE}/owner/orders?${qs.toString()}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async getOrderById(id: string): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/orders/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async updateOrderStatus(id: string, status: string): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/orders/${id}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async getCustomOrders(status?: string): Promise<any[]> {
+    const token = await getAuthToken();
+    const qs = status ? `?status=${encodeURIComponent(status)}` : '';
+    const res = await fetch(`${API_BASE}/owner/custom-orders${qs}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async updateCustomOrder(
+    id: string,
+    payload: { status?: string; final_price?: number; owner_notes?: string }
+  ): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/custom-orders/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async getProducts(params?: {
+    category_id?: string;
+    search?: string;
+    availability?: string;
+  }): Promise<any[]> {
+    const token = await getAuthToken();
+    const qs = new URLSearchParams();
+    if (params?.category_id) qs.set('category_id', params.category_id);
+    if (params?.search) qs.set('search', params.search);
+    if (params?.availability) qs.set('availability', params.availability);
+
+    const res = await fetch(`${API_BASE}/owner/products?${qs.toString()}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async updateProductAvailability(id: string, availability: 'AVAILABLE' | 'UNAVAILABLE'): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/products/${id}/availability`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ availability }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async updateVariantPrice(id: string, price: number): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/variants/${id}/price`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ price }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async getCategories(): Promise<any[]> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/categories`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async getCustomers(): Promise<any[]> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/customers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async getKnowledgeStats(): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/knowledge`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Profile
+// ---------------------------------------------------------------------------
+
+export const profileService = {
+  async updateProfile(payload: { full_name?: string; phone?: string }): Promise<void> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated.');
+    const { error } = await supabase.from('profiles').update(payload).eq('id', user.id);
+    if (error) throw new Error(error.message);
+  },
+};
+
+

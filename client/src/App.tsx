@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { Layout } from './components/layout/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { ChatWidget } from './components/chat/ChatWidget';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -17,82 +18,126 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { CustomerDashboardPage } from './pages/CustomerDashboardPage';
+import { OwnerDashboardPage } from './pages/OwnerDashboardPage';
+
+// Detect if current path is a dashboard path (no Navbar/Footer)
+function AppShell() {
+  const location = useLocation();
+  const isDashboard =
+    location.pathname.startsWith('/dashboard') ||
+    location.pathname.startsWith('/owner');
+
+  if (isDashboard) {
+    return (
+      <>
+        <Routes>
+          {/* Customer Dashboard — all subroutes handled internally */}
+          <Route
+            path="/dashboard/*"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Account alias */}
+          <Route
+            path="/account/*"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Owner Dashboard — all subroutes handled internally */}
+          <Route
+            path="/owner/*"
+            element={
+              <ProtectedRoute>
+                <OwnerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </>
+    );
+  }
+
+  return (
+    <Layout>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/* Protected Customer Routes */}
+        <Route
+          path="/custom-cake"
+          element={
+            <ProtectedRoute>
+              <CustomCakePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetailPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 404 Fallback */}
+        <Route
+          path="*"
+          element={
+            <div className="text-center py-24">
+              <h2 className="text-2xl font-bold font-serif text-stone-800">
+                404 - Page Not Found
+              </h2>
+              <p className="text-xs text-stone-500 mt-2">
+                The page you are looking for does not exist.
+              </p>
+            </div>
+          }
+        />
+      </Routes>
+      {/* AI Chat Widget — visible on all non-dashboard pages */}
+      <ChatWidget />
+    </Layout>
+  );
+}
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
-          <Layout>
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/menu" element={<MenuPage />} />
-              <Route path="/product/:id" element={<ProductDetailPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-
-              {/* Protected Customer Routes */}
-              <Route
-                path="/custom-cake"
-                element={
-                  <ProtectedRoute>
-                    <CustomCakePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/checkout"
-                element={
-                  <ProtectedRoute>
-                    <CheckoutPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/orders"
-                element={
-                  <ProtectedRoute>
-                    <OrdersPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/orders/:id"
-                element={
-                  <ProtectedRoute>
-                    <OrderDetailPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/account"
-                element={
-                  <ProtectedRoute>
-                    <OrdersPage />
-                  </ProtectedRoute>
-                }
-              />
-
-              {/* 404 Fallback */}
-              <Route
-                path="*"
-                element={
-                  <div className="text-center py-24">
-                    <h2 className="text-2xl font-bold font-serif text-stone-800">
-                      404 - Page Not Found
-                    </h2>
-                    <p className="text-xs text-stone-500 mt-2">
-                      The page you are looking for does not exist.
-                    </p>
-                  </div>
-                }
-              />
-            </Routes>
-          </Layout>
+          <AppShell />
         </Router>
       </CartProvider>
     </AuthProvider>

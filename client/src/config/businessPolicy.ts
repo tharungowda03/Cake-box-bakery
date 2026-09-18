@@ -61,3 +61,28 @@ export const CANCELLATION_AND_REFUND_POLICY = {
     },
   ],
 } as const;
+
+/**
+ * Order status transition rules — mirrors server/src/services/businessRules.ts.
+ * Used client-side ONLY for display logic in the Owner Dashboard.
+ * The server always enforces the authoritative transitions.
+ */
+export const REGULAR_ORDER_RULES = {
+  statusTransitions: {
+    DELIVERY: {
+      CONFIRMED: ['PREPARING', 'CANCELLED'] as const,
+      PREPARING: ['OUT_FOR_DELIVERY', 'CANCELLED'] as const,
+      OUT_FOR_DELIVERY: ['DELIVERED', 'CANCELLED'] as const,
+      DELIVERED: [] as const,
+      CANCELLED: [] as const,
+    },
+    PICKUP: {
+      CONFIRMED: ['PREPARING', 'CANCELLED'] as const,
+      PREPARING: ['READY', 'CANCELLED'] as const,
+      READY: ['PICKED_UP', 'CANCELLED'] as const,
+      PICKED_UP: [] as const,
+      CANCELLED: [] as const,
+    },
+  },
+} as const;
+

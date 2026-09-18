@@ -7,6 +7,8 @@ import settingsRouter from './routes/settings';
 import ordersRouter from './routes/orders';
 import customOrdersRouter from './routes/customOrders';
 import addressesRouter from './routes/addresses';
+import chatRouter from './routes/chat';
+import ownerRouter from './routes/owner';
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use('/api/settings', settingsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/custom-orders', customOrdersRouter);
 app.use('/api/addresses', addressesRouter);
+app.use('/api/chat', chatRouter);
+app.use('/api/owner', ownerRouter);
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {

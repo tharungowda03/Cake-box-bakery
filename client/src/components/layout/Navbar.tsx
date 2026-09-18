@@ -7,7 +7,7 @@ import { useAuth } from '../../contexts/AuthContext';
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { totalItems } = useCart();
-  const { user, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -78,6 +78,14 @@ export const Navbar: React.FC = () => {
           >
             Contact
           </Link>
+          {role === 'OWNER' && (
+            <Link
+              to="/owner"
+              className="text-sm font-semibold text-amber-700 hover:text-amber-900 transition-colors border-b-2 border-amber-400 pb-0.5"
+            >
+              Owner Panel
+            </Link>
+          )}
         </div>
 
         {/* Action icons */}
@@ -99,13 +107,23 @@ export const Navbar: React.FC = () => {
           {/* User Auth */}
           {user ? (
             <div className="flex items-center gap-2">
-              <Link
-                to="/orders"
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-stone-100 text-stone-800 hover:bg-stone-200 transition-colors"
-              >
-                <UserIcon className="w-3.5 h-3.5 text-amber-700" />
-                My Orders
-              </Link>
+              {role === 'OWNER' ? (
+                <Link
+                  to="/owner"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-amber-700 text-white hover:bg-amber-800 transition-colors"
+                >
+                  <UserIcon className="w-3.5 h-3.5" />
+                  Owner Panel
+                </Link>
+              ) : (
+                <Link
+                  to="/dashboard"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-stone-100 text-stone-800 hover:bg-stone-200 transition-colors"
+                >
+                  <UserIcon className="w-3.5 h-3.5 text-amber-700" />
+                  Dashboard
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className="text-xs font-medium text-stone-500 hover:text-stone-800 px-2 py-1 cursor-pointer"
@@ -171,13 +189,24 @@ export const Navbar: React.FC = () => {
             Contact
           </Link>
           {user && (
-            <Link
-              to="/orders"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-semibold text-amber-800 hover:text-amber-900 py-1"
-            >
-              My Orders & Inquiries
-            </Link>
+            <>
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-base font-semibold text-amber-800 hover:text-amber-900 py-1"
+              >
+                My Dashboard
+              </Link>
+              {role === 'OWNER' && (
+                <Link
+                  to="/owner"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-base font-bold text-amber-700 hover:text-amber-900 py-1"
+                >
+                  Owner Panel
+                </Link>
+              )}
+            </>
           )}
         </div>
       )}
