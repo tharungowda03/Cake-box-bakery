@@ -1,0 +1,692 @@
+[
+  {
+    "Item": "Apricot Delight",
+    "Price (INR)": 159,
+    "Description": "A creamy and rich delectable dessert made with finest apricots",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Choco Mousse",
+    "Price (INR)": 90,
+    "Description": "Soft and creamy chocolate mousse, perfect for a sweet treat",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Rainbow Pastry",
+    "Price (INR)": 180,
+    "Description": "Soft and colorful layered pastry",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Honey Trat",
+    "Price (INR)": 39,
+    "Description": "Sweet bakery treat",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Tres Leches",
+    "Price (INR)": 90,
+    "Description": "Spongy cake soaked with three types of milk and served with dry fruits",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Choco Lava",
+    "Price (INR)": 90,
+    "Description": "Vanilla and brownie chocolate ice cream with Oreo, choco chips and molten lava cake",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Brownie",
+    "Price (INR)": 69,
+    "Description": "Square or rectangular chocolate baked confection",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Death By Chocolate (500gms)",
+    "Price (INR)": 279,
+    "Description": "Rich chocolate dessert",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Malai Biscoff",
+    "Price (INR)": 130,
+    "Description": "Creamy Biscoff dessert",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Passion Delight",
+    "Price (INR)": 210,
+    "Description": "Fruity creamy dessert",
+    "Category": "Desserts"
+  },
+  {
+    "Item": "Vanilla Cake",
+    "Price (INR)": 455,
+    "Description": "Classic creamy vanilla-flavoured cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Strawberry Cake",
+    "Price (INR)": 159,
+    "Description": "Soft strawberry-flavoured cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Rasmalai Cake",
+    "Price (INR)": 780,
+    "Description": "Fusion of traditional rasmalai flavours with moist cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Mango Cake",
+    "Price (INR)": 455,
+    "Description": "Cake with fresh mango flavour",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Blackcurrant Cake",
+    "Price (INR)": 130,
+    "Description": "Blackcurrant-flavoured cake/dessert",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Chocochips",
+    "Price (INR)": 715,
+    "Description": "Crunchy chocolate-chip cake/treat",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Dutch Truffle Cake",
+    "Price (INR)": 780,
+    "Description": "Rich chocolate truffle cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Butterscotch Cake",
+    "Price (INR)": 520,
+    "Description": "Cake with buttery sauce and butterscotch chunks",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Semi Fondant Cakes",
+    "Price (INR)": 1300,
+    "Description": "Decorative semi-fondant cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Tiramisu Cake",
+    "Price (INR)": 130,
+    "Description": "Creamy chocolate and coffee-mascarpone style cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Gulab Jamun Cake",
+    "Price (INR)": 650,
+    "Description": "Indian gulab jamun inspired fusion cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Black Forest Cake",
+    "Price (INR)": 585,
+    "Description": "Chocolate cake with cream/chocolate and cherry-style flavour",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Fondant Cake [Full]",
+    "Price (INR)": 1500,
+    "Description": "Full fondant decorated cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Rasgulla Cake",
+    "Price (INR)": 650,
+    "Description": "Fusion cake inspired by rasgulla",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "White Forest Cake",
+    "Price (INR)": 585,
+    "Description": "Vanilla sponge with white chocolate mousse and flakes",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Photo Cakes",
+    "Price (INR)": 300,
+    "Description": "Custom photo-decorated cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Rainbow Cake",
+    "Price (INR)": 910,
+    "Description": "Colorful layered rainbow cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Pineapple Cake",
+    "Price (INR)": 520,
+    "Description": "Cake layered with pineapple compote and cream",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Extra Designs",
+    "Price (INR)": 200,
+    "Description": "Additional cake decoration/design",
+    "Category": "Cake Add-ons"
+  },
+  {
+    "Item": "Extra Milkmaid",
+    "Price (INR)": 200,
+    "Description": "Additional Milkmaid topping/filling",
+    "Category": "Cake Add-ons"
+  },
+  {
+    "Item": "Litchi Cake",
+    "Price (INR)": 585,
+    "Description": "Litchi-flavoured cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Butterfly and Balls",
+    "Price (INR)": 200,
+    "Description": "Decorative cake topper/design",
+    "Category": "Cake Add-ons"
+  },
+  {
+    "Item": "Swiss Chocolate Cake",
+    "Price (INR)": 650,
+    "Description": "Rich chocolate cake with smooth chocolate cream",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Drawing Cake",
+    "Price (INR)": 200,
+    "Description": "Custom drawing/decorated cake",
+    "Category": "Cake Add-ons"
+  },
+  {
+    "Item": "Blueberry Cake",
+    "Price (INR)": 780,
+    "Description": "Blueberry filling/flavour cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Oreo Cake",
+    "Price (INR)": 780,
+    "Description": "Cake with crushed Oreo and creamy filling",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Choco Almond Cake",
+    "Price (INR)": 715,
+    "Description": "Dark chocolate with roasted almonds and chocolate fudge",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Milky Butterscotch",
+    "Price (INR)": 585,
+    "Description": "Milky butterscotch cake/dessert",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Pineapple with Milk Maid",
+    "Price (INR)": 585,
+    "Description": "Pineapple cake/dessert with Milkmaid",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Hazelnut Cream",
+    "Price (INR)": 780,
+    "Description": "Creamy hazelnut cake/dessert",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Fresh Fruits",
+    "Price (INR)": 780,
+    "Description": "Cake/dessert topped with fresh fruits",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Honey Almond",
+    "Price (INR)": 650,
+    "Description": "Honey and almond flavoured cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "American Red Velvet",
+    "Price (INR)": 715,
+    "Description": "Classic red velvet cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Choco Red Velvet",
+    "Price (INR)": 715,
+    "Description": "Chocolate and red velvet fusion cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Celebrations",
+    "Price (INR)": 780,
+    "Description": "Celebration-style decorated cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Kitkat Chocolate",
+    "Price (INR)": 780,
+    "Description": "Chocolate cake featuring KitKat",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Cafe Delight",
+    "Price (INR)": 780,
+    "Description": "Creamy cafe-style dessert/cake",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Fruits and Nuts",
+    "Price (INR)": 910,
+    "Description": "Cake/dessert with fruits and nuts",
+    "Category": "Cakes"
+  },
+  {
+    "Item": "Classic Italian Pizza",
+    "Price (INR)": 260,
+    "Description": "Soft cheesy vegetarian pizza with Italian style",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Margherita Pizza",
+    "Price (INR)": 210,
+    "Description": "Tomato sauce, mozzarella and basil",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Corn Pizza",
+    "Price (INR)": 260,
+    "Description": "Pizza topped with sweet corn and cheese",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Cake Box Veg Special Pizza",
+    "Price (INR)": 330,
+    "Description": "Special vegetarian pizza",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Corn Paneer Pizza",
+    "Price (INR)": 280,
+    "Description": "Pizza with corn, paneer and herbs",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Farm House Pizza",
+    "Price (INR)": 300,
+    "Description": "Vegetable-loaded pizza",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Paneer Masala Pizza",
+    "Price (INR)": 300,
+    "Description": "Pizza topped with paneer, chilli flakes and seasoning",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Tandoori Paneer Pizza",
+    "Price (INR)": 300,
+    "Description": "Pizza with paneer, onion, capsicum, olives and BBQ sauce",
+    "Category": "Pizza"
+  },
+  {
+    "Item": "Cheese Corn Ball - 6P",
+    "Price (INR)": 260,
+    "Description": "Cheese and corn balls, 6 pieces",
+    "Category": "Starters"
+  },
+  {
+    "Item": "Veg Manchurian",
+    "Price (INR)": 220,
+    "Description": "Crispy vegetable balls in tangy Indo-Chinese sauce",
+    "Category": "Starters"
+  },
+  {
+    "Item": "Crispy Veg",
+    "Price (INR)": 230,
+    "Description": "Crispy fried vegetables with tangy sauce",
+    "Category": "Starters"
+  },
+  {
+    "Item": "Veg 65",
+    "Price (INR)": 260,
+    "Description": "Spiced vegetables with Chinese-style sauces",
+    "Category": "Starters"
+  },
+  {
+    "Item": "Mushroom 65",
+    "Price (INR)": 240,
+    "Description": "Crispy mushroom florets in spicy batter",
+    "Category": "Mushroom Starters"
+  },
+  {
+    "Item": "Butter Garlic Mushrooms",
+    "Price (INR)": 300,
+    "Description": "Mushrooms cooked with butter and garlic",
+    "Category": "Mushroom Starters"
+  },
+  {
+    "Item": "Mushroom Manchurian",
+    "Price (INR)": 260,
+    "Description": "Mushrooms with spicy Manchurian-style gravy",
+    "Category": "Mushroom Starters"
+  },
+  {
+    "Item": "Chilli Mushroom",
+    "Price (INR)": 260,
+    "Description": "Mushrooms with soy and chilli sauce, onions and bell peppers",
+    "Category": "Mushroom Starters"
+  },
+  {
+    "Item": "Schezwan Mushroom",
+    "Price (INR)": 270,
+    "Description": "Mushrooms tossed in spicy Schezwan sauce",
+    "Category": "Mushroom Starters"
+  },
+  {
+    "Item": "Badam Milk",
+    "Price (INR)": 90,
+    "Description": "Chopped almonds boiled in milk with kesar",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Doughnut Eggless [1 piece]",
+    "Price (INR)": 90,
+    "Description": "Eggless doughnut, one piece",
+    "Category": "Bakery & Desserts"
+  },
+  {
+    "Item": "Well Cake",
+    "Price (INR)": 130,
+    "Description": "Sweet bakery cake/treat",
+    "Category": "Bakery & Desserts"
+  },
+  {
+    "Item": "Alfredo",
+    "Price (INR)": 200,
+    "Description": "Vegetarian creamy sauce tossed with pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Alfredo Pasta",
+    "Price (INR)": 260,
+    "Description": "Creamy Alfredo pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Arrabiata",
+    "Price (INR)": 220,
+    "Description": "Vegetarian spicy tangy red sauce with pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Arrabbiata Pasta",
+    "Price (INR)": 280,
+    "Description": "Spicy tangy red sauce pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Pink Sauce Pasta",
+    "Price (INR)": 220,
+    "Description": "Italian rosa-style sauce pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Pink Sauce Pasta",
+    "Price (INR)": 280,
+    "Description": "Creamy pink sauce pasta",
+    "Category": "Pasta"
+  },
+  {
+    "Item": "Blackcurrant Ice Cream [1 Scoop]",
+    "Price (INR)": 80,
+    "Description": "Blackcurrant ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Caramel Nuts Ice Cream [1 Scoop]",
+    "Price (INR)": 120,
+    "Description": "Caramel and nut ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Mango Ice Cream [1 Scoop]",
+    "Price (INR)": 80,
+    "Description": "Mango ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Vanilla Ice Cream [1 Scoop]",
+    "Price (INR)": 80,
+    "Description": "Vanilla ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Chocolate Ice Cream [1 Scoop]",
+    "Price (INR)": 100,
+    "Description": "Chocolate ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Strawberry Ice Cream [1 Scoop]",
+    "Price (INR)": 80,
+    "Description": "Strawberry ice cream, one scoop",
+    "Category": "Ice Cream"
+  },
+  {
+    "Item": "Thums Up (250 ml)",
+    "Price (INR)": 19,
+    "Description": "250 ml soft drink",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Litchi Milkshake",
+    "Price (INR)": 160,
+    "Description": "Creamy litchi milkshake",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Sprite (250 ml)",
+    "Price (INR)": 19,
+    "Description": "250 ml soft drink",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Kinley (1.0 L)",
+    "Price (INR)": 19,
+    "Description": "1 litre packaged water",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Pista Punch",
+    "Price (INR)": 160,
+    "Description": "Pistachio-flavoured drink",
+    "Category": "Beverages"
+  },
+  {
+    "Item": "Veg Momos [5 Pieces]",
+    "Price (INR)": 130,
+    "Description": "Vegetable momos, 5 pieces",
+    "Category": "Starters"
+  },
+  {
+    "Item": "Peanut Biscuits",
+    "Price (INR)": 130,
+    "Description": "Crispy peanut biscuits",
+    "Category": "Cookies"
+  },
+  {
+    "Item": "Warm Biscuits",
+    "Price (INR)": 150,
+    "Description": "Warm bakery biscuits",
+    "Category": "Cookies"
+  },
+  {
+    "Item": "Stick Paneer - 5 Stick",
+    "Price (INR)": 280,
+    "Description": "Paneer sticks, 5 pieces",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Chilli Garlic Paneer",
+    "Price (INR)": 300,
+    "Description": "Paneer with chilli and garlic flavours",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Butter Garlic Paneer",
+    "Price (INR)": 300,
+    "Description": "Paneer cooked with butter and garlic",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Schezwan Paneer",
+    "Price (INR)": 280,
+    "Description": "Paneer with bold Schezwan sauce",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Paneer Majestic",
+    "Price (INR)": 300,
+    "Description": "Spiced smoked paneer cubes with tandoori masala",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Chili Paneer",
+    "Price (INR)": 290,
+    "Description": "Fried paneer in sweet, sour and spicy sauce",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Paneer Manchurian",
+    "Price (INR)": 280,
+    "Description": "Crispy paneer Manchurian with sauce",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Paneer 65",
+    "Price (INR)": 280,
+    "Description": "Crispy South Indian spiced paneer",
+    "Category": "Paneer Starters"
+  },
+  {
+    "Item": "Potato Cheese Blast Burger",
+    "Price (INR)": 200,
+    "Description": "Potato and cheese burger",
+    "Category": "Burgers"
+  },
+  {
+    "Item": "Paneer Patty Burger",
+    "Price (INR)": 230,
+    "Description": "Burger with a hearty paneer patty",
+    "Category": "Burgers"
+  },
+  {
+    "Item": "Cake Box Special Double Patty Mega Burger",
+    "Price (INR)": 280,
+    "Description": "Special double-patty mega burger",
+    "Category": "Burgers"
+  },
+  {
+    "Item": "Veg Patty Burger",
+    "Price (INR)": 180,
+    "Description": "Vegetable patty with lettuce and tangy sauce",
+    "Category": "Burgers"
+  },
+  {
+    "Item": "Classic Burger",
+    "Price (INR)": 200,
+    "Description": "Potato patty with vegetables and tangy sauce",
+    "Category": "Burgers"
+  },
+  {
+    "Item": "Mango",
+    "Price (INR)": 100,
+    "Description": "Chilled creamy mango dessert/drink",
+    "Category": "Sundaes & Desserts"
+  },
+  {
+    "Item": "Black Current",
+    "Price (INR)": 100,
+    "Description": "Chilled blackcurrant-flavoured dessert/drink",
+    "Category": "Sundaes & Desserts"
+  },
+  {
+    "Item": "Caramel Nuts",
+    "Price (INR)": 150,
+    "Description": "Sweet and nutty caramel dessert",
+    "Category": "Sundaes & Desserts"
+  },
+  {
+    "Item": "Milk Butterscotch Pastry",
+    "Price (INR)": 120,
+    "Description": "Milk butterscotch pastry",
+    "Category": "Pastries"
+  },
+  {
+    "Item": "Honey Almond Pastry",
+    "Price (INR)": 130,
+    "Description": "Honey almond pastry",
+    "Category": "Pastries"
+  },
+  {
+    "Item": "Black Forest Pastry",
+    "Price (INR)": 110,
+    "Description": "Chocolate sponge with rich cherry-style filling",
+    "Category": "Pastries"
+  },
+  {
+    "Item": "Whole Wheat Bread",
+    "Price (INR)": 110,
+    "Description": "Soft wholesome whole wheat bread",
+    "Category": "Breads"
+  },
+  {
+    "Item": "Dry Cake",
+    "Price (INR)": 169,
+    "Description": "Dry cake/bakery treat",
+    "Category": "Breads"
+  },
+  {
+    "Item": "Veg Momos",
+    "Price (INR)": 125,
+    "Description": "Steamed vegetable dumplings with chilli-garlic sauce",
+    "Category": "Momos"
+  },
+  {
+    "Item": "Paneer Momos",
+    "Price (INR)": 145,
+    "Description": "Steamed dumplings filled with paneer",
+    "Category": "Momos"
+  },
+  {
+    "Item": "Corn Cheese Sandwich",
+    "Price (INR)": 200,
+    "Description": "Sweet corn, mayo and cheese in whole-wheat bread",
+    "Category": "Sandwiches"
+  },
+  {
+    "Item": "Mushroom Sandwich",
+    "Price (INR)": 145,
+    "Description": "Creamy mushroom and cheese grilled sandwich",
+    "Category": "Sandwiches"
+  },
+  {
+    "Item": "Paneer Sandwich",
+    "Price (INR)": 200,
+    "Description": "Paneer and fresh vegetable sandwich",
+    "Category": "Sandwiches"
+  },
+  {
+    "Item": "Paneer Makhani Sandwich",
+    "Price (INR)": 220,
+    "Description": "Paneer with rich tomato gravy in grilled bread",
+    "Category": "Sandwiches"
+  }
+]

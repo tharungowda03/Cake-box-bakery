@@ -1,37 +1,101 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { CartProvider } from './contexts/CartContext';
+import { Layout } from './components/layout/Layout';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+
+// Pages
+import { HomePage } from './pages/HomePage';
+import { MenuPage } from './pages/MenuPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
+import { CartPage } from './pages/CartPage';
+import { CheckoutPage } from './pages/CheckoutPage';
+import { CustomCakePage } from './pages/CustomCakePage';
+import { OrdersPage } from './pages/OrdersPage';
+import { OrderDetailPage } from './pages/OrderDetailPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold mb-4">Cake Box Kakinada</h1>
-        <p className="text-lg mb-8">Digital Ordering Platform - Phase 1 Foundation</p>
-        
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<div className="p-4 border rounded">Home Page (Placeholder)</div>} />
-          <Route path="/menu" element={<div className="p-4 border rounded">Menu Page (Placeholder)</div>} />
-          <Route path="/product/:id" element={<div className="p-4 border rounded">Product Details (Placeholder)</div>} />
-          <Route path="/cart" element={<div className="p-4 border rounded">Cart (Placeholder)</div>} />
-          <Route path="/checkout" element={<div className="p-4 border rounded">Checkout (Placeholder)</div>} />
-          <Route path="/custom-cake" element={<div className="p-4 border rounded">Custom Cake (Placeholder)</div>} />
-          <Route path="/my-orders" element={<div className="p-4 border rounded">My Orders (Placeholder)</div>} />
-          <Route path="/login" element={<div className="p-4 border rounded">Login (Placeholder)</div>} />
-          <Route path="/register" element={<div className="p-4 border rounded">Register (Placeholder)</div>} />
-          <Route path="/profile" element={<div className="p-4 border rounded">Profile (Placeholder)</div>} />
-          <Route path="/about" element={<div className="p-4 border rounded">About (Placeholder)</div>} />
-          <Route path="/contact" element={<div className="p-4 border rounded">Contact (Placeholder)</div>} />
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Layout>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/menu" element={<MenuPage />} />
+              <Route path="/product/:id" element={<ProductDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
 
-          {/* Owner Routes */}
-          <Route path="/owner/login" element={<div className="p-4 border rounded">Owner Login (Placeholder)</div>} />
-          <Route path="/owner/dashboard" element={<div className="p-4 border rounded">Owner Dashboard (Placeholder)</div>} />
-          <Route path="/owner/orders" element={<div className="p-4 border rounded">Owner Orders (Placeholder)</div>} />
-          <Route path="/owner/custom-orders" element={<div className="p-4 border rounded">Owner Custom Orders (Placeholder)</div>} />
-          <Route path="/owner/menu" element={<div className="p-4 border rounded">Owner Menu Management (Placeholder)</div>} />
-          <Route path="/owner/settings" element={<div className="p-4 border rounded">Owner Settings (Placeholder)</div>} />
-        </Routes>
-      </div>
-    </Router>
+              {/* Protected Customer Routes */}
+              <Route
+                path="/custom-cake"
+                element={
+                  <ProtectedRoute>
+                    <CustomCakePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute>
+                    <CheckoutPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/orders"
+                element={
+                  <ProtectedRoute>
+                    <OrdersPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/orders/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderDetailPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/account"
+                element={
+                  <ProtectedRoute>
+                    <OrdersPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* 404 Fallback */}
+              <Route
+                path="*"
+                element={
+                  <div className="text-center py-24">
+                    <h2 className="text-2xl font-bold font-serif text-stone-800">
+                      404 - Page Not Found
+                    </h2>
+                    <p className="text-xs text-stone-500 mt-2">
+                      The page you are looking for does not exist.
+                    </p>
+                  </div>
+                }
+              />
+            </Routes>
+          </Layout>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

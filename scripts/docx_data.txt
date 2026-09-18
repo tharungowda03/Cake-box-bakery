@@ -1,0 +1,1050 @@
+CAKE BOX – KAKINADAE-COMMERCE MASTER INFORMATION
+
+Business knowledge + e-commerce specification + verified source information
+
+0. Purpose
+
+This is the master information/specification document for an e-commerce website built around Cake Box, Kakinada. It is designed to give the development team the business facts, product structure, customer-facing information, and system requirements needed for the website.
+
+Rule: information not exposed by the supplied sources is marked UNKNOWN / NOT VERIFIED. Do not invent prices, delivery rules, policies, or services.
+
+1. Source registry
+
+ID
+
+Source
+
+Use
+
+S1
+
+Zomato Cake Box Kakinada listing
+
+Business profile, menu categories, product names/descriptions, phone, address, licence number, ordering status
+
+S2
+
+Google business listing
+
+Branch address, phone, opening hours, category, rating/review snapshot
+
+S3
+
+User-supplied Google Maps URL
+
+Original location reference for the project
+
+2. Verified business profile
+
+Field
+
+Verified value
+
+Source
+
+Business name
+
+Cake Box
+
+Zomato
+
+Business type
+
+Bakery / cake / desserts / beverages / food outlet
+
+Zomato
+
+Zomato tags
+
+Shake, Bakery, Cake, Desserts, Beverages, North Indian, Chinese, Fast Food
+
+Zomato
+
+Zomato address
+
+27-9-7/1 G4, 1st Floor, Digimarthi Vari Street, Kakinada Locality, Kakinada
+
+Zomato
+
+Phone
+
++91 99939 99528
+
+Zomato / Google
+
+Food licence
+
+20125071000586
+
+Zomato
+
+Google category
+
+Bakery
+
+Google
+
+Google address
+
+First Floor, Pulavarthi Vari St, opposite DBS Bank, Kakinada, Andhra Pradesh 533001, India
+
+Google
+
+Google rating snapshot
+
+4.6/5 from 188 reviews
+
+Google, at retrieval
+
+Zomato delivery rating snapshot
+
+4.3 from 426 delivery ratings
+
+Zomato, at retrieval
+
+3. Location
+
+Kakinada, Andhra Pradesh, India.
+
+Zomato locality: Kakinada Locality.
+
+Zomato address: 27-9-7/1 G4, 1st Floor, Digimarthi Vari Street.
+
+Google listing address: First Floor, Pulavarthi Vari St, opposite DBS Bank, Kakinada, Andhra Pradesh 533001.
+
+The user-supplied map URL corresponds approximately to 16.9487241, 82.233144.
+
+Website should provide Address + Call + Directions/Map actions.
+
+Keep the two source address strings in the raw dataset until the exact canonical branch address is confirmed.
+
+4. Opening hours
+
+Day
+
+Store hours
+
+Source
+
+Monday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Tuesday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Wednesday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Thursday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Friday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Saturday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Sunday
+
+10:00 AM – 10:00 PM
+
+Google business listing
+
+Important: store hours and online-ordering hours are separate fields. The Zomato page can show online ordering as closed even while the store is within its normal operating hours.
+
+5. Online ordering
+
+Zomato provides an Order Online page for Cake Box.
+
+Zomato states that online ordering is supported through its mobile app.
+
+At retrieval, Zomato displayed 'Currently closed for online ordering'. This is a time-dependent status.
+
+Zomato showed live-order/live-tracking functionality and an approximately 30-minute indicator on the current listing.
+
+For the project's own website, online ordering should be controlled through admin settings.
+
+6. E-commerce website structure
+
+Page/module
+
+Purpose
+
+Home
+
+Brand introduction, search, featured products, categories, offers, store information, ordering actions.
+
+Shop
+
+All products, categories, search, filters and sorting.
+
+Product
+
+Images, name, description, price, variants, availability, verified dietary labels, customization where supported.
+
+Cart
+
+Items, quantity changes, subtotal, discounts, delivery fee and total.
+
+Checkout
+
+Customer, address, delivery/pickup, time/date if supported, payment and order confirmation.
+
+Account
+
+Login, profile, addresses, order history and favourites.
+
+Orders
+
+Order number, status, items, amount, timestamps and delivery/pickup state.
+
+Store
+
+Address, phone, hours, map and ordering status.
+
+Support
+
+FAQ, contact and order issue handling.
+
+Admin
+
+Products, prices, availability, categories, orders, customers, delivery, offers, hours and content.
+
+7. Current source-visible catalogue
+
+Category
+
+Source count
+
+Examples
+
+Cakes
+
+29
+
+Vanilla, Chocolate, Black Forest, KitKat Chocolate, Red Velvet, Tiramisu, Butterscotch, Mango, Strawberry, Pineapple, Oreo, Blueberry, Hazelnut, Rasgulla, Rasmalai 500 g and others.
+
+Bakery
+
+2
+
+Wheat Bread, Milk Bread
+
+Biscuits
+
+3
+
+Warm Biscuits, Peanut Biscuits, Honey Almond Sticks
+
+Desserts
+
+24
+
+Cheesecakes, mousse, brownie, dry cake, tres leches, choco lava, ice creams and others
+
+Pastries
+
+6
+
+Choco Chips, Rainbow, Honey Almond, Black Forest, Swiss Chocolate, Butterscotch
+
+Drinks (Beverages)
+
+26
+
+Badam Milk, bottled drinks/water, milkshakes and mojitos
+
+These are the category counts exposed by the current Zomato page. The retrieved web page does not expose the full later menu beyond these sections, so missing categories must not be invented from another branch.
+
+8. Product database fields
+
+Field
+
+Purpose
+
+product_id
+
+Unique internal ID
+
+category_id
+
+Category relationship
+
+name
+
+Canonical customer-facing product name
+
+slug
+
+URL-safe name
+
+short_description
+
+Product-card description
+
+full_description
+
+Product-page description
+
+price
+
+Current INR selling price
+
+compare_at_price
+
+Optional original price
+
+currency
+
+INR
+
+unit
+
+Piece, scoop, ml, litre, gram, kg, etc.
+
+weight
+
+Numeric weight when applicable
+
+variant
+
+Size/weight/flavour variant
+
+images
+
+Image URLs
+
+availability
+
+Available / unavailable / hidden
+
+stock_quantity
+
+Optional inventory count
+
+veg_status
+
+Only when verified
+
+eggless_status
+
+Only when verified
+
+allergens
+
+Only when verified
+
+customizable
+
+Yes / No / Unknown
+
+customization_options
+
+Only confirmed options
+
+preparation_time
+
+Only if officially established
+
+tags
+
+Search/filter tags
+
+source
+
+Origin of data
+
+last_verified
+
+Verification date/time
+
+9. Cake-specific requirements
+
+Cakes should support variants instead of forcing separate duplicate products.
+
+Flavour/type
+
+Weight such as 500 g or 1 kg when officially offered
+
+Price per variant
+
+Eggless status only when verified
+
+Cake message
+
+Theme/design
+
+Photo/design upload if custom cakes are officially accepted
+
+Preferred delivery/pickup date
+
+Preferred time
+
+Special instructions
+
+Availability/cut-off time
+
+Custom-order contact route
+
+These are recommended website capabilities, not claims that Cake Box currently offers every option.
+
+10. Delivery
+
+Third-party delivery through Zomato is evidenced by the listing.
+
+Exact Cake Box-owned delivery zones: NOT VERIFIED.
+
+Exact delivery charge: NOT VERIFIED.
+
+Minimum order: NOT VERIFIED.
+
+Own-site delivery ETA: NOT VERIFIED.
+
+Recommended configurable fields: delivery_enabled, delivery_zones, delivery_fee, minimum_order, free_delivery_threshold, estimated_minutes.
+
+11. Pickup
+
+The physical branch exists at the listed Kakinada address. Pickup can be supported by the e-commerce architecture, but pickup-specific rules and preparation times should be confirmed with the shop before being advertised as guaranteed.
+
+12. Payments
+
+The supplied sources do not verify the payment methods of a Cake Box-owned website.
+
+Payment method
+
+Payment gateway transaction ID
+
+Payment status: pending / paid / failed / refunded
+
+COD flag if enabled
+
+UPI/card/net-banking options only after confirmation
+
+Refund reference/status
+
+13. Order lifecycle
+
+Cart created
+
+Checkout started
+
+Order placed
+
+Payment pending
+
+Payment confirmed
+
+Order accepted
+
+Preparing
+
+Ready for pickup / Out for delivery
+
+Delivered / Picked up
+
+Cancelled
+
+Refund initiated
+
+Refund completed
+
+14. Customer/account data
+
+Customer ID
+
+Name
+
+Phone
+
+Email if required
+
+Secure authentication/password hash
+
+Saved addresses
+
+Default address
+
+Order history
+
+Wishlist/favourites
+
+Cart
+
+Notification preferences
+
+Account creation date
+
+Never store raw passwords.
+
+15. Address data
+
+Address ID
+
+Customer ID
+
+Recipient name
+
+Phone
+
+House/flat/building
+
+Street
+
+Area/locality
+
+Landmark
+
+City
+
+State
+
+PIN code
+
+Latitude/longitude when appropriately collected
+
+Delivery instructions
+
+16. Search/filter features
+
+Product-name search
+
+Category search
+
+Flavour search
+
+Price-range filter
+
+Availability filter
+
+Size/weight filter
+
+Verified dietary filters
+
+Sort by price/popularity/newest when data exists
+
+Spelling-tolerant search while preserving the canonical product name
+
+17. Offers/coupons
+
+No Cake Box Kakinada-owned coupon/promotion rules were verified from the supplied sources. The system should still support configurable promotions.
+
+Coupon code
+
+Percentage discount
+
+Flat discount
+
+Product/category restriction
+
+Minimum cart value
+
+Maximum discount
+
+Start/end date
+
+Usage limit
+
+Per-customer limit
+
+Active/inactive
+
+18. Reviews
+
+Zomato currently shows 4.3/5 from 426 delivery ratings; the Google business result shows 4.6/5 from 188 reviews. These are third-party snapshots and should not automatically become the website's native review score.
+
+Review ID
+
+Customer ID
+
+Order ID
+
+Product ID
+
+Rating
+
+Review text
+
+Images
+
+Created date
+
+Moderation status
+
+Admin reply
+
+19. Policies requiring direct confirmation
+
+Policy
+
+Status
+
+Cancellation window
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Refund eligibility
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Refund processing time
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Wrong/damaged product procedure
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Late delivery procedure
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Custom cake cancellation
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Custom cake advance notice
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Order modification deadline
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Delivery-area policy
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Delivery fee policy
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Pickup policy
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Privacy policy
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Terms of service
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Cookie policy
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+Food allergy disclaimer
+
+NOT VERIFIED — obtain from Cake Box before publishing
+
+20. Admin dashboard
+
+Dashboard KPIs
+
+Product CRUD
+
+Category CRUD
+
+Images
+
+Prices
+
+Variants
+
+Availability/inventory
+
+Order management
+
+Customer management
+
+Delivery zones
+
+Store hours
+
+Coupons/offers
+
+Review moderation
+
+Homepage banners
+
+Reports
+
+Audit logs
+
+21. Recommended database entities
+
+Business
+
+Branch
+
+BusinessHours
+
+Category
+
+Product
+
+ProductVariant
+
+ProductImage
+
+Inventory
+
+Customer
+
+Address
+
+Cart
+
+CartItem
+
+Order
+
+OrderItem
+
+Payment
+
+Delivery
+
+Coupon
+
+Review
+
+Notification
+
+SupportTicket
+
+AdminUser
+
+AuditLog
+
+22. Key relationships
+
+Business → many Branches
+
+Branch → many BusinessHours
+
+Category → many Products
+
+Product → many ProductVariants
+
+Product → many ProductImages
+
+Customer → many Addresses
+
+Customer → one active Cart
+
+Cart → many CartItems
+
+Customer → many Orders
+
+Order → many OrderItems
+
+Order → one Payment
+
+Order → one Delivery/Pickup record
+
+Customer/Product → many Reviews
+
+23. Required website screens
+
+Home
+
+Shop
+
+Category
+
+Product details
+
+Search results
+
+Offers
+
+Cart
+
+Checkout
+
+Order confirmation
+
+Order tracking
+
+Login
+
+Signup
+
+My Account
+
+My Orders
+
+Saved Addresses
+
+Wishlist
+
+About
+
+Contact
+
+Store Location
+
+FAQ
+
+Terms
+
+Privacy
+
+Refund/Cancellation
+
+Admin Login
+
+Admin Dashboard
+
+24. Homepage
+
+Brand name/logo
+
+Search
+
+Navigation categories
+
+Hero banner
+
+Featured cakes/products
+
+Popular categories
+
+Offers when available
+
+Quick cake ordering
+
+Delivery/pickup CTA
+
+Address
+
+Hours
+
+Phone
+
+Map/directions
+
+Footer policies
+
+25. Product card
+
+Image
+
+Name
+
+Short description
+
+Price
+
+Variant/size
+
+Verified dietary badge
+
+Availability
+
+Add to cart
+
+Wishlist
+
+Quick view
+
+26. Checkout
+
+Customer
+
+Address
+
+Delivery/pickup
+
+Order notes
+
+Preferred time/date if supported
+
+Cart summary
+
+Discount
+
+Delivery fee
+
+Tax if applicable
+
+Grand total
+
+Payment method
+
+Place order
+
+Order ID
+
+27. Embedded shopping chatbot
+
+A chatbot can be added as a shopping assistant. It should answer from the verified database and should not invent operational information.
+
+Use case
+
+Behaviour
+
+Product discovery
+
+Find products by name, category or flavour.
+
+Price query
+
+Filter using verified current prices.
+
+Availability
+
+Use the current product availability flag.
+
+Store questions
+
+Address, phone, hours and directions.
+
+Ordering help
+
+Explain the site's checkout process.
+
+Order support
+
+Require appropriate order/customer identification.
+
+Unknown information
+
+Say the information is unavailable and route to support.
+
+28. Data validation rules
+
+Never invent a price.
+
+Never assume eggless status from a product name.
+
+Never assume delivery zones or fees.
+
+Keep third-party ratings separate from native website ratings.
+
+Preserve original product names and keep normalized names separately.
+
+Use INR for this branch unless expansion requires other currencies.
+
+Separate product existence from current availability.
+
+Separate store hours from online-ordering hours.
+
+Timestamp prices, availability, ratings and hours.
+
+Keep source/provenance for important facts.
+
+29. Currently NOT VERIFIED
+
+Current item prices from the supplied sources
+
+Exact own-site delivery radius/zones
+
+Delivery charges
+
+Minimum order
+
+Own-site payment methods
+
+Refund/cancellation policy
+
+Custom cake policy and lead time
+
+Full catalogue eggless status
+
+Allergen/nutrition data
+
+Inventory quantities
+
+Loyalty/rewards program
+
+Coupon rules
+
+Official social accounts for this exact branch
+
+Official email
+
+Official own website for this exact branch
+
+Pickup-specific rules
+
+30. Information to collect directly from Cake Box before production
+
+Approved product catalogue
+
+Current prices and variants
+
+Product photos and usage permission
+
+Availability/stock rules
+
+Eggless/veg/allergen information
+
+Custom cake process
+
+Delivery zones and charges
+
+Minimum order
+
+Pickup process
+
+Payment methods
+
+Cancellation/refund/replacement rules
+
+Preparation times
+
+Holiday/special hours
+
+Official email/social links
+
+Logo/brand assets
+
+Order-support contact
+
+31. Source-visible product examples
+
+Cakes: Milky Butterscotch, Tiramisu, American Red Velvet, Gulab Jamun, Vanilla, Black Forest, Chocolate, KitKat Chocolate, Honey Almond, White Forest, Mango, Chocochips, Fresh Fruits, Strawberry, Swiss Chocolate, Pineapple with Milk Maid, Cafe Delight, Rainbow, Rasgulla, Choco Almond, Hazelnut Cream, Oreo, Blueberry, Litchi New Year, Blackcurrant, Pineapple, Butterscotch, Rasmalai 500 g.
+
+Bakery: Wheat Bread, Milk Bread.
+
+Biscuits: Warm Biscuits, Peanut Biscuits, Honey Almond Sticks.
+
+Desserts include Apricot Delight, Lotus Biscoff, Blueberry Cheese Cake, Choco Mousse, Doughnut Eggless (1 piece), Well Cake, Strawberry Cheese Cake, Oreo Cheese Cake, Brownie, Dry Cake, Malai Biscoff, Tres Leches, Choco Lava, Pista Punch, Belgian Chocolate, Hazelnut Cheesecake and Passion delight; ice creams are also exposed in this section.
+
+Pastries: Choco Chips, Rainbow, Honey Almond, Black Forest, Swiss Chocolate, Butterscotch.
+
+Drinks shown include Badam Milk, Thums Up 250 ml, Sprite 250 ml, Kinley 1.0 L, milkshakes and six non-alcoholic mojitos.
+
+32. Final implementation recommendation
+
+Use this document as the business/e-commerce specification and keep the separate product/menu dataset as the import source for the product database. Build the application so administrators can update prices, availability, hours, offers, delivery rules and policies without changing code. Keep source and verification timestamps for volatile information.
+
+33. Research references
+
+Zomato Cake Box Kakinada listing: https://www.zomato.com/kakinada/cake-box-kakinada-locality/order
+
+Google Maps link supplied by the project team: Cake Box – Kakinada.
+
+Research performed from the supplied sources; volatile values such as ratings, online-order status and hours should be rechecked before production.
+

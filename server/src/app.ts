@@ -3,6 +3,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import healthRouter from './routes/health';
+import settingsRouter from './routes/settings';
+import ordersRouter from './routes/orders';
+import customOrdersRouter from './routes/customOrders';
+import addressesRouter from './routes/addresses';
 
 const app = express();
 
@@ -14,6 +18,10 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api', healthRouter);
+app.use('/api/settings', settingsRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/custom-orders', customOrdersRouter);
+app.use('/api/addresses', addressesRouter);
 
 // 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
