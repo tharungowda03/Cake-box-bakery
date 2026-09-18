@@ -4,10 +4,9 @@
 Digital Ordering Platform for Cake Box – Kakinada.
 
 ## Tech Stack
-- **Frontend**: React, Vite, TypeScript, Tailwind CSS, shadcn/ui, React Router.
+- **Frontend**: React, Vite, TypeScript, Tailwind CSS v4, shadcn/ui, React Router, Lucide.
 - **Backend**: Node.js, Express.js, TypeScript.
-- **Database/Auth (Planned)**: Supabase (PostgreSQL, Auth, Storage, pgvector).
-- **AI (Planned)**: Google Gemini API.
+- **Database/Auth**: Supabase Client Foundation.
 
 ## Project Structure
 - `client/`: React frontend application.
@@ -15,49 +14,50 @@ Digital Ordering Platform for Cake Box – Kakinada.
 - `data/`: Source of truth files (menu, master information).
 - `scripts/`: Development and deployment scripts.
 
-## Development Setup
-1. Run `npm install` from the root directory to install dependencies for both client and server.
-2. Copy `.env.example` to `.env` and fill in the required values (to be used in Phase 2).
+## Environment Setup
+The project uses a **single root `.env` architecture**. All environment variables are stored in the `.env` file at the root of the repository.
 
-## Environment Variables
-See `.env.example` for the required environment variables. Secrets should never be committed to version control.
+1. Copy `.env.example` to `.env` in the root folder.
+2. Provide actual values in `.env`.
+   - `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are exposed to the frontend.
+   - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `GEMINI_API_KEY` are server-only.
 
-## Running Frontend
-To run only the frontend:
-```bash
-npm run dev:client
-```
+## Running the App Locally
 
-## Running Backend
-To run only the backend:
-```bash
-npm run dev:server
-```
+1. Install dependencies:
+   ```bash
+   cd client && npm install
+   cd ../server && npm install
+   ```
 
-## Running Both
-To run both simultaneously:
-```bash
-npm run dev
-```
+2. Start the Frontend (Vite):
+   ```bash
+   cd client
+   npm run dev
+   # Runs on http://localhost:5173
+   ```
 
-## API Health Check
-The backend exposes a health check endpoint to verify it is running correctly:
-```
-GET http://localhost:3000/api/health
-```
+3. Start the Backend (Express):
+   ```bash
+   cd server
+   npm run dev
+   # Runs on http://localhost:3000
+   ```
 
-## Current Phase
-**Phase 1 — Project Foundation**
+## Endpoints
+- **Health Check**: `GET /api/health` -> Returns a simple JSON response confirming the API is running.
+
+## Current Phase: Phase 1 — Project Foundation
 
 Currently Implemented:
 - Monorepo project structure
 - React frontend (Vite, TS, Tailwind, shadcn/ui) shell
 - Express backend (Node, TS) shell
-- Development scripts
-- Basic error handling in backend
+- Supabase client foundation
+- Single root `.env` architecture
 - API health check
 
-Intentionally NOT implemented yet:
+**Intentionally NOT implemented yet (Reserved for Later Phases):**
 - Database tables or migrations
 - Supabase authentication
 - RLS policies

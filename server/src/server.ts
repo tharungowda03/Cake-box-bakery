@@ -1,10 +1,6 @@
-import dotenv from 'dotenv';
+import { config } from './config/env';
 import app from './app';
 
-dotenv.config({ path: '../.env' }); // Load from root if possible
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Cake Box API is running on port ${PORT}`);
+app.listen(config.port, () => {
+  console.log(`Cake Box API is running on port ${config.port}`);
 });
