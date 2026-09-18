@@ -199,6 +199,10 @@ export const customCakeService = {
     return json.data || [];
   },
 
+  async getCustomOrders(): Promise<CustomOrder[]> {
+    return this.getCustomerCustomOrders();
+  },
+
   async confirmQuote(id: string): Promise<CustomOrder> {
     const token = await getAuthToken();
     const res = await fetch(`${API_BASE}/custom-orders/${id}/confirm`, {
@@ -245,14 +249,55 @@ export const chatService = {
     message: string,
     history: ChatMessage[] = []
   ): Promise<string> {
-    const res = await fetch(`${API_BASE}/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, history }),
-    });
-    const json = await res.json();
-    if (!json.success) throw new Error(json.message || 'Chat request failed.');
-    return json.data.reply;
+    let res: Response;
+    try {
+      res = await fetch(`${API_BASE}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, history }),
+      });
+    } catch {
+      // Network-level failure (offline, CORS, DNS, etc.)
+      throw new Error(
+        'Unable to reach the assistant. Please check your connection and try again.'
+      );
+    }
+
+    // Try to parse JSON regardless of status code
+    let json: any = null;
+    try {
+      const text = await res.text();
+      if (text.trim().length > 0) {
+        json = JSON.parse(text);
+      }
+    } catch {
+      // Body was not valid JSON (should not happen with our server, but be safe)
+      json = null;
+    }
+
+    if (!res.ok) {
+      // Server returned an error status
+      const serverMsg = json?.message;
+      throw new Error(
+        serverMsg ||
+          'Sorry, the assistant is temporarily unavailable. Please try again shortly.'
+      );
+    }
+
+    if (!json?.success) {
+      throw new Error(
+        json?.message || 'The assistant could not process your request.'
+      );
+    }
+
+    const reply = json?.data?.reply;
+    if (typeof reply !== 'string' || reply.trim().length === 0) {
+      throw new Error(
+        'The assistant returned an empty response. Please try again.'
+      );
+    }
+
+    return reply.trim();
   },
 };
 

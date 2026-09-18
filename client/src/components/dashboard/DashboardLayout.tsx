@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DashboardSidebar } from './DashboardSidebar';
 import { DashboardHeader } from './DashboardHeader';
 import { DashboardMobileNav } from './DashboardMobileNav';
-import { BreadcrumbItem } from './DashboardBreadcrumbs';
+import type { BreadcrumbItem } from './DashboardBreadcrumbs';
 
 export interface DashboardLayoutProps {
   children: React.ReactNode;

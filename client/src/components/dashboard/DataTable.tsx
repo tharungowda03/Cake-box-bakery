@@ -1,7 +1,7 @@
 import React from 'react';
 import { EmptyState } from './EmptyState';
 import { LoadingState } from './LoadingState';
-import { LucideIcon, Inbox } from 'lucide-react';
+import { Inbox, type LucideIcon } from 'lucide-react';
 
 export interface Column<T> {
   header: string;

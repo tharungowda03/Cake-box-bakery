@@ -2,7 +2,8 @@ import React from 'react';
 import { Menu, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { DashboardBreadcrumbs, BreadcrumbItem } from './DashboardBreadcrumbs';
+import { DashboardBreadcrumbs } from './DashboardBreadcrumbs';
+import type { BreadcrumbItem } from './DashboardBreadcrumbs';
 
 export interface DashboardHeaderProps {
   title?: string;
@@ -68,7 +69,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               {user?.email?.split('@')[0]}
             </p>
             <p className="text-[10px] text-stone-400 font-medium leading-tight mt-0.5 capitalize">
-              {role.toLowerCase()}
+              {role?.toLowerCase() || 'Customer'}
             </p>
           </div>
         </div>

@@ -3,8 +3,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Spinner } from '../ui/Spinner';
 
-export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, loading } = useAuth();
+export const ProtectedRoute: React.FC<{
+  children: React.ReactNode;
+  requiredRole?: 'CUSTOMER' | 'OWNER';
+}> = ({ children, requiredRole }) => {
+  const { user, role, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -17,6 +20,10 @@ export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ childr
 
   if (!user) {
     return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
+  }
+
+  if (requiredRole && role !== requiredRole) {
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

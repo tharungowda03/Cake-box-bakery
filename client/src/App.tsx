@@ -34,6 +34,14 @@ function AppShell() {
         <Routes>
           {/* Customer Dashboard — all subroutes handled internally */}
           <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/dashboard/*"
             element={
               <ProtectedRoute>
@@ -42,6 +50,14 @@ function AppShell() {
             }
           />
           {/* Account alias */}
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <CustomerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/account/*"
             element={
@@ -52,9 +68,17 @@ function AppShell() {
           />
           {/* Owner Dashboard — all subroutes handled internally */}
           <Route
+            path="/owner"
+            element={
+              <ProtectedRoute requiredRole="OWNER">
+                <OwnerDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/owner/*"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requiredRole="OWNER">
                 <OwnerDashboardPage />
               </ProtectedRoute>
             }

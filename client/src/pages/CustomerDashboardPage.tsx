@@ -4,8 +4,6 @@ import {
   Package,
   Cake,
   MapPin,
-  User,
-  Bot,
   Clock,
   Truck,
   CheckCircle2,
@@ -19,7 +17,6 @@ import {
   Calendar,
   Sparkles,
   ShoppingBag,
-  IndianRupee,
   Check,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -270,13 +267,13 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
                     ₹{Number(order.total).toFixed(2)}
                   </span>
                   <StatusBadge status={order.status} />
-                  <Link
-                    to={`/orders/${order.id}`}
+                  <button
+                    onClick={() => onViewOrder(order.id)}
                     className="p-1.5 text-stone-400 hover:text-stone-900 rounded-md hover:bg-stone-100 transition"
                     title="View details"
                   >
                     <ExternalLink className="w-4 h-4" />
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -307,15 +304,17 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
                 <div>
                   <div className="flex items-center space-x-2">
                     <span className="text-xs font-semibold text-stone-900">
-                      {co.cake_type || 'Custom Cake'} ({co.flavour || 'Standard'})
+                      {co.occasion || co.theme || 'Custom Cake'} ({co.flavour || 'Standard'})
                     </span>
-                    <span className="text-[11px] text-stone-500">
-                      • {co.weight_kg} kg
-                    </span>
+                    {co.weight && (
+                      <span className="text-[11px] text-stone-500">
+                        • {co.weight} kg
+                      </span>
+                    )}
                   </div>
                   <p className="text-xs text-stone-500 mt-0.5 flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-stone-400" />
-                    Event: {co.event_date ? new Date(co.event_date).toLocaleDateString('en-IN') : 'TBD'}
+                    Event: {co.required_date ? new Date(co.required_date).toLocaleDateString('en-IN') : 'TBD'}
                   </p>
                 </div>
 
@@ -662,10 +661,13 @@ const CustomerCustomCakesTab: React.FC<{
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <h3 className="font-bold text-stone-900 text-sm">
-                      {co.cake_type || 'Custom Cake'}
+                      {co.occasion || co.theme || 'Custom Cake'}
                     </h3>
                     <p className="text-xs text-stone-500 mt-0.5">
-                      Flavour: <span className="font-semibold text-stone-700">{co.flavour || 'Standard'}</span> • Weight: <span className="font-semibold text-stone-700">{co.weight_kg} kg</span>
+                      Flavour: <span className="font-semibold text-stone-700">{co.flavour || 'Standard'}</span>
+                      {co.weight && (
+                        <> • Weight: <span className="font-semibold text-stone-700">{co.weight} kg</span></>
+                      )}
                     </p>
                   </div>
                   <StatusBadge status={co.status} />
@@ -674,32 +676,40 @@ const CustomerCustomCakesTab: React.FC<{
                 <div className="mt-3 text-xs text-stone-600 space-y-1.5 bg-stone-50/70 p-3 rounded-lg border border-stone-100">
                   <p className="flex items-center gap-1.5 text-stone-700">
                     <Calendar className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                    <span>Event Date: <strong>{co.event_date ? new Date(co.event_date).toLocaleDateString('en-IN') : 'Not specified'}</strong></span>
+                    <span>Event Date: <strong>{co.required_date ? new Date(co.required_date).toLocaleDateString('en-IN') : 'Not specified'}</strong></span>
                   </p>
-                  {co.message_on_cake && (
+                  {co.cake_message && (
                     <p className="text-stone-700">
-                      Message: <span className="italic">"{co.message_on_cake}"</span>
+                      Message: <span className="italic">"{co.cake_message}"</span>
                     </p>
                   )}
-                  {co.description && (
+                  {co.additional_requirements && (
                     <p className="text-stone-500 text-[11px] line-clamp-2">
-                      Notes: {co.description}
+                      Notes: {co.additional_requirements}
                     </p>
                   )}
                 </div>
 
                 {/* Reference Image Preview */}
-                {co.reference_image_url && (
+                {co.reference_image_path && (
                   <div className="mt-3">
                     <p className="text-[11px] font-semibold text-stone-400 mb-1">Reference Image</p>
                     <a
-                      href={co.reference_image_url}
+                      href={
+                        co.reference_image_path.startsWith('http')
+                          ? co.reference_image_path
+                          : supabase.storage.from('custom-cake-references').getPublicUrl(co.reference_image_path).data.publicUrl
+                      }
                       target="_blank"
                       rel="noreferrer"
                       className="inline-block relative rounded-lg overflow-hidden border border-stone-200 group"
                     >
                       <img
-                        src={co.reference_image_url}
+                        src={
+                          co.reference_image_path.startsWith('http')
+                            ? co.reference_image_path
+                            : supabase.storage.from('custom-cake-references').getPublicUrl(co.reference_image_path).data.publicUrl
+                        }
                         alt="Reference"
                         className="w-20 h-20 object-cover group-hover:scale-105 transition"
                       />
@@ -766,12 +776,15 @@ const CustomerAddressesTab: React.FC = () => {
 
   // New address form
   const [form, setForm] = useState({
-    name: '',
-    address_line1: '',
+    recipient_name: '',
+    phone: '',
+    house_flat_building: '',
+    street: '',
+    area_locality: '',
+    landmark: '',
     city: 'Kakinada',
     state: 'Andhra Pradesh',
     postal_code: '533001',
-    phone: '',
     is_default: false,
   });
 
@@ -798,12 +811,15 @@ const CustomerAddressesTab: React.FC = () => {
       await addressService.createAddress(form);
       setShowAddModal(false);
       setForm({
-        name: '',
-        address_line1: '',
+        recipient_name: '',
+        phone: '',
+        house_flat_building: '',
+        street: '',
+        area_locality: '',
+        landmark: '',
         city: 'Kakinada',
         state: 'Andhra Pradesh',
         postal_code: '533001',
-        phone: '',
         is_default: false,
       });
       loadAddresses();
@@ -861,7 +877,7 @@ const CustomerAddressesTab: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-stone-900 text-sm">
-                    {addr.name || 'Address'}
+                    {addr.recipient_name || 'Delivery Address'}
                   </span>
                   {addr.is_default && (
                     <span className="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-full text-[10px] font-bold">
@@ -870,8 +886,7 @@ const CustomerAddressesTab: React.FC = () => {
                   )}
                 </div>
                 <p className="text-xs text-stone-600 mt-2 leading-relaxed">
-                  {addr.address_line1}
-                  {addr.address_line2 ? `, ${addr.address_line2}` : ''}
+                  {[addr.house_flat_building, addr.street, addr.area_locality, addr.landmark].filter(Boolean).join(', ')}
                 </p>
                 <p className="text-xs text-stone-500">
                   {addr.city}, {addr.state} - {addr.postal_code}
@@ -904,26 +919,62 @@ const CustomerAddressesTab: React.FC = () => {
             <h3 className="font-bold text-stone-900 text-base mb-4">Add Delivery Address</h3>
             <form onSubmit={handleCreateAddress} className="space-y-3.5 text-xs">
               <div>
-                <label className="font-semibold text-stone-700 block mb-1">Address Label</label>
+                <label className="font-semibold text-stone-700 block mb-1">Recipient Name</label>
                 <input
                   type="text"
                   required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="e.g. Home, Office, Parents"
+                  value={form.recipient_name}
+                  onChange={(e) => setForm({ ...form, recipient_name: e.target.value })}
+                  placeholder="e.g. John Doe"
                   className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
                 />
               </div>
-              <div>
-                <label className="font-semibold text-stone-700 block mb-1">Street Address</label>
-                <textarea
-                  required
-                  rows={2}
-                  value={form.address_line1}
-                  onChange={(e) => setForm({ ...form, address_line1: e.target.value })}
-                  placeholder="House #, Flat, Building, Street"
-                  className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
-                />
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="font-semibold text-stone-700 block mb-1">House / Flat / Building</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.house_flat_building}
+                    onChange={(e) => setForm({ ...form, house_flat_building: e.target.value })}
+                    placeholder="D.No / Flat 402"
+                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-stone-700 block mb-1">Street</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.street}
+                    onChange={(e) => setForm({ ...form, street: e.target.value })}
+                    placeholder="Main Road"
+                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="font-semibold text-stone-700 block mb-1">Area / Locality</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.area_locality}
+                    onChange={(e) => setForm({ ...form, area_locality: e.target.value })}
+                    placeholder="Suryaraopeta"
+                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-stone-700 block mb-1">Landmark (Optional)</label>
+                  <input
+                    type="text"
+                    value={form.landmark}
+                    onChange={(e) => setForm({ ...form, landmark: e.target.value })}
+                    placeholder="Near Temple"
+                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
@@ -951,6 +1002,7 @@ const CustomerAddressesTab: React.FC = () => {
                 <label className="font-semibold text-stone-700 block mb-1">Contact Phone</label>
                 <input
                   type="tel"
+                  required
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+91 98765 43210"
@@ -1282,8 +1334,11 @@ export const CustomerDashboardPage: React.FC = () => {
   const [customerName, setCustomerName] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Determine current active subroute
-  const pathname = location.pathname;
+  // Normalize current active subroute (strip trailing slash, map /account to /dashboard)
+  const normalized = location.pathname.replace(/\/$/, '') || '/dashboard';
+  const cleanPath = normalized.startsWith('/account')
+    ? normalized.replace(/^\/account/, '/dashboard')
+    : normalized;
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -1318,22 +1373,57 @@ export const CustomerDashboardPage: React.FC = () => {
 
   // Breadcrumbs builder
   const getBreadcrumbs = () => {
-    if (pathname.includes('/orders')) {
+    if (cleanPath.includes('/orders')) {
       return [{ label: 'My Orders' }];
     }
-    if (pathname.includes('/custom-cakes')) {
+    if (cleanPath.includes('/custom-cakes')) {
       return [{ label: 'Custom Cakes' }];
     }
-    if (pathname.includes('/addresses')) {
+    if (cleanPath.includes('/addresses')) {
       return [{ label: 'Addresses' }];
     }
-    if (pathname.includes('/profile')) {
+    if (cleanPath.includes('/profile')) {
       return [{ label: 'Profile' }];
     }
-    if (pathname.includes('/assistant')) {
+    if (cleanPath.includes('/assistant')) {
       return [{ label: 'AI Assistant' }];
     }
     return [];
+  };
+
+  const renderContent = () => {
+    if (cleanPath === '/dashboard/orders') {
+      return <CustomerOrdersTab orders={orders} loading={loading} />;
+    }
+    if (cleanPath === '/dashboard/custom-cakes') {
+      return (
+        <CustomerCustomCakesTab
+          customOrders={customOrders}
+          loading={loading}
+          onRefresh={loadData}
+        />
+      );
+    }
+    if (cleanPath === '/dashboard/addresses') {
+      return <CustomerAddressesTab />;
+    }
+    if (cleanPath === '/dashboard/profile') {
+      return <CustomerProfileTab />;
+    }
+    if (cleanPath === '/dashboard/assistant') {
+      return <CustomerAssistantTab />;
+    }
+    // Default to Overview (/dashboard or unknown)
+    return (
+      <CustomerOverviewTab
+        orders={orders}
+        customOrders={customOrders}
+        loading={loading}
+        customerName={customerName}
+        onViewOrder={(id) => navigate(`/orders/${id}`)}
+        onNavigateTab={(path) => navigate(path)}
+      />
+    );
   };
 
   return (
@@ -1343,34 +1433,7 @@ export const CustomerDashboardPage: React.FC = () => {
       baseLabel="Customer Dashboard"
       breadcrumbs={getBreadcrumbs()}
     >
-      {pathname === '/dashboard' && (
-        <CustomerOverviewTab
-          orders={orders}
-          customOrders={customOrders}
-          loading={loading}
-          customerName={customerName}
-          onViewOrder={(id) => navigate(`/orders/${id}`)}
-          onNavigateTab={(path) => navigate(path)}
-        />
-      )}
-
-      {pathname === '/dashboard/orders' && (
-        <CustomerOrdersTab orders={orders} loading={loading} />
-      )}
-
-      {pathname === '/dashboard/custom-cakes' && (
-        <CustomerCustomCakesTab
-          customOrders={customOrders}
-          loading={loading}
-          onRefresh={loadData}
-        />
-      )}
-
-      {pathname === '/dashboard/addresses' && <CustomerAddressesTab />}
-
-      {pathname === '/dashboard/profile' && <CustomerProfileTab />}
-
-      {pathname === '/dashboard/assistant' && <CustomerAssistantTab />}
+      {renderContent()}
     </DashboardLayout>
   );
 };
