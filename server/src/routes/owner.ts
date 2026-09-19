@@ -450,6 +450,69 @@ router.patch('/products/:id/availability', async (req: AuthenticatedRequest, res
 });
 
 // ---------------------------------------------------------------------------
+// PATCH /api/owner/products/:id/featured
+// Owner-only: Toggle is_featured flag on a product.
+// Security: Only AVAILABLE products may be set to featured.
+// Customers have no write access to products table (RLS enforced at DB level).
+// ---------------------------------------------------------------------------
+
+router.patch('/products/:id/featured', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { is_featured } = req.body;
+
+    if (typeof is_featured !== 'boolean') {
+      res.status(400).json({
+        success: false,
+        message: 'is_featured must be a boolean (true or false).',
+      });
+      return;
+    }
+
+    // Fetch current product to validate
+    const { data: product, error: fetchErr } = await supabase
+      .from('products')
+      .select('id, name, availability, is_featured')
+      .eq('id', id)
+      .single();
+
+    if (fetchErr || !product) {
+      res.status(404).json({ success: false, message: 'Product not found.' });
+      return;
+    }
+
+    // Only AVAILABLE products can be featured
+    if (is_featured === true && product.availability !== 'AVAILABLE') {
+      res.status(400).json({
+        success: false,
+        message: `Cannot feature a product that is not AVAILABLE. Current status: ${product.availability}.`,
+      });
+      return;
+    }
+
+    const { data: updated, error: updateErr } = await supabase
+      .from('products')
+      .update({ is_featured, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select('id, name, availability, is_featured')
+      .single();
+
+    if (updateErr) {
+      res.status(500).json({ success: false, message: updateErr.message });
+      return;
+    }
+
+    res.json({
+      success: true,
+      message: `Product "${updated.name}" ${is_featured ? 'marked as Featured' : 'removed from Featured'}.`,
+      data: updated,
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // PATCH /api/owner/variants/:id/price
 // ---------------------------------------------------------------------------
 
@@ -709,6 +772,128 @@ router.get('/knowledge', async (req: AuthenticatedRequest, res: Response) => {
         last_ingested_at: data?.[0]?.created_at || null,
       },
     });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// SHOWCASE SLIDES MANAGEMENT (Owner only)
+// Decoupled from product_images; controls homepage visual brand slider.
+// ---------------------------------------------------------------------------
+
+router.get('/showcase', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { data, error } = await supabase
+      .from('home_showcase_images')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (error) {
+      // Return fallback slides if table is not yet migrated
+      const { DEFAULT_SHOWCASE_SLIDES } = await import('./showcase');
+      res.json({ success: true, data: DEFAULT_SHOWCASE_SLIDES, is_fallback: true });
+      return;
+    }
+
+    res.json({ success: true, data: data || [] });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/showcase', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const {
+      image_url,
+      storage_path,
+      eyebrow,
+      title,
+      subtitle,
+      highlight_word,
+      cta_label,
+      cta_link,
+      secondary_cta_label,
+      secondary_cta_link,
+      display_order,
+      is_active,
+    } = req.body;
+
+    if (!image_url || !title) {
+      res.status(400).json({ success: false, message: 'image_url and title are required.' });
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('home_showcase_images')
+      .insert([
+        {
+          image_url,
+          storage_path,
+          eyebrow: eyebrow || 'CAKE BOX · KAKINADA',
+          title,
+          subtitle,
+          highlight_word,
+          cta_label: cta_label || 'Explore Menu',
+          cta_link: cta_link || '/menu',
+          secondary_cta_label: secondary_cta_label || 'Custom Cake',
+          secondary_cta_link: secondary_cta_link || '/custom-cake',
+          display_order: display_order !== undefined ? display_order : 0,
+          is_active: is_active !== undefined ? is_active : true,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      res.status(500).json({ success: false, message: error.message });
+      return;
+    }
+
+    res.json({ success: true, message: 'Showcase slide created.', data });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.patch('/showcase/:id', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updates = { ...req.body, updated_at: new Date().toISOString() };
+
+    const { data, error } = await supabase
+      .from('home_showcase_images')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      res.status(500).json({ success: false, message: error.message });
+      return;
+    }
+
+    res.json({ success: true, message: 'Showcase slide updated.', data });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.delete('/showcase/:id', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const { error } = await supabase
+      .from('home_showcase_images')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      res.status(500).json({ success: false, message: error.message });
+      return;
+    }
+
+    res.json({ success: true, message: 'Showcase slide deleted.' });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });
   }

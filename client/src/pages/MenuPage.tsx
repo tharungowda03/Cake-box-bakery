@@ -65,6 +65,22 @@ export const MenuPage: React.FC = () => {
     return true;
   });
 
+  // Sort products: Featured available with image first, then Available, then Unavailable
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    // 1. Availability: AVAILABLE before others
+    const aAvail = a.availability === 'AVAILABLE' ? 1 : 0;
+    const bAvail = b.availability === 'AVAILABLE' ? 1 : 0;
+    if (aAvail !== bAvail) return bAvail - aAvail;
+
+    // 2. Featured status: is_featured = true first (among available items with images)
+    const aFeat = (a.is_featured && a.product_images && a.product_images.length > 0) ? 1 : 0;
+    const bFeat = (b.is_featured && b.product_images && b.product_images.length > 0) ? 1 : 0;
+    if (aFeat !== bFeat) return bFeat - aFeat;
+
+    // 3. Name alphabetical
+    return a.name.localeCompare(b.name);
+  });
+
   if (loading) {
     return (
       <div className="py-24">
@@ -137,9 +153,9 @@ export const MenuPage: React.FC = () => {
       </div>
 
       {/* Products Grid */}
-      {filteredProducts.length > 0 ? (
+      {sortedProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProducts.map((prod) => (
+          {sortedProducts.map((prod) => (
             <ProductCard key={prod.id} product={prod} />
           ))}
         </div>

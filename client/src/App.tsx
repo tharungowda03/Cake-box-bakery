@@ -4,6 +4,7 @@ import { CartProvider } from './contexts/CartContext';
 import { Layout } from './components/layout/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ChatWidget } from './components/chat/ChatWidget';
+import { CartNotification } from './components/cart/CartNotification';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -152,6 +153,8 @@ function AppShell() {
       </Routes>
       {/* AI Chat Widget — visible on all non-dashboard pages */}
       <ChatWidget />
+      {/* Toast Notification for Add to Cart */}
+      <CartNotification />
     </Layout>
   );
 }

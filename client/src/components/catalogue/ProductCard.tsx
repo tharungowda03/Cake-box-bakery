@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Check, Clock } from 'lucide-react';
+import { Plus, Check, Clock, Star } from 'lucide-react';
 import type { Product } from '../../types';
 import { useCart } from '../../contexts/CartContext';
 import { Badge } from '../ui/Badge';
@@ -13,6 +13,17 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
   const [addedAnimation, setAddedAnimation] = React.useState(false);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isAddingRef = React.useRef(false);
+
+  // Clean up timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   // Default to first variant or product base
   const variants = product.product_variants || [];
@@ -29,6 +40,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.stopPropagation();
     if (!primaryVariant || !isAvailable) return;
 
+    // Prevent accidental double rapid clicks within 250ms
+    if (isAddingRef.current) return;
+    isAddingRef.current = true;
+    setTimeout(() => {
+      isAddingRef.current = false;
+    }, 250);
+
     addToCart({
       product_id: product.id,
       product_name: product.name,
@@ -40,8 +58,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       veg_status: product.veg_status,
     });
 
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     setAddedAnimation(true);
-    setTimeout(() => setAddedAnimation(false), 1500);
+    timerRef.current = setTimeout(() => {
+      setAddedAnimation(false);
+      timerRef.current = null;
+    }, 2500); // 2.5 seconds natural display
   };
 
   return (
@@ -53,6 +77,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={product.product_images[0].public_url}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              const target = e.currentTarget;
+              const storagePath = product.product_images?.[0]?.storage_path;
+              if (storagePath && !target.src.includes('/images/products/')) {
+                target.src = `/images/products/${storagePath}`;
+              }
+            }}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-amber-50 to-orange-100/50 p-4 text-center">
@@ -65,6 +96,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Dietary and Status Badges */}
         <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1">
+          {product.is_featured && (
+            <span className="px-2 py-0.5 text-[10px] font-bold rounded-md uppercase tracking-wider bg-amber-600 text-white shadow-xs flex items-center gap-1">
+              <Star className="w-2.5 h-2.5 fill-white" /> Popular
+            </span>
+          )}
           {product.veg_status && (
             <span
               className={`px-2 py-0.5 text-[10px] font-bold rounded-md uppercase tracking-wider shadow-xs ${

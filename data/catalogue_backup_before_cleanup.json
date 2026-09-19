@@ -1,0 +1,1318 @@
+{
+  "timestamp": "2026-09-19T04:57:44.240Z",
+  "totalProducts": 112,
+  "products": [
+    {
+      "id": "bf541ae7-5b33-4b05-b1f4-9ee5d39a2f50",
+      "name": "Rainbow Pastry",
+      "slug": "rainbow-pastry",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "c6f2d4aa-da24-40ad-bbf9-9f9110487ea5",
+          "alt_text": "Rainbow Pastry",
+          "created_at": "2026-09-19T04:33:05.19751+00:00",
+          "is_primary": true,
+          "product_id": "bf541ae7-5b33-4b05-b1f4-9ee5d39a2f50",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/rainbow_pastry.jpg",
+          "storage_path": "rainbow_pastry.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "38989639-a71e-4a17-b5ed-6e487db04472",
+      "name": "Honey Trat",
+      "slug": "honey-trat",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "dbac8b32-d5a1-4c7c-bc93-675f1a6068d2",
+          "alt_text": "Honey Trat",
+          "created_at": "2026-09-19T04:33:06.102464+00:00",
+          "is_primary": true,
+          "product_id": "38989639-a71e-4a17-b5ed-6e487db04472",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/honey_trat.jpg",
+          "storage_path": "honey_trat.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "dd6788e8-052c-4b09-a350-fc64aab6c5af",
+      "name": "Tres Leches",
+      "slug": "tres-leches",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "5344a4d2-d39c-41db-940e-72fafe6b3452",
+          "alt_text": "Tres Leches",
+          "created_at": "2026-09-19T04:33:07.133647+00:00",
+          "is_primary": true,
+          "product_id": "dd6788e8-052c-4b09-a350-fc64aab6c5af",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/tres_leches.jpg",
+          "storage_path": "tres_leches.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "228cc239-1ff2-4fcd-9b07-912fd769ba68",
+      "name": "Choco Lava",
+      "slug": "choco-lava",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "30e8c9e8-c98a-4efc-b8c4-f5972cee9fef",
+          "alt_text": "Choco Lava",
+          "created_at": "2026-09-19T04:33:08.050398+00:00",
+          "is_primary": true,
+          "product_id": "228cc239-1ff2-4fcd-9b07-912fd769ba68",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/choco_lava.jpg",
+          "storage_path": "choco_lava.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "20923289-aba9-4649-91b9-541df3209aca",
+      "name": "Brownie",
+      "slug": "brownie",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "928436e3-6b10-43f4-a1e0-029aa1f871c8",
+          "alt_text": "Brownie",
+          "created_at": "2026-09-19T04:33:08.986082+00:00",
+          "is_primary": true,
+          "product_id": "20923289-aba9-4649-91b9-541df3209aca",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/brownie.jpg",
+          "storage_path": "brownie.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "090ab698-1435-4452-ab75-99183fddb7da",
+      "name": "Death By Chocolate",
+      "slug": "death-by-chocolate",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "6b401793-a98b-4279-8c85-3cd7beb5dddf",
+          "alt_text": "Death By Chocolate",
+          "created_at": "2026-09-19T04:33:09.791408+00:00",
+          "is_primary": true,
+          "product_id": "090ab698-1435-4452-ab75-99183fddb7da",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/death_by_chocolate_500gms.jpg",
+          "storage_path": "death_by_chocolate_500gms.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "e49667eb-142e-498a-ace9-957e1a133b37",
+      "name": "Malai Biscoff",
+      "slug": "malai-biscoff",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "5058e4d3-ca68-4a1c-bf33-114816b714cd",
+          "alt_text": "Malai Biscoff",
+          "created_at": "2026-09-19T04:33:10.931443+00:00",
+          "is_primary": true,
+          "product_id": "e49667eb-142e-498a-ace9-957e1a133b37",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/malai_biscoff.jpg",
+          "storage_path": "malai_biscoff.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "26d29eb8-4e47-4de0-84be-c418fa9abee6",
+      "name": "Passion Delight",
+      "slug": "passion-delight",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "743f8393-0b04-444f-adc8-695934562529",
+          "alt_text": "Passion Delight",
+          "created_at": "2026-09-19T04:33:12.349613+00:00",
+          "is_primary": true,
+          "product_id": "26d29eb8-4e47-4de0-84be-c418fa9abee6",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/passion_delight.jpg",
+          "storage_path": "passion_delight.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "362f2783-65ec-4781-9389-a8c25d323e39",
+      "name": "Vanilla Cake",
+      "slug": "vanilla-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "baa9adb2-095b-4a61-8152-ec7d84e432d4",
+          "alt_text": "Vanilla Cake",
+          "created_at": "2026-09-19T04:35:40.238726+00:00",
+          "is_primary": true,
+          "product_id": "362f2783-65ec-4781-9389-a8c25d323e39",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/vanilla_cake.jpg",
+          "storage_path": "vanilla_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "4a9fce35-cc76-40f1-afeb-15fc6fd67018",
+      "name": "Strawberry Cake",
+      "slug": "strawberry-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "88b8773b-49da-46dc-922d-b2b9068965b7",
+          "alt_text": "Strawberry Cake",
+          "created_at": "2026-09-19T04:33:14.193023+00:00",
+          "is_primary": true,
+          "product_id": "4a9fce35-cc76-40f1-afeb-15fc6fd67018",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/strawberry_cake.jpg",
+          "storage_path": "strawberry_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "de1d9dae-fd73-40e1-80c2-d8e6aa12b2f1",
+      "name": "Rasmalai Cake",
+      "slug": "rasmalai-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "3cbd6b91-b504-4e19-8b51-00e6d456b08f",
+          "alt_text": "Rasmalai Cake",
+          "created_at": "2026-09-19T04:33:15.148372+00:00",
+          "is_primary": true,
+          "product_id": "de1d9dae-fd73-40e1-80c2-d8e6aa12b2f1",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/rasmalai_cake.jpg",
+          "storage_path": "rasmalai_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "b5912d1d-f208-4468-93c6-53945b3da5d0",
+      "name": "Mango Cake",
+      "slug": "mango-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "2843d6d6-4f42-461f-ac51-cbb3463b949e",
+          "alt_text": "Mango Cake",
+          "created_at": "2026-09-19T04:33:16.548234+00:00",
+          "is_primary": true,
+          "product_id": "b5912d1d-f208-4468-93c6-53945b3da5d0",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/mango_cake.jpg",
+          "storage_path": "mango_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "64d08acc-5454-4e12-a8e2-625690e51c01",
+      "name": "Blackcurrant Cake",
+      "slug": "blackcurrant-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "a7f4099e-f615-4866-bc21-4dab23cf24ec",
+          "alt_text": "Blackcurrant Cake",
+          "created_at": "2026-09-19T04:33:17.585832+00:00",
+          "is_primary": true,
+          "product_id": "64d08acc-5454-4e12-a8e2-625690e51c01",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/blackcurrant_cake.jpg",
+          "storage_path": "blackcurrant_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "31cea568-e826-4b63-a8ae-3822f159ea20",
+      "name": "Chocochips",
+      "slug": "chocochips",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "e1a7c9ec-0850-4d7e-9516-8f09a8b74ad2",
+          "alt_text": "Chocochips",
+          "created_at": "2026-09-19T04:33:18.499894+00:00",
+          "is_primary": true,
+          "product_id": "31cea568-e826-4b63-a8ae-3822f159ea20",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/chocochips.jpg",
+          "storage_path": "chocochips.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "27e0302a-b967-4fbf-a098-d327b398f72d",
+      "name": "Dutch Truffle Cake",
+      "slug": "dutch-truffle-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "473e8606-d772-4722-a7d0-2dac64cf2d2d",
+      "name": "Butterscotch Cake",
+      "slug": "butterscotch-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "99ea162c-08f0-41ec-88b2-f0ed9d9738f8",
+          "alt_text": "Butterscotch Cake",
+          "created_at": "2026-09-19T04:33:20.256607+00:00",
+          "is_primary": true,
+          "product_id": "473e8606-d772-4722-a7d0-2dac64cf2d2d",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/butterscotch_cake.jpg",
+          "storage_path": "butterscotch_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "1be8af1d-d309-4f5a-bd60-f2ffab3bee07",
+      "name": "Semi Fondant Cakes",
+      "slug": "semi-fondant-cakes",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "64f31f4f-e7f9-4064-889f-5b94fdb6e977",
+          "alt_text": "Semi Fondant Cakes",
+          "created_at": "2026-09-19T04:33:21.380407+00:00",
+          "is_primary": true,
+          "product_id": "1be8af1d-d309-4f5a-bd60-f2ffab3bee07",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/semi_fondant_cakes.jpg",
+          "storage_path": "semi_fondant_cakes.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "2c4f6c46-c915-473b-869d-7ce6f8889053",
+      "name": "Tiramisu Cake",
+      "slug": "tiramisu-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "88873f81-6f17-4e52-bfbe-fb7e2f58c14e",
+          "alt_text": "Tiramisu Cake",
+          "created_at": "2026-09-19T04:33:22.204624+00:00",
+          "is_primary": true,
+          "product_id": "2c4f6c46-c915-473b-869d-7ce6f8889053",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/tiramisu_cake.jpg",
+          "storage_path": "tiramisu_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "de75c940-6850-4e26-8c89-83966b4bb88e",
+      "name": "Gulab Jamun Cake",
+      "slug": "gulab-jamun-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "c421dbb3-b911-477a-8793-ffbacc7a5daf",
+          "alt_text": "Gulab Jamun Cake",
+          "created_at": "2026-09-19T04:33:23.103726+00:00",
+          "is_primary": true,
+          "product_id": "de75c940-6850-4e26-8c89-83966b4bb88e",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/gulab_jamun_cake.jpg",
+          "storage_path": "gulab_jamun_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "c47f8b6b-aeae-433a-b2e7-185834a01143",
+      "name": "Black Forest Cake",
+      "slug": "black-forest-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "39aeefe3-b9a8-44ba-be4d-5b6bab3b16b0",
+      "name": "Fondant Cake",
+      "slug": "fondant-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "3c811495-3697-4a1a-b464-4cd05407c5ad",
+      "name": "Rasgulla Cake",
+      "slug": "rasgulla-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "1ce4a5ff-bd30-40db-82f2-0ea3ea85a250",
+      "name": "White Forest Cake",
+      "slug": "white-forest-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "25e34709-0a06-4b3a-abdb-4759778e9541",
+      "name": "Photo Cakes",
+      "slug": "photo-cakes",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "b8a5072b-0bfd-4742-b0b9-99c568f2d5c8",
+          "alt_text": "Photo Cakes",
+          "created_at": "2026-09-19T04:33:27.303989+00:00",
+          "is_primary": true,
+          "product_id": "25e34709-0a06-4b3a-abdb-4759778e9541",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/photo_cakes.jpg",
+          "storage_path": "photo_cakes.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "2a609e26-7aff-4d20-aace-c1a1ee9f4053",
+      "name": "Rainbow Cake",
+      "slug": "rainbow-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "aa84e5d9-31d9-49cf-b8d4-117b2e1c5da6",
+      "name": "Pineapple Cake",
+      "slug": "pineapple-cake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "7e26cc78-aad8-480c-bc3a-2747ec17f756",
+          "alt_text": "Pineapple Cake",
+          "created_at": "2026-09-19T04:35:57.450038+00:00",
+          "is_primary": true,
+          "product_id": "aa84e5d9-31d9-49cf-b8d4-117b2e1c5da6",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/pineapple_cake.jpg",
+          "storage_path": "pineapple_cake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "639464d0-cdd8-4776-ad0e-b65713634636",
+      "name": "Extra Designs",
+      "slug": "extra-designs",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "feb1f76e-d95d-40ba-84f2-76d3031f7bc1",
+          "alt_text": "Extra Designs",
+          "created_at": "2026-09-19T04:33:29.87194+00:00",
+          "is_primary": true,
+          "product_id": "639464d0-cdd8-4776-ad0e-b65713634636",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/extra_designs.jpg",
+          "storage_path": "extra_designs.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "b3a27ed7-aba2-4535-9164-c27ce73767af",
+      "name": "Extra Milkmaid",
+      "slug": "extra-milkmaid",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "3b950528-4293-4b57-9002-34a1bbef872b",
+          "alt_text": "Extra Milkmaid",
+          "created_at": "2026-09-19T04:33:31.173847+00:00",
+          "is_primary": true,
+          "product_id": "b3a27ed7-aba2-4535-9164-c27ce73767af",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/extra_milkmaid.jpg",
+          "storage_path": "extra_milkmaid.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "bf4f6a60-a265-423c-a8ec-ba3ce7989493",
+      "name": "Litchi Cake",
+      "slug": "litchi-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "342a1e4a-616c-403c-9159-3c815f4b8574",
+      "name": "Butterfly and Balls",
+      "slug": "butterfly-and-balls",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "10950fdd-b58d-47f4-83bf-7e1cff2d95d1",
+      "name": "Choco Mousse",
+      "slug": "choco-mousse",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "9e0f8062-6716-4eb3-a3c8-ce40203e53e4",
+          "alt_text": "Choco Mousse",
+          "created_at": "2026-09-19T04:33:04.160213+00:00",
+          "is_primary": true,
+          "product_id": "10950fdd-b58d-47f4-83bf-7e1cff2d95d1",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/choco_mousse.jpg",
+          "storage_path": "choco_mousse.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "36b5efdb-980a-463c-9588-d63b2c9dfa74",
+      "name": "Blueberry Cake",
+      "slug": "blueberry-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "ee628ecf-03c8-4daf-9b64-05b29f21fe49",
+      "name": "Oreo Cake",
+      "slug": "oreo-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "404af5cb-a827-425e-9146-270c74d5dfbe",
+      "name": "Choco Almond Cake",
+      "slug": "choco-almond-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "a6fe48d6-e108-4def-a008-5e50a547c9b2",
+      "name": "Milky Butterscotch",
+      "slug": "milky-butterscotch",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "ac15f80a-4c2e-4a1d-bc65-c226b121ce26",
+      "name": "Pineapple with Milk Maid",
+      "slug": "pineapple-with-milk-maid",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "a2aea0a7-b4e6-4612-b8b0-df562e784b82",
+      "name": "Hazelnut Cream",
+      "slug": "hazelnut-cream",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "8afc312e-e8af-4418-be4a-95bd110c5da6",
+      "name": "Fresh Fruits",
+      "slug": "fresh-fruits",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "346f46a2-16d7-4b59-8484-1efb2336f968",
+      "name": "Honey Almond",
+      "slug": "honey-almond",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "e9ea8fa9-da82-4c0f-ac91-526ba6c98b65",
+      "name": "American Red Velvet",
+      "slug": "american-red-velvet",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "e1def74a-f08d-4e2a-9aa9-8c5f1639f362",
+          "alt_text": "American Red Velvet",
+          "created_at": "2026-09-19T04:33:40.733311+00:00",
+          "is_primary": true,
+          "product_id": "e9ea8fa9-da82-4c0f-ac91-526ba6c98b65",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/american_red_velvet.jpg",
+          "storage_path": "american_red_velvet.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "17cb862d-359b-4663-b589-c74d58ad5365",
+      "name": "Choco Red Velvet",
+      "slug": "choco-red-velvet",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "cf1d2e42-96ca-4125-9b67-21cb76fbbbe8",
+      "name": "Celebrations",
+      "slug": "celebrations",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "5ec44a44-e1a2-41aa-8b83-1e6d4aed84d8",
+      "name": "Kitkat Chocolate",
+      "slug": "kitkat-chocolate",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "f44af72b-3d0b-4449-a1a8-ae9d3c690d43",
+      "name": "Cafe Delight",
+      "slug": "cafe-delight",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "619ad1f8-6056-4e8f-abac-146e8b5a98b9",
+      "name": "Fruits and Nuts",
+      "slug": "fruits-and-nuts",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "3c5f61d1-8451-4604-8431-e7b7b8b88283",
+      "name": "Classic Italian Pizza",
+      "slug": "classic-italian-pizza",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "01410cd0-4bf0-419d-a92a-73b5cd66cfdf",
+          "alt_text": "Classic Italian Pizza",
+          "created_at": "2026-09-19T04:33:46.039479+00:00",
+          "is_primary": true,
+          "product_id": "3c5f61d1-8451-4604-8431-e7b7b8b88283",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/classic_italian_pizza.jpg",
+          "storage_path": "classic_italian_pizza.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "591d992d-8613-45a4-8e06-56ddebbd0374",
+      "name": "Margherita Pizza",
+      "slug": "margherita-pizza",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "81418d4e-15ed-4de9-a0f8-1e4cecb5bb26",
+          "alt_text": "Margherita Pizza",
+          "created_at": "2026-09-19T04:33:47.113204+00:00",
+          "is_primary": true,
+          "product_id": "591d992d-8613-45a4-8e06-56ddebbd0374",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/margherita_pizza.jpg",
+          "storage_path": "margherita_pizza.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "f3cd997e-785d-4b88-9e29-c82955759cae",
+      "name": "Corn Pizza",
+      "slug": "corn-pizza",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "4c652600-0335-478f-9286-14811664e4a3",
+          "alt_text": "Corn Pizza",
+          "created_at": "2026-09-19T04:33:47.99435+00:00",
+          "is_primary": true,
+          "product_id": "f3cd997e-785d-4b88-9e29-c82955759cae",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/corn_pizza.jpg",
+          "storage_path": "corn_pizza.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "c5392e1f-5a8d-409c-b247-8c67d45613be",
+      "name": "Cake Box Veg Special Pizza",
+      "slug": "cake-box-veg-special-pizza",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "72bdd3cb-e140-4d80-a195-d7e1671cd87a",
+          "alt_text": "Cake Box Veg Special Pizza",
+          "created_at": "2026-09-19T04:33:49.130653+00:00",
+          "is_primary": true,
+          "product_id": "c5392e1f-5a8d-409c-b247-8c67d45613be",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/cake_box_veg_special_pizza.jpg",
+          "storage_path": "cake_box_veg_special_pizza.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "d614a4e6-5174-411d-afb2-cf9b802bed1c",
+      "name": "Corn Paneer Pizza",
+      "slug": "corn-paneer-pizza",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "c45e32bd-92c8-4000-b922-074bd2b07307",
+      "name": "Farm House Pizza",
+      "slug": "farm-house-pizza",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "5b090beb-c91e-4e37-a86f-b5c22aa5ca31",
+      "name": "Paneer Masala Pizza",
+      "slug": "paneer-masala-pizza",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "2c938619-f390-4761-b400-6f2df3471f26",
+      "name": "Tandoori Paneer Pizza",
+      "slug": "tandoori-paneer-pizza",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "16080f74-55c1-4ab2-8f44-95a06f1cf330",
+      "name": "Cheese Corn Ball",
+      "slug": "cheese-corn-ball",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "d25f4b2b-0a05-44d5-804e-74c5bca9133b",
+          "alt_text": "Cheese Corn Ball",
+          "created_at": "2026-09-19T04:33:54.035386+00:00",
+          "is_primary": true,
+          "product_id": "16080f74-55c1-4ab2-8f44-95a06f1cf330",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/cheese_corn_ball_6p.jpg",
+          "storage_path": "cheese_corn_ball_6p.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "52220f8e-0ade-4d49-ac1b-b0f0b8d1f6d0",
+      "name": "Veg Manchurian",
+      "slug": "veg-manchurian",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "fa612286-6aa0-4eb2-8902-83e01650bd80",
+          "alt_text": "Veg Manchurian",
+          "created_at": "2026-09-19T04:33:55.05466+00:00",
+          "is_primary": true,
+          "product_id": "52220f8e-0ade-4d49-ac1b-b0f0b8d1f6d0",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/veg_manchurian.jpg",
+          "storage_path": "veg_manchurian.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "272eb7f4-e271-4d56-8cc1-7d1194c7cf37",
+      "name": "Crispy Veg",
+      "slug": "crispy-veg",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "7cb27b41-4dc9-40f5-b257-b58ca2a08f8e",
+      "name": "Veg 65",
+      "slug": "veg-65",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "4c2d65f2-b9de-4290-949e-4287ad8b7511",
+          "alt_text": "Veg 65",
+          "created_at": "2026-09-19T04:33:56.8227+00:00",
+          "is_primary": true,
+          "product_id": "7cb27b41-4dc9-40f5-b257-b58ca2a08f8e",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/veg_65.jpg",
+          "storage_path": "veg_65.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "3508bf4d-6f5d-406d-a280-3ca3970ae22c",
+      "name": "Mushroom 65",
+      "slug": "mushroom-65",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "f9276bbb-7449-43f5-ae22-e58da855d666",
+          "alt_text": "Mushroom 65",
+          "created_at": "2026-09-19T04:33:57.714328+00:00",
+          "is_primary": true,
+          "product_id": "3508bf4d-6f5d-406d-a280-3ca3970ae22c",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/mushroom_65.jpg",
+          "storage_path": "mushroom_65.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "3dab2a57-1e91-4381-9df8-4dc0b024eca1",
+      "name": "Butter Garlic Mushrooms",
+      "slug": "butter-garlic-mushrooms",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "c6fa5e07-d9e9-4ccd-bc95-68d7eba152e2",
+      "name": "Mushroom Manchurian",
+      "slug": "mushroom-manchurian",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "4e07243b-d59d-489e-a774-548e925f2c6a",
+      "name": "Chilli Mushroom",
+      "slug": "chilli-mushroom",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "907a6e6a-02c8-4b8d-a846-7b668a229fcb",
+      "name": "Drawing Cake",
+      "slug": "drawing-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "8b9a3bfe-fb8a-4254-8df5-14f1d5af0974",
+      "name": "Badam Milk",
+      "slug": "badam-milk",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "0564d084-4881-4491-af3a-8f99b300e8e2",
+          "alt_text": "Badam Milk",
+          "created_at": "2026-09-19T04:34:01.71461+00:00",
+          "is_primary": true,
+          "product_id": "8b9a3bfe-fb8a-4254-8df5-14f1d5af0974",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/badam_milk.jpg",
+          "storage_path": "badam_milk.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "9c8f7b5b-d1be-426c-85eb-96eaf76eb80b",
+      "name": "Doughnut Eggless",
+      "slug": "doughnut-eggless",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "2b12ff59-5f88-4921-b3d7-818f5d087b9d",
+          "alt_text": "Doughnut Eggless",
+          "created_at": "2026-09-19T04:34:02.634655+00:00",
+          "is_primary": true,
+          "product_id": "9c8f7b5b-d1be-426c-85eb-96eaf76eb80b",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/doughnut_eggless_1_piece.jpg",
+          "storage_path": "doughnut_eggless_1_piece.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "5a820fbc-6c51-42db-b829-618511621d00",
+      "name": "Well Cake",
+      "slug": "well-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "d1cb7403-7398-4817-9ae7-e146e4168f20",
+      "name": "Arrabiata",
+      "slug": "arrabiata",
+      "availability": "HIDDEN",
+      "images": []
+    },
+    {
+      "id": "d4c41eb6-66e0-4ef7-92db-22b20e57e17a",
+      "name": "Alfredo Pasta",
+      "slug": "alfredo-pasta",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "5e0dcd50-2e4a-40bc-9ed7-0773126c9241",
+          "alt_text": "Alfredo Pasta",
+          "created_at": "2026-09-19T04:34:04.176566+00:00",
+          "is_primary": true,
+          "product_id": "d4c41eb6-66e0-4ef7-92db-22b20e57e17a",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/alfredo_pasta.jpg",
+          "storage_path": "alfredo_pasta.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "d58b1a66-29ad-4811-8cd1-a46a37143443",
+      "name": "Arrabbiata Pasta",
+      "slug": "arrabbiata-pasta",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "d3db4e10-88e2-44ce-aca6-8cc01fff65a6",
+          "alt_text": "Arrabbiata Pasta",
+          "created_at": "2026-09-19T04:34:05.826971+00:00",
+          "is_primary": true,
+          "product_id": "d58b1a66-29ad-4811-8cd1-a46a37143443",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/arrabbiata_pasta.jpg",
+          "storage_path": "arrabbiata_pasta.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "645f311d-9394-4d70-b14f-95f81631bc8a",
+      "name": "Blackcurrant Ice Cream",
+      "slug": "blackcurrant-ice-cream",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "2fe53824-16f5-4106-94cb-da50e4a9c11e",
+          "alt_text": "Blackcurrant Ice Cream",
+          "created_at": "2026-09-19T04:34:07.126655+00:00",
+          "is_primary": true,
+          "product_id": "645f311d-9394-4d70-b14f-95f81631bc8a",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/blackcurrant_ice_cream_1_scoop.jpg",
+          "storage_path": "blackcurrant_ice_cream_1_scoop.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "0c242d10-d515-4ebf-8867-58bda3e7f58d",
+      "name": "Caramel Nuts Ice Cream",
+      "slug": "caramel-nuts-ice-cream",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "a2347da7-1b05-4cc2-8f1c-9d7c3cd40487",
+          "alt_text": "Caramel Nuts Ice Cream",
+          "created_at": "2026-09-19T04:34:08.274266+00:00",
+          "is_primary": true,
+          "product_id": "0c242d10-d515-4ebf-8867-58bda3e7f58d",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/caramel_nuts_ice_cream_1_scoop.jpg",
+          "storage_path": "caramel_nuts_ice_cream_1_scoop.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "093fed42-71b8-4f20-b4a2-cd4815558691",
+      "name": "Mango Ice Cream",
+      "slug": "mango-ice-cream",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "2ac0c890-292f-4ac2-b77d-31538ef59dfb",
+      "name": "Vanilla Ice Cream",
+      "slug": "vanilla-ice-cream",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "28015137-b60b-41fe-8202-5d0b13375656",
+      "name": "Chocolate Ice Cream",
+      "slug": "chocolate-ice-cream",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "40940b94-55ad-4db9-ad1c-7759f8fd9d34",
+          "alt_text": "Chocolate Ice Cream",
+          "created_at": "2026-09-19T04:34:11.02435+00:00",
+          "is_primary": true,
+          "product_id": "28015137-b60b-41fe-8202-5d0b13375656",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/chocolate_ice_cream_1_scoop.jpg",
+          "storage_path": "chocolate_ice_cream_1_scoop.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "c7f941fd-f413-4b76-a55b-42772f4a1518",
+      "name": "Strawberry Ice Cream",
+      "slug": "strawberry-ice-cream",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "4a68fcd7-aea3-4b79-9949-eba7fe79394f",
+      "name": "Thums Up",
+      "slug": "thums-up",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "aee12ae2-387f-457b-badb-588007fbd739",
+          "alt_text": "Thums Up",
+          "created_at": "2026-09-19T04:34:12.978244+00:00",
+          "is_primary": true,
+          "product_id": "4a68fcd7-aea3-4b79-9949-eba7fe79394f",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/thums_up_250_ml.jpg",
+          "storage_path": "thums_up_250_ml.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "0f5646ad-2641-4ed0-8574-eca0c37ae1ff",
+      "name": "Litchi Milkshake",
+      "slug": "litchi-milkshake",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "0473b7e6-eba8-400e-8959-48812d3fdd40",
+          "alt_text": "Litchi Milkshake",
+          "created_at": "2026-09-19T04:34:13.882314+00:00",
+          "is_primary": true,
+          "product_id": "0f5646ad-2641-4ed0-8574-eca0c37ae1ff",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/litchi_milkshake.jpg",
+          "storage_path": "litchi_milkshake.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "31d03519-5380-40aa-9502-e5ac9ee50e1a",
+      "name": "Sprite",
+      "slug": "sprite",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "92f6d184-7c66-4555-8ed0-3d177b807754",
+      "name": "Kinley",
+      "slug": "kinley",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "7fd52e2b-5152-4603-82b6-fc9ac53ced02",
+          "alt_text": "Kinley",
+          "created_at": "2026-09-19T04:36:53.440689+00:00",
+          "is_primary": true,
+          "product_id": "92f6d184-7c66-4555-8ed0-3d177b807754",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/kinley_1_0_l.jpg",
+          "storage_path": "kinley_1_0_l.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "484a4339-3c15-4485-a73f-4b2cfc0f2cf3",
+      "name": "Pista Punch",
+      "slug": "pista-punch",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "1d877bf7-e9fe-474c-bca7-70f49d72845b",
+      "name": "Veg Momos",
+      "slug": "veg-momos",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "686b591b-0a96-4d58-b7e2-8c1d0f77983a",
+          "alt_text": "Veg Momos",
+          "created_at": "2026-09-19T04:34:16.762674+00:00",
+          "is_primary": true,
+          "product_id": "1d877bf7-e9fe-474c-bca7-70f49d72845b",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/veg_momos_5_pieces.jpg",
+          "storage_path": "veg_momos_5_pieces.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "d3a81aed-ce4f-41e8-8051-1c2caa83f1a7",
+      "name": "Peanut Biscuits",
+      "slug": "peanut-biscuits",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "5ae43339-c954-43a7-a13e-f6b50b38512d",
+          "alt_text": "Peanut Biscuits",
+          "created_at": "2026-09-19T04:34:17.679807+00:00",
+          "is_primary": true,
+          "product_id": "d3a81aed-ce4f-41e8-8051-1c2caa83f1a7",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/peanut_biscuits.jpg",
+          "storage_path": "peanut_biscuits.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "739e6e4b-b467-45e9-bbdb-b3ee80ee888f",
+      "name": "Warm Biscuits",
+      "slug": "warm-biscuits",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "d7ac265a-1d7e-4896-9ea1-54e7b181d7eb",
+      "name": "Chilli Garlic Paneer",
+      "slug": "chilli-garlic-paneer",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "ee527126-b399-423b-b793-65e955db47fe",
+      "name": "Butter Garlic Paneer",
+      "slug": "butter-garlic-paneer",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "079e5177-ad16-4e27-9756-01b696bfbf36",
+      "name": "Schezwan Paneer",
+      "slug": "schezwan-paneer",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "ea560b30-cc41-4d39-9c2b-c129e8dc9f50",
+      "name": "Paneer Majestic",
+      "slug": "paneer-majestic",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "9b8be3ea-0f48-438d-a25c-59e47e5a9893",
+      "name": "Chili Paneer",
+      "slug": "chili-paneer",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "6dc876b7-a322-402f-9d22-5d515a5eb877",
+      "name": "Paneer Manchurian",
+      "slug": "paneer-manchurian",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "9cf1038b-cb8e-4fa6-bfd4-4ae25718d107",
+      "name": "Paneer 65",
+      "slug": "paneer-65",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "db47ad10-5d43-4dc1-b353-a860879be3b2",
+      "name": "Potato Cheese Blast Burger",
+      "slug": "potato-cheese-blast-burger",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "ec8af258-edd6-412f-8dc0-754bece39177",
+          "alt_text": "Potato Cheese Blast Burger",
+          "created_at": "2026-09-19T04:34:26.812808+00:00",
+          "is_primary": true,
+          "product_id": "db47ad10-5d43-4dc1-b353-a860879be3b2",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/potato_cheese_blast_burger.jpg",
+          "storage_path": "potato_cheese_blast_burger.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "73a76dba-3cf5-470c-8373-00ebd4df468a",
+      "name": "Paneer Patty Burger",
+      "slug": "paneer-patty-burger",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "bd27ae70-1013-4124-9d99-4ad9e570b8f5",
+          "alt_text": "Paneer Patty Burger",
+          "created_at": "2026-09-19T04:34:27.720103+00:00",
+          "is_primary": true,
+          "product_id": "73a76dba-3cf5-470c-8373-00ebd4df468a",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/paneer_patty_burger.jpg",
+          "storage_path": "paneer_patty_burger.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "b7bf09e7-8d4c-45df-b828-717924238d0c",
+      "name": "Alfredo",
+      "slug": "alfredo",
+      "availability": "HIDDEN",
+      "images": []
+    },
+    {
+      "id": "74678624-54c4-41c6-9e23-95a803d7aec7",
+      "name": "Schezwan Mushroom",
+      "slug": "schezwan-mushroom",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "6809acbc-b440-4dc7-98af-d3f5842f0535",
+      "name": "Veg Patty Burger",
+      "slug": "veg-patty-burger",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "3322d074-c064-48be-832c-506a8f582bc7",
+      "name": "Corn Cheese Sandwich",
+      "slug": "corn-cheese-sandwich",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "e1fcd156-d1a7-4530-8308-c479b0cee65d",
+          "alt_text": "Corn Cheese Sandwich",
+          "created_at": "2026-09-19T04:34:37.964436+00:00",
+          "is_primary": true,
+          "product_id": "3322d074-c064-48be-832c-506a8f582bc7",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/corn_cheese_sandwich.jpg",
+          "storage_path": "corn_cheese_sandwich.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "95aa24fd-79f2-4fdc-96a9-f573f5b07401",
+      "name": "Mushroom Sandwich",
+      "slug": "mushroom-sandwich",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "89adc160-48ce-4777-a58d-0e2f214078cb",
+      "name": "Paneer Sandwich",
+      "slug": "paneer-sandwich",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "b7534191-e9f1-4290-a8aa-456866c47af6",
+      "name": "Paneer Makhani Sandwich",
+      "slug": "paneer-makhani-sandwich",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "69c6d660-8489-4d67-a3b9-d1b4aa79cb79",
+      "name": "Mango",
+      "slug": "mango",
+      "availability": "HIDDEN",
+      "images": []
+    },
+    {
+      "id": "c42bd317-d9b8-48cd-978f-b21fd6e226e3",
+      "name": "Black Current",
+      "slug": "black-current",
+      "availability": "HIDDEN",
+      "images": []
+    },
+    {
+      "id": "64487a0a-6d63-4318-bfea-bf17f9ed2be9",
+      "name": "Caramel Nuts",
+      "slug": "caramel-nuts",
+      "availability": "HIDDEN",
+      "images": []
+    },
+    {
+      "id": "7a167d7b-908d-4ea2-a557-621fd4853495",
+      "name": "Apricot Delight",
+      "slug": "apricot-delight",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "94bc5914-fc31-42ae-a0b6-8c58d64b844d",
+      "name": "Swiss Chocolate Cake",
+      "slug": "swiss-chocolate-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "db4cf900-eec6-480f-b570-2104a4a16d3a",
+      "name": "Stick Paneer",
+      "slug": "stick-paneer",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "c9a0fdbe-b126-4e42-adf4-c3bb2d4dc14e",
+      "name": "Cake Box Special Double Patty Mega Burger",
+      "slug": "cake-box-special-double-patty-mega-burger",
+      "availability": "AVAILABLE",
+      "images": [
+        {
+          "id": "ca11df68-d085-4e96-9054-ea12a11b7cb1",
+          "alt_text": "Cake Box Special Double Patty Mega Burger",
+          "created_at": "2026-09-19T04:34:28.546583+00:00",
+          "is_primary": true,
+          "product_id": "c9a0fdbe-b126-4e42-adf4-c3bb2d4dc14e",
+          "public_url": "https://gujyilxtvjwsiohlvmmm.supabase.co/storage/v1/object/public/product-images/cake_box_special_double_patty_mega_burger.jpg",
+          "storage_path": "cake_box_special_double_patty_mega_burger.jpg",
+          "display_order": 0
+        }
+      ]
+    },
+    {
+      "id": "1b48a9ec-9f67-4883-96eb-a8805dc28719",
+      "name": "Classic Burger",
+      "slug": "classic-burger",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "1fe44ec7-830a-4d5b-86bf-7872659a626f",
+      "name": "Milk Butterscotch Pastry",
+      "slug": "milk-butterscotch-pastry",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "7e9fb41d-8ce7-4d43-a16b-14aa1d049d5c",
+      "name": "Honey Almond Pastry",
+      "slug": "honey-almond-pastry",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "72ea7ae2-bb32-4c12-aa95-32c565649b93",
+      "name": "Black Forest Pastry",
+      "slug": "black-forest-pastry",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "1cf51b17-6d5d-490f-9f68-27686bb8706d",
+      "name": "Whole Wheat Bread",
+      "slug": "whole-wheat-bread",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "42c72d53-5f04-4a13-9b12-5c880cdbdc30",
+      "name": "Dry Cake",
+      "slug": "dry-cake",
+      "availability": "AVAILABLE",
+      "images": []
+    },
+    {
+      "id": "931ee0e9-6df4-4d00-852b-443501828b8a",
+      "name": "Paneer Momos",
+      "slug": "paneer-momos",
+      "availability": "AVAILABLE",
+      "images": []
+    }
+  ]
+}

@@ -1,0 +1,603 @@
+{
+  "summary": {
+    "total": 112,
+    "hidden": 5,
+    "pubTotal": 107,
+    "withImage": 48,
+    "imageless": 59,
+    "dupCount": 0
+  },
+  "imageless": [
+    {
+      "id": "27e0302a-b967-4fbf-a098-d327b398f72d",
+      "name": "Dutch Truffle Cake",
+      "slug": "dutch-truffle-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "c47f8b6b-aeae-433a-b2e7-185834a01143",
+      "name": "Black Forest Cake",
+      "slug": "black-forest-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "39aeefe3-b9a8-44ba-be4d-5b6bab3b16b0",
+      "name": "Fondant Cake",
+      "slug": "fondant-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "3c811495-3697-4a1a-b464-4cd05407c5ad",
+      "name": "Rasgulla Cake",
+      "slug": "rasgulla-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "1ce4a5ff-bd30-40db-82f2-0ea3ea85a250",
+      "name": "White Forest Cake",
+      "slug": "white-forest-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "2a609e26-7aff-4d20-aace-c1a1ee9f4053",
+      "name": "Rainbow Cake",
+      "slug": "rainbow-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "bf4f6a60-a265-423c-a8ec-ba3ce7989493",
+      "name": "Litchi Cake",
+      "slug": "litchi-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "342a1e4a-616c-403c-9159-3c815f4b8574",
+      "name": "Butterfly and Balls",
+      "slug": "butterfly-and-balls",
+      "cat": "Cake Add-ons",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "36b5efdb-980a-463c-9588-d63b2c9dfa74",
+      "name": "Blueberry Cake",
+      "slug": "blueberry-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "ee628ecf-03c8-4daf-9b64-05b29f21fe49",
+      "name": "Oreo Cake",
+      "slug": "oreo-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "404af5cb-a827-425e-9146-270c74d5dfbe",
+      "name": "Choco Almond Cake",
+      "slug": "choco-almond-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "a6fe48d6-e108-4def-a008-5e50a547c9b2",
+      "name": "Milky Butterscotch",
+      "slug": "milky-butterscotch",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "ac15f80a-4c2e-4a1d-bc65-c226b121ce26",
+      "name": "Pineapple with Milk Maid",
+      "slug": "pineapple-with-milk-maid",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "a2aea0a7-b4e6-4612-b8b0-df562e784b82",
+      "name": "Hazelnut Cream",
+      "slug": "hazelnut-cream",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "8afc312e-e8af-4418-be4a-95bd110c5da6",
+      "name": "Fresh Fruits",
+      "slug": "fresh-fruits",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "346f46a2-16d7-4b59-8484-1efb2336f968",
+      "name": "Honey Almond",
+      "slug": "honey-almond",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "17cb862d-359b-4663-b589-c74d58ad5365",
+      "name": "Choco Red Velvet",
+      "slug": "choco-red-velvet",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "cf1d2e42-96ca-4125-9b67-21cb76fbbbe8",
+      "name": "Celebrations",
+      "slug": "celebrations",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "5ec44a44-e1a2-41aa-8b83-1e6d4aed84d8",
+      "name": "Kitkat Chocolate",
+      "slug": "kitkat-chocolate",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "f44af72b-3d0b-4449-a1a8-ae9d3c690d43",
+      "name": "Cafe Delight",
+      "slug": "cafe-delight",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "619ad1f8-6056-4e8f-abac-146e8b5a98b9",
+      "name": "Fruits and Nuts",
+      "slug": "fruits-and-nuts",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "d614a4e6-5174-411d-afb2-cf9b802bed1c",
+      "name": "Corn Paneer Pizza",
+      "slug": "corn-paneer-pizza",
+      "cat": "Pizza",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "c45e32bd-92c8-4000-b922-074bd2b07307",
+      "name": "Farm House Pizza",
+      "slug": "farm-house-pizza",
+      "cat": "Pizza",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "5b090beb-c91e-4e37-a86f-b5c22aa5ca31",
+      "name": "Paneer Masala Pizza",
+      "slug": "paneer-masala-pizza",
+      "cat": "Pizza",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "2c938619-f390-4761-b400-6f2df3471f26",
+      "name": "Tandoori Paneer Pizza",
+      "slug": "tandoori-paneer-pizza",
+      "cat": "Pizza",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "272eb7f4-e271-4d56-8cc1-7d1194c7cf37",
+      "name": "Crispy Veg",
+      "slug": "crispy-veg",
+      "cat": "Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "3dab2a57-1e91-4381-9df8-4dc0b024eca1",
+      "name": "Butter Garlic Mushrooms",
+      "slug": "butter-garlic-mushrooms",
+      "cat": "Mushroom Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "c6fa5e07-d9e9-4ccd-bc95-68d7eba152e2",
+      "name": "Mushroom Manchurian",
+      "slug": "mushroom-manchurian",
+      "cat": "Mushroom Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "4e07243b-d59d-489e-a774-548e925f2c6a",
+      "name": "Chilli Mushroom",
+      "slug": "chilli-mushroom",
+      "cat": "Mushroom Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "907a6e6a-02c8-4b8d-a846-7b668a229fcb",
+      "name": "Drawing Cake",
+      "slug": "drawing-cake",
+      "cat": "Cake Add-ons",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "5a820fbc-6c51-42db-b829-618511621d00",
+      "name": "Well Cake",
+      "slug": "well-cake",
+      "cat": "Bakery & Desserts",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "093fed42-71b8-4f20-b4a2-cd4815558691",
+      "name": "Mango Ice Cream",
+      "slug": "mango-ice-cream",
+      "cat": "Ice Cream",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "2ac0c890-292f-4ac2-b77d-31538ef59dfb",
+      "name": "Vanilla Ice Cream",
+      "slug": "vanilla-ice-cream",
+      "cat": "Ice Cream",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "c7f941fd-f413-4b76-a55b-42772f4a1518",
+      "name": "Strawberry Ice Cream",
+      "slug": "strawberry-ice-cream",
+      "cat": "Ice Cream",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "31d03519-5380-40aa-9502-e5ac9ee50e1a",
+      "name": "Sprite",
+      "slug": "sprite",
+      "cat": "Beverages",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "484a4339-3c15-4485-a73f-4b2cfc0f2cf3",
+      "name": "Pista Punch",
+      "slug": "pista-punch",
+      "cat": "Beverages",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "739e6e4b-b467-45e9-bbdb-b3ee80ee888f",
+      "name": "Warm Biscuits",
+      "slug": "warm-biscuits",
+      "cat": "Cookies",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "d7ac265a-1d7e-4896-9ea1-54e7b181d7eb",
+      "name": "Chilli Garlic Paneer",
+      "slug": "chilli-garlic-paneer",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "ee527126-b399-423b-b793-65e955db47fe",
+      "name": "Butter Garlic Paneer",
+      "slug": "butter-garlic-paneer",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "079e5177-ad16-4e27-9756-01b696bfbf36",
+      "name": "Schezwan Paneer",
+      "slug": "schezwan-paneer",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "ea560b30-cc41-4d39-9c2b-c129e8dc9f50",
+      "name": "Paneer Majestic",
+      "slug": "paneer-majestic",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "9b8be3ea-0f48-438d-a25c-59e47e5a9893",
+      "name": "Chili Paneer",
+      "slug": "chili-paneer",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "6dc876b7-a322-402f-9d22-5d515a5eb877",
+      "name": "Paneer Manchurian",
+      "slug": "paneer-manchurian",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "9cf1038b-cb8e-4fa6-bfd4-4ae25718d107",
+      "name": "Paneer 65",
+      "slug": "paneer-65",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "74678624-54c4-41c6-9e23-95a803d7aec7",
+      "name": "Schezwan Mushroom",
+      "slug": "schezwan-mushroom",
+      "cat": "Mushroom Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "6809acbc-b440-4dc7-98af-d3f5842f0535",
+      "name": "Veg Patty Burger",
+      "slug": "veg-patty-burger",
+      "cat": "Burgers",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "95aa24fd-79f2-4fdc-96a9-f573f5b07401",
+      "name": "Mushroom Sandwich",
+      "slug": "mushroom-sandwich",
+      "cat": "Sandwiches",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "89adc160-48ce-4777-a58d-0e2f214078cb",
+      "name": "Paneer Sandwich",
+      "slug": "paneer-sandwich",
+      "cat": "Sandwiches",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "b7534191-e9f1-4290-a8aa-456866c47af6",
+      "name": "Paneer Makhani Sandwich",
+      "slug": "paneer-makhani-sandwich",
+      "cat": "Sandwiches",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "7a167d7b-908d-4ea2-a557-621fd4853495",
+      "name": "Apricot Delight",
+      "slug": "apricot-delight",
+      "cat": "Desserts",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "94bc5914-fc31-42ae-a0b6-8c58d64b844d",
+      "name": "Swiss Chocolate Cake",
+      "slug": "swiss-chocolate-cake",
+      "cat": "Cakes",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "db4cf900-eec6-480f-b570-2104a4a16d3a",
+      "name": "Stick Paneer",
+      "slug": "stick-paneer",
+      "cat": "Paneer Starters",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "1b48a9ec-9f67-4883-96eb-a8805dc28719",
+      "name": "Classic Burger",
+      "slug": "classic-burger",
+      "cat": "Burgers",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "1fe44ec7-830a-4d5b-86bf-7872659a626f",
+      "name": "Milk Butterscotch Pastry",
+      "slug": "milk-butterscotch-pastry",
+      "cat": "Pastries",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "7e9fb41d-8ce7-4d43-a16b-14aa1d049d5c",
+      "name": "Honey Almond Pastry",
+      "slug": "honey-almond-pastry",
+      "cat": "Pastries",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "72ea7ae2-bb32-4c12-aa95-32c565649b93",
+      "name": "Black Forest Pastry",
+      "slug": "black-forest-pastry",
+      "cat": "Pastries",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "1cf51b17-6d5d-490f-9f68-27686bb8706d",
+      "name": "Whole Wheat Bread",
+      "slug": "whole-wheat-bread",
+      "cat": "Breads",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "42c72d53-5f04-4a13-9b12-5c880cdbdc30",
+      "name": "Dry Cake",
+      "slug": "dry-cake",
+      "cat": "Breads",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    },
+    {
+      "id": "931ee0e9-6df4-4d00-852b-443501828b8a",
+      "name": "Paneer Momos",
+      "slug": "paneer-momos",
+      "cat": "Momos",
+      "avail": "AVAILABLE",
+      "status": "NO_IMAGE_RECORD",
+      "hasOrders": false,
+      "recommend": "REMOVE"
+    }
+  ],
+  "dupGroups": []
+}

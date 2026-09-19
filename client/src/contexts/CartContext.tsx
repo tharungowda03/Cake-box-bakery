@@ -1,6 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { CartItem } from '../types';
 
+export interface CartNotification {
+  id: string;
+  product_name: string;
+  variant_name?: string;
+  quantity: number;
+  unit_price: number;
+  image_url?: string;
+  timestamp: number;
+}
+
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: Omit<CartItem, 'id'>) => void;
@@ -9,6 +19,8 @@ interface CartContextType {
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
+  lastAddedNotification: CartNotification | null;
+  dismissNotification: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -25,6 +37,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   });
 
+  const [lastAddedNotification, setLastAddedNotification] = useState<CartNotification | null>(null);
+
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
@@ -32,6 +46,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Failed to persist cart to localStorage', e);
     }
   }, [cart]);
+
+  const dismissNotification = () => {
+    setLastAddedNotification(null);
+  };
 
   const addToCart = (item: Omit<CartItem, 'id'>) => {
     setCart((prev) => {
@@ -47,6 +65,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         );
       }
       return [...prev, { ...item, id: `${item.variant_id}_${Date.now()}` }];
+    });
+
+    // Trigger persistent success feedback notification
+    setLastAddedNotification({
+      id: `${item.variant_id}_${Date.now()}`,
+      product_name: item.product_name,
+      variant_name: item.variant_name,
+      quantity: item.quantity,
+      unit_price: item.unit_price,
+      image_url: item.image_url,
+      timestamp: Date.now(),
     });
   };
 
@@ -81,6 +110,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         clearCart,
         totalItems,
         subtotal,
+        lastAddedNotification,
+        dismissNotification,
       }}
     >
       {children}

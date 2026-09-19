@@ -102,5 +102,69 @@ export const catalogueService = {
     }
 
     return (data || []) as Product[];
-  }
+  },
+
+  /**
+   * Fetch owner-featured products for the Home page Popular Picks section.
+   * Returns products where is_featured = true, availability = AVAILABLE,
+   * and they have a valid product image, ordered by name (stable deterministic).
+   * Limit: 8 products max.
+   *
+   * If no featured products exist, falls back to first 8 AVAILABLE products
+   * that have images (for a clean "Explore Our Menu" experience).
+   */
+  async getFeaturedProducts(): Promise<{ products: Product[]; isFeatured: boolean }> {
+    try {
+      // Attempt to fetch owner-featured products
+      const { data: featured, error: featErr } = await supabase
+        .from('products')
+        .select(`
+          *,
+          category:categories (*),
+          product_variants (*),
+          product_images (*)
+        `)
+        .eq('availability', 'AVAILABLE')
+        .eq('is_featured', true)
+        .order('name', { ascending: true })
+        .limit(8);
+
+      if (!featErr && featured && featured.length > 0) {
+        // Filter to only those with a valid primary image
+        const featuredWithImages = (featured || []).filter(
+          (p: any) => p.product_images && p.product_images.length > 0
+        ) as Product[];
+
+        if (featuredWithImages.length > 0) {
+          return { products: featuredWithImages, isFeatured: true };
+        }
+      }
+    } catch (err) {
+      console.warn('Could not query is_featured, falling back to top menu items:', err);
+    }
+
+    // Fallback: first 8 AVAILABLE products with images
+    const { data: fallback, error: fallbackErr } = await supabase
+      .from('products')
+      .select(`
+        *,
+        category:categories (*),
+        product_variants (*),
+        product_images (*)
+      `)
+      .eq('availability', 'AVAILABLE')
+      .order('name', { ascending: true })
+      .limit(24); // fetch more, filter by image presence
+
+    if (fallbackErr) {
+      console.error('Error fetching fallback products:', fallbackErr);
+      throw fallbackErr;
+    }
+
+    const fallbackWithImages = (fallback || [])
+      .filter((p: any) => p.product_images && p.product_images.length > 0)
+      .slice(0, 8) as Product[];
+
+    return { products: fallbackWithImages, isFeatured: false };
+  },
 };

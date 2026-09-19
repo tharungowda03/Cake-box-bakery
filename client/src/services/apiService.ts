@@ -440,6 +440,21 @@ export const ownerService = {
     return json.data;
   },
 
+  async updateProductFeatured(id: string, is_featured: boolean): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/products/${id}/featured`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ is_featured }),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
   async updateVariantPrice(id: string, price: number): Promise<any> {
     const token = await getAuthToken();
     const res = await fetch(`${API_BASE}/owner/variants/${id}/price`, {
@@ -516,6 +531,56 @@ export const ownerService = {
     const json = await res.json();
     if (!json.success) throw new Error(json.message);
     return json.data;
+  },
+
+  async getShowcaseSlides(): Promise<any[]> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/showcase`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data || [];
+  },
+
+  async createShowcaseSlide(data: any): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/showcase`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async updateShowcaseSlide(id: string, data: any): Promise<any> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/showcase/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
+    return json.data;
+  },
+
+  async deleteShowcaseSlide(id: string): Promise<void> {
+    const token = await getAuthToken();
+    const res = await fetch(`${API_BASE}/owner/showcase/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.message);
   },
 };
 

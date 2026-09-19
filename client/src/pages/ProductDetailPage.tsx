@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Check, Clock, ShieldAlert, ShoppingBag } from 'lucide-react';
 import { catalogueService } from '../services/catalogueService';
@@ -16,6 +16,16 @@ export const ProductDetailPage: React.FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
   const [addedAnimation, setAddedAnimation] = useState(false);
   const [loading, setLoading] = useState(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isAddingRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     async function loadProduct() {
@@ -64,6 +74,13 @@ export const ProductDetailPage: React.FC = () => {
   const handleAddToCart = () => {
     if (!selectedVariant || !isAvailable) return;
 
+    // Rapid-click debounce protection
+    if (isAddingRef.current) return;
+    isAddingRef.current = true;
+    setTimeout(() => {
+      isAddingRef.current = false;
+    }, 250);
+
     addToCart({
       product_id: product.id,
       product_name: product.name,
@@ -75,8 +92,14 @@ export const ProductDetailPage: React.FC = () => {
       veg_status: product.veg_status,
     });
 
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     setAddedAnimation(true);
-    setTimeout(() => setAddedAnimation(false), 1500);
+    timerRef.current = setTimeout(() => {
+      setAddedAnimation(false);
+      timerRef.current = null;
+    }, 2500);
   };
 
   return (
@@ -97,6 +120,13 @@ export const ProductDetailPage: React.FC = () => {
                 src={product.product_images[0].public_url}
                 alt={product.name}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const storagePath = product.product_images?.[0]?.storage_path;
+                  if (storagePath && !target.src.includes('/images/products/')) {
+                    target.src = `/images/products/${storagePath}`;
+                  }
+                }}
               />
             ) : (
               <div className="text-center p-6">

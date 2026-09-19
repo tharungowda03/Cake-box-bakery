@@ -53,6 +53,13 @@ export interface Product {
   tags: string[] | null;
   source: string | null;
   created_at: string;
+  // Featured & offers (from migration 004)
+  is_featured: boolean;
+  is_on_offer: boolean;
+  offer_price: number | null;
+  offer_label: string | null;
+  offer_start_at: string | null;
+  offer_end_at: string | null;
   // Joined relations
   category?: Category;
   product_variants?: ProductVariant[];
@@ -159,4 +166,22 @@ export interface ServiceabilityCheckResponse {
   distance_km: number;
   delivery_charge_inr: number;
   reason?: string;
+}
+
+export interface ShowcaseSlide {
+  id: string;
+  image_url: string;
+  storage_path?: string | null;
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  highlight_word?: string;
+  cta_label?: string;
+  cta_link?: string;
+  secondary_cta_label?: string;
+  secondary_cta_link?: string;
+  display_order: number;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
 }

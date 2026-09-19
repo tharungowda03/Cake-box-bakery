@@ -34,6 +34,7 @@ import {
   Plus,
   ExternalLink,
   Tag,
+  Star,
 } from 'lucide-react';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -945,6 +946,7 @@ const OwnerProductsTab: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [filterAvailability, setFilterAvailability] = useState('');
   const [togglingId, setTogglingId] = useState<string | null>(null);
+  const [togglingFeaturedId, setTogglingFeaturedId] = useState<string | null>(null);
   const [editingVariant, setEditingVariant] = useState<{ id: string; name: string; price: number } | null>(null);
   const [newPrice, setNewPrice] = useState('');
   const [savingPrice, setSavingPrice] = useState(false);
@@ -1015,6 +1017,24 @@ const OwnerProductsTab: React.FC = () => {
       alert(e.message);
     } finally {
       setTogglingId(null);
+    }
+  };
+
+  const handleToggleFeatured = async (productId: string, currentFeatured: boolean, availability: string) => {
+    if (!currentFeatured && availability !== 'AVAILABLE') {
+      alert('Only AVAILABLE products can be marked as Featured.');
+      return;
+    }
+    setTogglingFeaturedId(productId);
+    try {
+      await ownerService.updateProductFeatured(productId, !currentFeatured);
+      setProducts((prev) =>
+        prev.map((p) => (p.id === productId ? { ...p, is_featured: !currentFeatured } : p))
+      );
+    } catch (e: any) {
+      alert(e.message || 'Failed to update featured status');
+    } finally {
+      setTogglingFeaturedId(null);
     }
   };
 
@@ -1172,7 +1192,7 @@ const OwnerProductsTab: React.FC = () => {
             <span>Price</span>
             <span>Availability</span>
             <span>Source</span>
-            <span className="w-20">Actions</span>
+            <span className="w-28 text-right">Actions</span>
           </div>
 
           <div className="divide-y divide-stone-100">
@@ -1204,7 +1224,14 @@ const OwnerProductsTab: React.FC = () => {
                         </div>
                       )}
                       <div className="min-w-0">
-                        <p className="font-semibold text-stone-900 text-sm truncate">{product.name}</p>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <p className="font-semibold text-stone-900 text-sm truncate">{product.name}</p>
+                          {product.is_featured && (
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold rounded bg-amber-100 text-amber-800 shrink-0">
+                              <Star className="w-2.5 h-2.5 fill-amber-600 text-amber-600" /> Featured
+                            </span>
+                          )}
+                        </div>
                         {product.veg_status && (
                           <span className={`text-[9px] font-bold uppercase ${
                             product.veg_status.toLowerCase().includes('non') ? 'text-rose-600' : 'text-emerald-600'
@@ -1259,6 +1286,30 @@ const OwnerProductsTab: React.FC = () => {
 
                     {/* Actions */}
                     <div className="flex items-center gap-1 justify-end shrink-0">
+                      {/* Featured Toggle */}
+                      <button
+                        onClick={() => handleToggleFeatured(product.id, !!product.is_featured, product.availability)}
+                        disabled={togglingFeaturedId === product.id || (product.availability !== 'AVAILABLE' && !product.is_featured)}
+                        title={
+                          product.is_featured
+                            ? 'Featured on Home (Popular Picks). Click to unfeature.'
+                            : product.availability === 'AVAILABLE'
+                            ? 'Feature on Home (Popular Picks)'
+                            : 'Only AVAILABLE products can be featured'
+                        }
+                        className={`p-1.5 rounded-lg transition disabled:opacity-30 ${
+                          product.is_featured
+                            ? 'text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700'
+                            : 'text-stone-300 hover:text-amber-600 hover:bg-stone-100'
+                        }`}
+                      >
+                        {togglingFeaturedId === product.id ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <Star className={`w-4 h-4 ${product.is_featured ? 'fill-amber-500 text-amber-500' : ''}`} />
+                        )}
+                      </button>
+
                       {/* Cycle Availability */}
                       <button
                         onClick={() => handleCycleAvailability(product.id, product.availability)}
@@ -1303,6 +1354,11 @@ const OwnerProductsTab: React.FC = () => {
                   <div className="md:hidden px-4 pb-3 -mt-1 flex items-center gap-2 flex-wrap">
                     <span className="text-[10px] text-stone-400">{product.category?.name}</span>
                     <AvailabilityBadge availability={product.availability} />
+                    {product.is_featured && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 flex items-center gap-1">
+                        <Star className="w-2.5 h-2.5 fill-amber-500 text-amber-500" /> Featured
+                      </span>
+                    )}
                     {displayPrice !== null && (
                       <span className="text-xs font-bold text-stone-900">₹{Number(displayPrice).toFixed(0)}</span>
                     )}
