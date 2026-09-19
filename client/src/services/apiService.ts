@@ -7,10 +7,57 @@ import type {
   ServiceabilityCheckResponse,
 } from '../types';
 
-const rawApiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim() || '';
-export const API_BASE = rawApiUrl
-  ? (rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl.replace(/\/+$/, '')}/api`)
-  : '/api';
+// ---------------------------------------------------------------------------
+// API Base URL Configuration
+// ---------------------------------------------------------------------------
+// VITE_API_URL must be set in Render's environment variables for the frontend
+// static site, e.g.: https://your-backend.onrender.com
+//
+// Local development: VITE_API_URL is NOT required. The Vite dev server proxies
+// all /api requests to localhost:3000 (see vite.config.ts).
+//
+// Production: VITE_API_URL MUST be set. If missing, a clear error is thrown
+// immediately so the misconfiguration is obvious in the browser console.
+// ---------------------------------------------------------------------------
+
+const rawApiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim() ?? '';
+
+// Detect local development by checking the current browser hostname.
+// This check runs at module-load time in the browser.
+const isLocalDev =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.hostname.startsWith('192.168.'));
+
+function buildApiBase(): string {
+  if (rawApiUrl) {
+    // Normalise: strip trailing slash, then append /api if not already present.
+    // Handles both:
+    //   VITE_API_URL=https://backend.onrender.com      → https://backend.onrender.com/api
+    //   VITE_API_URL=https://backend.onrender.com/api  → https://backend.onrender.com/api
+    const base = rawApiUrl.replace(/\/+$/, '');
+    return base.endsWith('/api') ? base : `${base}/api`;
+  }
+
+  if (isLocalDev) {
+    // Safe: Vite dev server will proxy /api → localhost:3000
+    return '/api';
+  }
+
+  // Production with no VITE_API_URL: fail loudly so it's immediately obvious.
+  const msg =
+    '[Cake Box] CONFIGURATION ERROR: VITE_API_URL is not set. ' +
+    'The production frontend cannot reach the backend. ' +
+    'Set VITE_API_URL=https://your-backend.onrender.com in the Render ' +
+    'frontend environment variables and redeploy.';
+  console.error(msg);
+  // Return a clearly invalid sentinel so every API call produces a meaningful
+  // network error instead of a silent 404 on the frontend origin.
+  return 'MISSING_VITE_API_URL/api';
+}
+
+export const API_BASE = buildApiBase();
 
 async function getAuthToken(): Promise<string> {
   const { data: { session } } = await supabase.auth.getSession();
