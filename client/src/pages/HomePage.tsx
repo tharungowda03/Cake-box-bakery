@@ -9,9 +9,7 @@ import {
   Star,
   MapPin,
   Clock,
-  Phone,
   MessageCircle,
-  HelpCircle,
   CheckCircle2,
   Cake,
 } from 'lucide-react';

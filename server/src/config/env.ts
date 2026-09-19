@@ -2,30 +2,43 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 
-// Determine the path to the root .env file
-// __dirname will be either in src/config or dist/config
-const isDist = __dirname.includes('dist');
-const envPath = isDist 
-  ? path.resolve(__dirname, '../../../.env') 
-  : path.resolve(__dirname, '../../../.env'); // in both src/config and dist/config, we go up three levels (src/config -> src -> server -> root)
+// Look for .env in current working directory and parent directories (for local development)
+const possibleEnvPaths = [
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(__dirname, '../../../.env'),
+  path.resolve(__dirname, '../../.env'),
+];
 
-if (!fs.existsSync(envPath)) {
-  console.warn(`[Env] Root .env file not found at ${envPath}`);
+let loadedEnv = false;
+for (const p of possibleEnvPaths) {
+  if (fs.existsSync(p)) {
+    dotenv.config({ path: p });
+    loadedEnv = true;
+    break;
+  }
 }
 
-dotenv.config({ path: envPath });
+// In production environments (like Render), environment variables are provided
+// directly by the platform into process.env without requiring a .env file on disk.
+if (!loadedEnv) {
+  dotenv.config();
+}
 
-const requireEnv = (name: string): string => {
-  const value = process.env[name];
+const getEnv = (name: string, fallbackName?: string): string => {
+  const value = process.env[name] || (fallbackName ? process.env[fallbackName] : undefined);
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(
+      `Missing required environment variable: ${name}${fallbackName ? ` (or ${fallbackName})` : ''}. ` +
+      `Please configure this in your Render dashboard environment variables.`
+    );
   }
   return value;
 };
 
 export const config = {
-  port: process.env.PORT || 3000,
-  supabaseUrl: requireEnv('SUPABASE_URL'),
-  supabaseServiceRoleKey: requireEnv('SUPABASE_SERVICE_ROLE_KEY'),
-  geminiApiKey: requireEnv('GEMINI_API_KEY'),
+  port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+  supabaseUrl: getEnv('SUPABASE_URL', 'VITE_SUPABASE_URL'),
+  supabaseServiceRoleKey: getEnv('SUPABASE_SERVICE_ROLE_KEY'),
+  geminiApiKey: getEnv('GEMINI_API_KEY'),
+  frontendUrl: process.env.FRONTEND_URL,
 };

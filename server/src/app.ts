@@ -11,11 +11,59 @@ import chatRouter from './routes/chat';
 import ownerRouter from './routes/owner';
 import showcaseRouter from './routes/showcase';
 
+import { config } from './config/env';
+
 const app = express();
 
 // Middlewares
-app.use(helmet());
-app.use(cors());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+
+// Production-ready CORS supporting local dev, Render domains, and FRONTEND_URL
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:4173',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:4173',
+];
+
+if (config.frontendUrl) {
+  const customOrigins = config.frontendUrl
+    .split(',')
+    .map((u) => u.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
+  allowedOrigins.push(...customOrigins);
+}
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. mobile apps, curl, uptime monitors)
+      if (!origin) return callback(null, true);
+
+      // Check if origin matches allowed list, any .onrender.com subdomain, or wildcard
+      const isAllowed =
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.onrender.com') ||
+        config.frontendUrl === '*';
+
+      if (isAllowed) {
+        return callback(null, true);
+      }
+
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
 app.use(express.json());
 app.use(morgan('dev'));
 

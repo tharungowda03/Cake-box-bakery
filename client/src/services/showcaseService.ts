@@ -1,4 +1,5 @@
 import type { ShowcaseSlide } from '../types';
+import { API_BASE } from './apiService';
 
 export const FALLBACK_SHOWCASE_SLIDES: ShowcaseSlide[] = [
   {
@@ -71,7 +72,7 @@ export const showcaseService = {
    */
   async getShowcaseSlides(): Promise<ShowcaseSlide[]> {
     try {
-      const res = await fetch('/api/showcase');
+      const res = await fetch(`${API_BASE}/showcase`);
       if (res.ok) {
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {

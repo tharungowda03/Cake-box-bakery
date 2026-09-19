@@ -9,7 +9,7 @@ export default defineConfig({
   envDir: '../', // Read .env from root
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
   server: {
