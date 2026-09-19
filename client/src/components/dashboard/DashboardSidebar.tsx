@@ -53,43 +53,48 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ role, onNavi
   const navItems = role === 'OWNER' ? ownerNavItems : customerNavItems;
 
   const isActive = (href: string, exact?: boolean) => {
-    if (exact) {
-      return location.pathname === href;
-    }
+    if (exact) return location.pathname === href;
     return location.pathname.startsWith(href);
   };
 
   return (
-    <aside className="w-64 bg-white border-r border-stone-200 flex flex-col h-full shrink-0">
+    <aside className="w-64 bg-white border-r flex flex-col h-full shrink-0" style={{ borderColor: 'var(--db-border)' }}>
       {/* Brand Header */}
-      <div className="p-5 border-b border-stone-100 flex items-center justify-between">
-        <Link
-          to="/"
-          onClick={onNavigate}
-          className="flex items-center space-x-2.5 group"
-        >
-          <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-amber-700 font-serif font-bold text-lg group-hover:scale-105 transition-transform">
+      <div className="p-5 border-b flex items-center justify-between" style={{ borderColor: 'var(--db-border-light)' }}>
+        <Link to="/" onClick={onNavigate} className="flex items-center space-x-2.5 group">
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center font-serif font-bold text-lg group-hover:scale-105 transition-transform text-white"
+            style={{ background: 'var(--db-primary)' }}
+          >
             CB
           </div>
           <div>
             <div className="flex items-center space-x-1.5">
-              <span className="font-serif font-bold text-base text-stone-900 leading-none">
+              <span className="font-serif font-bold text-base leading-none" style={{ color: 'var(--db-text)' }}>
                 Cake Box
               </span>
               {role === 'OWNER' && (
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-200">
+                <span
+                  className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold"
+                  style={{ background: 'var(--db-accent)', color: 'var(--db-text)' }}
+                >
                   ADMIN
                 </span>
               )}
             </div>
-            <p className="text-[11px] text-stone-400 font-sans mt-0.5">Kakinada, AP</p>
+            <p className="text-[11px] mt-0.5 font-sans" style={{ color: 'var(--db-text-subtle)' }}>
+              Kakinada, AP
+            </p>
           </div>
         </Link>
       </div>
 
       {/* Navigation Menu */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
-        <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-2">
+      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
+        <p
+          className="px-3 text-[10px] font-bold uppercase tracking-wider mb-3"
+          style={{ color: 'var(--db-text-subtle)' }}
+        >
           {role === 'OWNER' ? 'Bakery Management' : 'My Account'}
         </p>
         {navItems.map((item) => {
@@ -100,57 +105,102 @@ export const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ role, onNavi
               key={item.href}
               to={item.href}
               onClick={onNavigate}
-              className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
+              className="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all duration-150"
+              style={
                 active
-                  ? 'bg-stone-900 text-white font-semibold shadow-xs'
-                  : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100/70'
-              }`}
+                  ? {
+                      background: 'var(--db-primary)',
+                      color: '#ffffff',
+                      fontWeight: 600,
+                    }
+                  : {
+                      color: 'var(--db-text-muted)',
+                    }
+              }
+              onMouseEnter={(e) => {
+                if (!active) {
+                  (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-soft)';
+                  (e.currentTarget as HTMLElement).style.color = 'var(--db-primary)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!active) {
+                  (e.currentTarget as HTMLElement).style.background = '';
+                  (e.currentTarget as HTMLElement).style.color = 'var(--db-text-muted)';
+                }
+              }}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-amber-400' : 'text-stone-400'}`} />
+              <Icon
+                className="w-4 h-4 shrink-0"
+                style={{ color: active ? '#FFD444' : 'var(--db-text-subtle)' }}
+              />
               <span className="truncate">{item.label}</span>
             </Link>
           );
         })}
       </div>
 
-      {/* User / Quick Actions Footer */}
-      <div className="p-3 border-t border-stone-100 bg-stone-50/50 space-y-1">
+      {/* Footer */}
+      <div
+        className="p-3 border-t space-y-0.5"
+        style={{ borderColor: 'var(--db-border-light)', background: 'var(--db-bg)' }}
+      >
         <Link
           to="/"
           onClick={onNavigate}
-          className="flex items-center space-x-3 px-3 py-2 rounded-lg text-xs text-stone-600 hover:text-stone-900 hover:bg-stone-100/80 transition"
+          className="flex items-center space-x-3 px-3 py-2 rounded-lg text-xs transition-all duration-150"
+          style={{ color: 'var(--db-text-muted)' }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-soft)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--db-primary)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = '';
+            (e.currentTarget as HTMLElement).style.color = 'var(--db-text-muted)';
+          }}
         >
-          <Store className="w-4 h-4 text-stone-400" />
+          <Store className="w-4 h-4" style={{ color: 'var(--db-text-subtle)' }} />
           <span>Return to Storefront</span>
         </Link>
         <Link
           to="/contact"
           onClick={onNavigate}
-          className="flex items-center space-x-3 px-3 py-2 rounded-lg text-xs text-stone-600 hover:text-stone-900 hover:bg-stone-100/80 transition"
+          className="flex items-center space-x-3 px-3 py-2 rounded-lg text-xs transition-all duration-150"
+          style={{ color: 'var(--db-text-muted)' }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-soft)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--db-primary)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = '';
+            (e.currentTarget as HTMLElement).style.color = 'var(--db-text-muted)';
+          }}
         >
-          <HelpCircle className="w-4 h-4 text-stone-400" />
+          <HelpCircle className="w-4 h-4" style={{ color: 'var(--db-text-subtle)' }} />
           <span>Help & Support</span>
         </Link>
         <button
-          onClick={() => {
-            signOut();
-            if (onNavigate) onNavigate();
-          }}
-          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-xs text-red-600 hover:bg-red-50/70 transition text-left"
+          onClick={() => { signOut(); if (onNavigate) onNavigate(); }}
+          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-xs transition-all duration-150 text-left text-red-600 hover:bg-red-50"
         >
           <LogOut className="w-4 h-4 text-red-500" />
           <span>Sign Out</span>
         </button>
 
-        <div className="pt-2 border-t border-stone-200/60 mt-2 px-2 flex items-center justify-between">
+        <div
+          className="pt-2 border-t mt-2 px-2 flex items-center justify-between"
+          style={{ borderColor: 'var(--db-border-light)' }}
+        >
           <div className="truncate pr-2">
-            <p className="text-[11px] font-semibold text-stone-800 truncate">
+            <p className="text-[11px] font-semibold truncate" style={{ color: 'var(--db-text)' }}>
               {user?.email}
             </p>
-            <p className="text-[10px] text-stone-400 capitalize">{role.toLowerCase()}</p>
+            <p className="text-[10px] capitalize" style={{ color: 'var(--db-text-subtle)' }}>
+              {role.toLowerCase()}
+            </p>
           </div>
           {role === 'OWNER' && (
-            <Shield className="w-4 h-4 text-amber-600 shrink-0" />
+            <Shield className="w-4 h-4 shrink-0" style={{ color: 'var(--db-primary)' }} />
           )}
         </div>
       </div>

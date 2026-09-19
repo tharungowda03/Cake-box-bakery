@@ -105,10 +105,10 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
     <div className="space-y-6">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 font-sans">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0f2231] font-sans">
           {getTimeGreeting(customerName)}
         </h1>
-        <p className="text-xs sm:text-sm text-stone-500 mt-1">
+        <p className="text-xs sm:text-sm text-[#4a6275] mt-1">
           Here's what's happening with your orders.
         </p>
       </div>
@@ -164,7 +164,7 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
           action={
             <Link
               to={`/orders/${activeOrder.id}`}
-              className="text-xs font-semibold text-amber-700 hover:text-amber-800 flex items-center space-x-1"
+              className="text-xs font-semibold text-[#006199] hover:text-[#004d7a] flex items-center space-x-1"
             >
               <span>View Order</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -174,11 +174,11 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
           <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-stone-500">Fulfilment:</span>
-                <span className="text-xs font-semibold text-stone-800 uppercase tracking-wider flex items-center gap-1">
+                <span className="text-xs text-[#4a6275]">Fulfilment:</span>
+                <span className="text-xs font-semibold text-[#0f2231] uppercase tracking-wider flex items-center gap-1">
                   {activeOrder.delivery_type === 'DELIVERY' ? (
                     <>
-                      <Truck className="w-3.5 h-3.5 text-amber-600" /> Delivery
+                      <Truck className="w-3.5 h-3.5 text-[#006199]" /> Delivery
                     </>
                   ) : (
                     <>
@@ -199,12 +199,12 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
             />
 
             {/* Items Summary */}
-            <div className="bg-stone-50/70 rounded-xl p-3 border border-stone-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
-              <p className="text-stone-700 font-medium">
+            <div className="bg-[#f0f5f9] rounded-xl p-3 border border-[#e8f2f9] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
+              <p className="text-[#4a6275] font-medium">
                 {activeOrder.order_items?.map((item) => `${item.quantity}x ${item.product_name_snapshot}`).join(', ') ||
                   'Items in preparation'}
               </p>
-              <p className="font-bold text-stone-900 text-sm">
+              <p className="font-bold text-[#0f2231] text-sm">
                 ₹{Number(activeOrder.total).toFixed(2)}
               </p>
             </div>
@@ -220,7 +220,7 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
           orders.length > 3 ? (
             <button
               onClick={() => onNavigateTab('/dashboard/orders')}
-              className="text-xs font-semibold text-amber-700 hover:text-amber-800"
+              className="text-xs font-semibold text-[#006199] hover:text-[#004d7a]"
             >
               View All Orders ({orders.length})
             </button>
@@ -236,40 +236,40 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
             actionHref="/menu"
           />
         ) : (
-          <div className="divide-y divide-stone-100">
+          <div className="divide-y divide-[#e8f2f9]">
             {orders.slice(0, 4).map((order) => (
               <div
                 key={order.id}
-                className="py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 hover:bg-stone-50/40 -mx-2 px-2 rounded-lg transition"
+                className="py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 hover:bg-[#f0f5f9] -mx-2 px-2 rounded-lg transition"
               >
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="font-semibold text-stone-900 text-xs sm:text-sm">
+                    <span className="font-semibold text-[#0f2231] text-xs sm:text-sm">
                       #{order.order_number}
                     </span>
-                    <span className="text-[11px] text-stone-400">
+                    <span className="text-[11px] text-[#7a9db3]">
                       {new Date(order.created_at).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
                       })}
                     </span>
-                    <span className="text-[10px] font-semibold text-stone-500 uppercase">
+                    <span className="text-[10px] font-semibold text-[#4a6275] uppercase">
                       • {order.delivery_type}
                     </span>
                   </div>
-                  <p className="text-xs text-stone-500 mt-0.5 line-clamp-1">
+                  <p className="text-xs text-[#4a6275] mt-0.5 line-clamp-1">
                     {order.order_items?.map((i) => `${i.quantity}x ${i.product_name_snapshot}`).join(', ') || 'Bakery Items'}
                   </p>
                 </div>
 
                 <div className="flex items-center justify-between sm:justify-end gap-3">
-                  <span className="font-bold text-stone-800 text-xs sm:text-sm">
+                  <span className="font-bold text-[#0f2231] text-xs sm:text-sm">
                     ₹{Number(order.total).toFixed(2)}
                   </span>
                   <StatusBadge status={order.status} />
                   <button
                     onClick={() => onViewOrder(order.id)}
-                    className="p-1.5 text-stone-400 hover:text-stone-900 rounded-md hover:bg-stone-100 transition"
+                    className="p-1.5 text-[#7a9db3] hover:text-[#006199] rounded-md hover:bg-[#e0f3fd] transition"
                     title="View details"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -289,7 +289,7 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
           action={
             <button
               onClick={() => onNavigateTab('/dashboard/custom-cakes')}
-              className="text-xs font-semibold text-amber-700 hover:text-amber-800"
+              className="text-xs font-semibold text-[#006199] hover:text-[#004d7a]"
             >
               Manage ({customOrders.length})
             </button>
@@ -299,21 +299,21 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
             {customOrders.slice(0, 3).map((co) => (
               <div
                 key={co.id}
-                className="p-3.5 rounded-xl border border-stone-100 bg-stone-50/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                className="p-3.5 rounded-xl border border-[#e8f2f9] bg-[#f0f5f9] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
               >
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs font-semibold text-stone-900">
+                    <span className="text-xs font-semibold text-[#0f2231]">
                       {co.occasion || co.theme || 'Custom Cake'} ({co.flavour || 'Standard'})
                     </span>
                     {co.weight && (
-                      <span className="text-[11px] text-stone-500">
+                      <span className="text-[11px] text-[#4a6275]">
                         • {co.weight} kg
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-stone-500 mt-0.5 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                  <p className="text-xs text-[#4a6275] mt-0.5 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#7a9db3]" />
                     Event: {co.required_date ? new Date(co.required_date).toLocaleDateString('en-IN') : 'TBD'}
                   </p>
                 </div>
@@ -321,15 +321,15 @@ const CustomerOverviewTab: React.FC<OverviewTabProps> = ({
                 <div className="flex items-center justify-between sm:justify-end gap-3">
                   {co.status === 'QUOTED' && co.final_price ? (
                     <div className="text-right">
-                      <span className="text-[10px] text-amber-700 font-semibold uppercase block">Quoted</span>
-                      <span className="text-xs font-bold text-stone-900">₹{co.final_price}</span>
+                      <span className="text-[10px] text-[#006199] font-semibold uppercase block">Quoted</span>
+                      <span className="text-xs font-bold text-[#0f2231]">₹{co.final_price}</span>
                     </div>
                   ) : null}
                   <StatusBadge status={co.status} />
                   {co.status === 'QUOTED' && (
                     <button
                       onClick={() => onNavigateTab('/dashboard/custom-cakes')}
-                      className="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold transition shadow-2xs"
+                      className="px-3 py-1 bg-[#006199] hover:bg-[#004d7a] text-white rounded-lg text-xs font-semibold transition shadow-2xs"
                     >
                       Review Quote
                     </button>
@@ -375,9 +375,9 @@ function OrderProgressIndicator({
     <div className="py-2">
       {/* Desktop Horizontal Stepper */}
       <div className="hidden sm:flex items-center justify-between relative">
-        <div className="absolute top-4 left-6 right-6 h-0.5 bg-stone-200 -z-0" />
+        <div className="absolute top-4 left-6 right-6 h-0.5 bg-[#d1e3ef] -z-0" />
         <div
-          className="absolute top-4 left-6 h-0.5 bg-amber-600 transition-all duration-300 -z-0"
+          className="absolute top-4 left-6 h-0.5 bg-[#006199] transition-all duration-300 -z-0"
           style={{
             width:
               currentIndex <= 0
@@ -394,10 +394,10 @@ function OrderProgressIndicator({
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
                   isDone
-                    ? 'bg-amber-600 text-white shadow-xs'
+                    ? 'bg-[#006199] text-white shadow-xs'
                     : isCurrent
-                    ? 'bg-amber-500 text-white ring-4 ring-amber-100'
-                    : 'bg-white border-2 border-stone-300 text-stone-400'
+                    ? 'bg-[#FFD444] text-[#0f2231] ring-4 ring-[#F4EB6C]/50'
+                    : 'bg-white border-2 border-[#8ACFF8] text-[#7a9db3]'
                 }`}
               >
                 {isDone ? <Check className="w-4 h-4" /> : idx + 1}
@@ -405,10 +405,10 @@ function OrderProgressIndicator({
               <span
                 className={`text-[11px] mt-2 font-medium ${
                   isCurrent
-                    ? 'text-stone-900 font-bold'
+                    ? 'text-[#0f2231] font-bold'
                     : isDone
-                    ? 'text-stone-700'
-                    : 'text-stone-400'
+                    ? 'text-[#4a6275]'
+                    : 'text-[#7a9db3]'
                 }`}
               >
                 {stepLabels[step]}
@@ -428,10 +428,10 @@ function OrderProgressIndicator({
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
                   isDone
-                    ? 'bg-amber-600 text-white'
+                    ? 'bg-[#006199] text-white'
                     : isCurrent
-                    ? 'bg-amber-500 text-white ring-2 ring-amber-100'
-                    : 'bg-stone-100 border border-stone-300 text-stone-400'
+                    ? 'bg-[#FFD444] text-[#0f2231] ring-2 ring-[#F4EB6C]/50'
+                    : 'bg-[#e0f3fd] border border-[#8ACFF8] text-[#7a9db3]'
                 }`}
               >
                 {isDone ? <Check className="w-3.5 h-3.5" /> : idx + 1}
@@ -439,10 +439,10 @@ function OrderProgressIndicator({
               <span
                 className={`text-xs ${
                   isCurrent
-                    ? 'font-bold text-stone-900'
+                    ? 'font-bold text-[#0f2231]'
                     : isDone
-                    ? 'text-stone-700'
-                    : 'text-stone-400'
+                    ? 'text-[#4a6275]'
+                    : 'text-[#7a9db3]'
                 }`}
               >
                 {stepLabels[step]}
@@ -498,16 +498,16 @@ const CustomerOrdersTab: React.FC<{
       />
 
       {/* Filter & Search Bar */}
-      <div className="bg-white rounded-xl border border-stone-200/80 p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white rounded-xl border border-[#d1e3ef] p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
         {/* Search */}
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#7a9db3] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by order # or item..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#006199]/20 focus:border-[#006199]"
           />
         </div>
 
@@ -526,8 +526,8 @@ const CustomerOrdersTab: React.FC<{
               onClick={() => setFilter(tab.id as any)}
               className={`px-3 py-1 rounded-lg text-xs font-medium transition shrink-0 ${
                 filter === tab.id
-                  ? 'bg-stone-900 text-white font-semibold shadow-2xs'
-                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                  ? 'bg-[#006199] text-white font-semibold shadow-2xs'
+                  : 'bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40'
               }`}
             >
               {tab.label}
@@ -552,19 +552,19 @@ const CustomerOrdersTab: React.FC<{
           {filteredOrders.map((order) => (
             <div
               key={order.id}
-              className="bg-white rounded-xl border border-stone-200/80 p-5 shadow-xs hover:border-amber-300 transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+              className="bg-white rounded-xl border border-[#d1e3ef] p-5 shadow-xs hover:border-[#8ACFF8] transition-colors flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
             >
               <div className="space-y-1">
                 <div className="flex items-center space-x-2.5">
-                  <span className="font-bold text-stone-900 text-sm">
+                  <span className="font-bold text-[#0f2231] text-sm">
                     #{order.order_number}
                   </span>
                   <StatusBadge status={order.status} />
-                  <span className="text-[11px] font-semibold text-stone-500 uppercase px-2 py-0.5 bg-stone-100 rounded-md">
+                  <span className="text-[11px] font-semibold text-[#4a6275] uppercase px-2 py-0.5 bg-[#e0f3fd] rounded-md">
                     {order.delivery_type}
                   </span>
                 </div>
-                <p className="text-xs text-stone-400">
+                <p className="text-xs text-[#7a9db3]">
                   Ordered on{' '}
                   {new Date(order.created_at).toLocaleDateString('en-IN', {
                     day: 'numeric',
@@ -572,20 +572,20 @@ const CustomerOrdersTab: React.FC<{
                     year: 'numeric',
                   })}
                 </p>
-                <p className="text-xs text-stone-600 line-clamp-1 pt-1">
+                <p className="text-xs text-[#4a6275] line-clamp-1 pt-1">
                   {order.order_items?.map((i) => `${i.quantity}x ${i.product_name_snapshot}`).join(', ') ||
                     'Bakery items'}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 border-stone-100">
+              <div className="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 border-[#e8f2f9]">
                 <div className="sm:text-right">
-                  <p className="text-[10px] text-stone-400 uppercase font-semibold">Total Amount</p>
-                  <p className="font-bold text-stone-900 text-base">₹{Number(order.total).toFixed(2)}</p>
+                  <p className="text-[10px] text-[#7a9db3] uppercase font-semibold">Total Amount</p>
+                  <p className="font-bold text-[#0f2231] text-base">₹{Number(order.total).toFixed(2)}</p>
                 </div>
                 <Link
                   to={`/orders/${order.id}`}
-                  className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-2xs"
+                  className="px-3.5 py-1.5 bg-[#006199] hover:bg-[#004d7a] text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-2xs"
                 >
                   <span>View Details</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -634,7 +634,7 @@ const CustomerCustomCakesTab: React.FC<{
         action={
           <Link
             to="/custom-cake"
-            className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-2xs"
+            className="px-4 py-2 bg-[#006199] hover:bg-[#004d7a] text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-2xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Request a Custom Cake</span>
@@ -655,36 +655,36 @@ const CustomerCustomCakesTab: React.FC<{
           {customOrders.map((co) => (
             <div
               key={co.id}
-              className="bg-white rounded-xl border border-stone-200/80 p-5 shadow-xs flex flex-col justify-between space-y-4"
+              className="bg-white rounded-xl border border-[#d1e3ef] p-5 shadow-xs flex flex-col justify-between space-y-4"
             >
               <div>
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-bold text-stone-900 text-sm">
+                    <h3 className="font-bold text-[#0f2231] text-sm">
                       {co.occasion || co.theme || 'Custom Cake'}
                     </h3>
-                    <p className="text-xs text-stone-500 mt-0.5">
-                      Flavour: <span className="font-semibold text-stone-700">{co.flavour || 'Standard'}</span>
+                    <p className="text-xs text-[#4a6275] mt-0.5">
+                      Flavour: <span className="font-semibold text-[#4a6275]">{co.flavour || 'Standard'}</span>
                       {co.weight && (
-                        <> • Weight: <span className="font-semibold text-stone-700">{co.weight} kg</span></>
+                        <> • Weight: <span className="font-semibold text-[#4a6275]">{co.weight} kg</span></>
                       )}
                     </p>
                   </div>
                   <StatusBadge status={co.status} />
                 </div>
 
-                <div className="mt-3 text-xs text-stone-600 space-y-1.5 bg-stone-50/70 p-3 rounded-lg border border-stone-100">
-                  <p className="flex items-center gap-1.5 text-stone-700">
-                    <Calendar className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                <div className="mt-3 text-xs text-[#4a6275] space-y-1.5 bg-[#f0f5f9] p-3 rounded-lg border border-[#e8f2f9]">
+                  <p className="flex items-center gap-1.5 text-[#4a6275]">
+                    <Calendar className="w-3.5 h-3.5 text-[#7a9db3] shrink-0" />
                     <span>Event Date: <strong>{co.required_date ? new Date(co.required_date).toLocaleDateString('en-IN') : 'Not specified'}</strong></span>
                   </p>
                   {co.cake_message && (
-                    <p className="text-stone-700">
+                    <p className="text-[#4a6275]">
                       Message: <span className="italic">"{co.cake_message}"</span>
                     </p>
                   )}
                   {co.additional_requirements && (
-                    <p className="text-stone-500 text-[11px] line-clamp-2">
+                    <p className="text-[#4a6275] text-[11px] line-clamp-2">
                       Notes: {co.additional_requirements}
                     </p>
                   )}
@@ -693,7 +693,7 @@ const CustomerCustomCakesTab: React.FC<{
                 {/* Reference Image Preview */}
                 {co.reference_image_path && (
                   <div className="mt-3">
-                    <p className="text-[11px] font-semibold text-stone-400 mb-1">Reference Image</p>
+                    <p className="text-[11px] font-semibold text-[#7a9db3] mb-1">Reference Image</p>
                     <a
                       href={
                         co.reference_image_path.startsWith('http')
@@ -702,7 +702,7 @@ const CustomerCustomCakesTab: React.FC<{
                       }
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-block relative rounded-lg overflow-hidden border border-stone-200 group"
+                      className="inline-block relative rounded-lg overflow-hidden border border-[#d1e3ef] group"
                     >
                       <img
                         src={
@@ -719,22 +719,22 @@ const CustomerCustomCakesTab: React.FC<{
               </div>
 
               {/* Action / Quote Status */}
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between">
+              <div className="pt-3 border-t border-[#e8f2f9] flex items-center justify-between">
                 <div>
                   {co.final_price ? (
                     <div>
-                      <p className="text-[10px] text-stone-400 uppercase font-semibold">Quoted Price</p>
-                      <p className="font-bold text-stone-900 text-base">₹{co.final_price}</p>
+                      <p className="text-[10px] text-[#7a9db3] uppercase font-semibold">Quoted Price</p>
+                      <p className="font-bold text-[#0f2231] text-base">₹{co.final_price}</p>
                     </div>
                   ) : (
-                    <p className="text-xs text-stone-400 italic">Quotation pending</p>
+                    <p className="text-xs text-[#7a9db3] italic">Quotation pending</p>
                   )}
                 </div>
 
                 {co.status === 'QUOTED' ? (
                   <Button
                     onClick={() => setConfirmingId(co.id)}
-                    className="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3.5 py-1.5 h-auto"
+                    className="bg-[#006199] hover:bg-[#004d7a] text-white text-xs px-3.5 py-1.5 h-auto"
                   >
                     Confirm & Accept Quote
                   </Button>
@@ -847,7 +847,7 @@ const CustomerAddressesTab: React.FC = () => {
         action={
           <Button
             onClick={() => setShowAddModal(true)}
-            className="bg-stone-900 hover:bg-stone-800 text-white text-xs px-3.5 py-2 h-auto flex items-center gap-1.5"
+            className="bg-[#006199] hover:bg-[#004d7a] text-white text-xs px-3.5 py-2 h-auto flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add New Address</span>
@@ -872,36 +872,36 @@ const CustomerAddressesTab: React.FC = () => {
           {addresses.map((addr) => (
             <div
               key={addr.id}
-              className="bg-white rounded-xl border border-stone-200/80 p-5 shadow-xs flex flex-col justify-between"
+              className="bg-white rounded-xl border border-[#d1e3ef] p-5 shadow-xs flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-stone-900 text-sm">
+                  <span className="font-bold text-[#0f2231] text-sm">
                     {addr.recipient_name || 'Delivery Address'}
                   </span>
                   {addr.is_default && (
-                    <span className="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-full text-[10px] font-bold">
+                    <span className="px-2 py-0.5 bg-[#F4EB6C]/30 text-[#004d7a] border border-[#FFD444] rounded-full text-[10px] font-bold">
                       DEFAULT
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-stone-600 mt-2 leading-relaxed">
+                <p className="text-xs text-[#4a6275] mt-2 leading-relaxed">
                   {[addr.house_flat_building, addr.street, addr.area_locality, addr.landmark].filter(Boolean).join(', ')}
                 </p>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-[#4a6275]">
                   {addr.city}, {addr.state} - {addr.postal_code}
                 </p>
                 {addr.phone && (
-                  <p className="text-xs text-stone-500 mt-1 flex items-center gap-1">
-                    <Phone className="w-3 h-3 text-stone-400" /> {addr.phone}
+                  <p className="text-xs text-[#4a6275] mt-1 flex items-center gap-1">
+                    <Phone className="w-3 h-3 text-[#7a9db3]" /> {addr.phone}
                   </p>
                 )}
               </div>
 
-              <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-end">
+              <div className="pt-4 mt-4 border-t border-[#e8f2f9] flex items-center justify-end">
                 <button
                   onClick={() => setDeletingId(addr.id)}
-                  className="p-1.5 text-stone-400 hover:text-red-600 rounded-md transition"
+                  className="p-1.5 text-[#7a9db3] hover:text-red-600 rounded-md transition"
                   title="Delete address"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -914,99 +914,99 @@ const CustomerAddressesTab: React.FC = () => {
 
       {/* Add Address Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-stone-200 p-6 max-w-md w-full shadow-xl">
-            <h3 className="font-bold text-stone-900 text-base mb-4">Add Delivery Address</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0f2231]/40 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl border border-[#d1e3ef] p-6 max-w-md w-full shadow-xl">
+            <h3 className="font-bold text-[#0f2231] text-base mb-4">Add Delivery Address</h3>
             <form onSubmit={handleCreateAddress} className="space-y-3.5 text-xs">
               <div>
-                <label className="font-semibold text-stone-700 block mb-1">Recipient Name</label>
+                <label className="font-semibold text-[#4a6275] block mb-1">Recipient Name</label>
                 <input
                   type="text"
                   required
                   value={form.recipient_name}
                   onChange={(e) => setForm({ ...form, recipient_name: e.target.value })}
                   placeholder="e.g. John Doe"
-                  className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">House / Flat / Building</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">House / Flat / Building</label>
                   <input
                     type="text"
                     required
                     value={form.house_flat_building}
                     onChange={(e) => setForm({ ...form, house_flat_building: e.target.value })}
                     placeholder="D.No / Flat 402"
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">Street</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">Street</label>
                   <input
                     type="text"
                     required
                     value={form.street}
                     onChange={(e) => setForm({ ...form, street: e.target.value })}
                     placeholder="Main Road"
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">Area / Locality</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">Area / Locality</label>
                   <input
                     type="text"
                     required
                     value={form.area_locality}
                     onChange={(e) => setForm({ ...form, area_locality: e.target.value })}
                     placeholder="Suryaraopeta"
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">Landmark (Optional)</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">Landmark (Optional)</label>
                   <input
                     type="text"
                     value={form.landmark}
                     onChange={(e) => setForm({ ...form, landmark: e.target.value })}
                     placeholder="Near Temple"
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">City</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">City</label>
                   <input
                     type="text"
                     required
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-stone-700 block mb-1">PIN Code</label>
+                  <label className="font-semibold text-[#4a6275] block mb-1">PIN Code</label>
                   <input
                     type="text"
                     required
                     value={form.postal_code}
                     onChange={(e) => setForm({ ...form, postal_code: e.target.value })}
-                    className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                    className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                   />
                 </div>
               </div>
               <div>
-                <label className="font-semibold text-stone-700 block mb-1">Contact Phone</label>
+                <label className="font-semibold text-[#4a6275] block mb-1">Contact Phone</label>
                 <input
                   type="tel"
                   required
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+91 98765 43210"
-                  className="w-full p-2 bg-stone-50 border border-stone-200 rounded-lg"
+                  className="w-full p-2 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg"
                 />
               </div>
 
@@ -1016,12 +1016,12 @@ const CustomerAddressesTab: React.FC = () => {
                   id="is_default"
                   checked={form.is_default}
                   onChange={(e) => setForm({ ...form, is_default: e.target.checked })}
-                  className="rounded border-stone-300 text-amber-600 focus:ring-amber-500"
+                  className="rounded border-[#8ACFF8] text-[#006199] focus:ring-[#006199]"
                 />
-                <label htmlFor="is_default" className="text-stone-700 font-medium">Set as default address</label>
+                <label htmlFor="is_default" className="text-[#4a6275] font-medium">Set as default address</label>
               </div>
 
-              <div className="flex justify-end space-x-2 pt-4 border-t border-stone-100">
+              <div className="flex justify-end space-x-2 pt-4 border-t border-[#e8f2f9]">
                 <Button
                   type="button"
                   variant="outline"
@@ -1032,7 +1032,7 @@ const CustomerAddressesTab: React.FC = () => {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-stone-900 text-white text-xs px-4 py-1.5 h-auto"
+                  className="bg-[#006199] text-white text-xs px-4 py-1.5 h-auto"
                 >
                   Save Address
                 </Button>
@@ -1114,36 +1114,36 @@ const CustomerProfileTab: React.FC = () => {
       <SectionCard title="Personal Information">
         <form onSubmit={handleSave} className="space-y-4 text-xs">
           <div>
-            <label className="font-semibold text-stone-700 block mb-1">Email Address</label>
+            <label className="font-semibold text-[#4a6275] block mb-1">Email Address</label>
             <input
               type="email"
               disabled
               value={profile.email}
-              className="w-full p-2.5 bg-stone-100 text-stone-500 border border-stone-200 rounded-lg cursor-not-allowed"
+              className="w-full p-2.5 bg-[#e0f3fd] text-[#4a6275] border border-[#d1e3ef] rounded-lg cursor-not-allowed"
             />
-            <p className="text-[11px] text-stone-400 mt-1">Managed via authentication provider.</p>
+            <p className="text-[11px] text-[#7a9db3] mt-1">Managed via authentication provider.</p>
           </div>
 
           <div>
-            <label className="font-semibold text-stone-700 block mb-1">Full Name</label>
+            <label className="font-semibold text-[#4a6275] block mb-1">Full Name</label>
             <input
               type="text"
               required
               value={profile.full_name}
               onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
               placeholder="Your full name"
-              className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:border-amber-500"
+              className="w-full p-2.5 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-hidden focus:border-[#006199]"
             />
           </div>
 
           <div>
-            <label className="font-semibold text-stone-700 block mb-1">Phone Number</label>
+            <label className="font-semibold text-[#4a6275] block mb-1">Phone Number</label>
             <input
               type="tel"
               value={profile.phone}
               onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
               placeholder="+91 99939 99528"
-              className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:border-amber-500"
+              className="w-full p-2.5 bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-hidden focus:border-[#006199]"
             />
           </div>
 
@@ -1157,7 +1157,7 @@ const CustomerProfileTab: React.FC = () => {
             <Button
               type="submit"
               disabled={saving}
-              className="bg-stone-900 text-white text-xs px-4 py-2 h-auto"
+              className="bg-[#006199] text-white text-xs px-4 py-2 h-auto"
             >
               {saving ? 'Saving...' : 'Save Profile Changes'}
             </Button>
@@ -1235,14 +1235,14 @@ const CustomerAssistantTab: React.FC = () => {
         subtitle="Instant answers grounded in verified Cake Box Kakinada store data."
       />
 
-      <div className="bg-white rounded-2xl border border-stone-200/80 shadow-xs overflow-hidden flex flex-col h-[560px]">
+      <div className="bg-white rounded-2xl border border-[#d1e3ef] shadow-xs overflow-hidden flex flex-col h-[560px]">
         {/* Header note */}
-        <div className="px-5 py-3 border-b border-stone-100 bg-stone-50/70 flex items-center justify-between text-xs">
-          <span className="font-semibold text-stone-800 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+        <div className="px-5 py-3 border-b border-[#e8f2f9] bg-[#f0f5f9] flex items-center justify-between text-xs">
+          <span className="font-semibold text-[#0f2231] flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#006199]" />
             Cake Box Assistant
           </span>
-          <span className="text-[10px] text-stone-500 bg-stone-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] text-[#4a6275] bg-[#e0f3fd] px-2 py-0.5 rounded-full">
             Verified Store Data
           </span>
         </div>
@@ -1257,8 +1257,8 @@ const CustomerAssistantTab: React.FC = () => {
               <div
                 className={`max-w-[82%] p-3.5 rounded-2xl leading-relaxed whitespace-pre-wrap ${
                   m.role === 'user'
-                    ? 'bg-stone-900 text-white rounded-tr-xs'
-                    : 'bg-stone-100 text-stone-800 rounded-tl-xs border border-stone-200/60'
+                    ? 'bg-[#006199] text-white rounded-tr-xs'
+                    : 'bg-[#e0f3fd] text-[#0f2231] rounded-tl-xs border border-[#d1e3ef]/60'
                 }`}
               >
                 {m.text}
@@ -1267,8 +1267,8 @@ const CustomerAssistantTab: React.FC = () => {
           ))}
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-stone-100 text-stone-500 p-3 rounded-2xl text-xs flex items-center space-x-2">
-                <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-600" />
+              <div className="bg-[#e0f3fd] text-[#4a6275] p-3 rounded-2xl text-xs flex items-center space-x-2">
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-[#006199]" />
                 <span>Checking verified store records...</span>
               </div>
             </div>
@@ -1276,12 +1276,12 @@ const CustomerAssistantTab: React.FC = () => {
         </div>
 
         {/* Starter Chips */}
-        <div className="px-4 py-2 bg-stone-50/40 border-t border-stone-100 flex items-center gap-1.5 overflow-x-auto">
+        <div className="px-4 py-2 bg-[#f0f5f9] border-t border-[#e8f2f9] flex items-center gap-1.5 overflow-x-auto">
           {starterChips.map((chip, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(chip)}
-              className="text-[11px] bg-white hover:bg-stone-100 text-stone-700 border border-stone-200 px-2.5 py-1 rounded-full whitespace-nowrap transition"
+              className="text-[11px] bg-white hover:bg-[#e0f3fd] text-[#4a6275] border border-[#d1e3ef] px-2.5 py-1 rounded-full whitespace-nowrap transition"
             >
               {chip}
             </button>
@@ -1294,26 +1294,26 @@ const CustomerAssistantTab: React.FC = () => {
             e.preventDefault();
             handleSend();
           }}
-          className="p-3 border-t border-stone-200 bg-white flex items-center gap-2"
+          className="p-3 border-t border-[#d1e3ef] bg-white flex items-center gap-2"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about products, pickup, delivery charge, store hours..."
-            className="flex-1 p-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-hidden focus:border-amber-500"
+            className="flex-1 p-2.5 text-xs bg-[#f0f5f9] border border-[#d1e3ef] rounded-xl focus:outline-hidden focus:border-[#006199]"
           />
           <Button
             type="submit"
             disabled={!input.trim() || loading}
-            className="bg-stone-900 text-white px-4 py-2 h-auto rounded-xl"
+            className="bg-[#006199] text-white px-4 py-2 h-auto rounded-xl"
           >
             <Send className="w-3.5 h-3.5" />
           </Button>
         </form>
       </div>
 
-      <p className="text-[11px] text-stone-400 text-center">
+      <p className="text-[11px] text-[#7a9db3] text-center">
         Disclaimer: Answers are based on verified Cake Box Kakinada information and current live menu prices.
       </p>
     </div>

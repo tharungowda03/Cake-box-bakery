@@ -18,12 +18,32 @@ export const SectionCard: React.FC<SectionCardProps> = ({
   noPadding = false,
 }) => {
   return (
-    <div className={`bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden ${className}`}>
+    <div
+      className={`bg-white rounded-xl border overflow-hidden ${className}`}
+      style={{
+        borderColor: 'var(--db-border)',
+        boxShadow: '0 1px 3px rgba(0,97,153,0.05)',
+      }}
+    >
       {(title || action) && (
-        <div className="px-5 py-4 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 bg-stone-50/40">
+        <div
+          className="px-5 py-4 border-b flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+          style={{
+            borderColor: 'var(--db-border-light)',
+            background: 'var(--db-primary-soft)',
+          }}
+        >
           <div>
-            {title && <h2 className="text-sm font-semibold text-stone-900">{title}</h2>}
-            {subtitle && <p className="text-xs text-stone-500 mt-0.5">{subtitle}</p>}
+            {title && (
+              <h2 className="text-sm font-semibold" style={{ color: 'var(--db-primary)' }}>
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="text-xs mt-0.5" style={{ color: 'var(--db-text-muted)' }}>
+                {subtitle}
+              </p>
+            )}
           </div>
           {action && <div className="shrink-0">{action}</div>}
         </div>

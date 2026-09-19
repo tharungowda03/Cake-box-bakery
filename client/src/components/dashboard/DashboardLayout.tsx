@@ -22,7 +22,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] flex">
+    // dashboard-shell scopes the blue/yellow design tokens away from the storefront
+    <div className="dashboard-shell min-h-screen flex">
       {/* Desktop Sidebar (visible on lg+) */}
       <div className="hidden lg:block shrink-0 sticky top-0 h-screen">
         <DashboardSidebar role={role} />

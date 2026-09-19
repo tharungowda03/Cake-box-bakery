@@ -51,10 +51,20 @@ export function DataTable<T>({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-stone-200/80 bg-white shadow-xs">
+    <div
+      className="overflow-x-auto rounded-xl border bg-white"
+      style={{ borderColor: 'var(--db-border)', boxShadow: '0 1px 4px rgba(0,97,153,0.05)' }}
+    >
       <table className="w-full text-left border-collapse text-xs sm:text-sm">
         <thead>
-          <tr className="border-b border-stone-200/80 bg-stone-50/70 text-stone-600 font-semibold text-[11px] sm:text-xs uppercase tracking-wider">
+          <tr
+            className="border-b text-[11px] sm:text-xs uppercase tracking-wider font-semibold"
+            style={{
+              borderColor: 'var(--db-border)',
+              background: 'var(--db-primary-soft)',
+              color: 'var(--db-primary)',
+            }}
+          >
             {columns.map((col, idx) => (
               <th
                 key={idx}
@@ -67,11 +77,21 @@ export function DataTable<T>({
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-stone-100 text-stone-700">
+        <tbody
+          className="divide-y divide-[#e8f2f9]"
+          style={{ color: 'var(--db-text)' }}
+        >
           {data.map((row, index) => (
             <tr
               key={keyExtractor(row, index)}
-              className="hover:bg-stone-50/60 transition-colors"
+              className="transition-colors duration-100"
+              style={{ borderColor: 'var(--db-border-light)' }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-soft)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = '';
+              }}
             >
               {columns.map((col, colIdx) => (
                 <td

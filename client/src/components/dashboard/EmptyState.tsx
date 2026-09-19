@@ -1,6 +1,5 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Button } from '../ui/Button';
 
 export interface EmptyStateProps {
   icon: LucideIcon;
@@ -20,12 +19,20 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   actionHref,
 }) => {
   return (
-    <div className="bg-white rounded-xl border border-dashed border-stone-300 p-12 text-center max-w-md mx-auto my-6">
-      <div className="w-12 h-12 bg-amber-50 text-amber-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-amber-100/60 shadow-2xs">
+    <div
+      className="rounded-xl border border-dashed p-12 text-center max-w-md mx-auto my-6"
+      style={{ borderColor: 'var(--db-border)', background: 'white' }}
+    >
+      <div
+        className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
+        style={{ background: 'var(--db-primary-soft)', color: 'var(--db-primary)' }}
+      >
         <Icon className="w-6 h-6" />
       </div>
-      <h3 className="text-base font-semibold text-stone-900 mb-1">{title}</h3>
-      <p className="text-sm text-stone-500 mb-6 max-w-xs mx-auto leading-relaxed">
+      <h3 className="text-base font-semibold mb-1" style={{ color: 'var(--db-text)' }}>
+        {title}
+      </h3>
+      <p className="text-sm mb-6 max-w-xs mx-auto leading-relaxed" style={{ color: 'var(--db-text-muted)' }}>
         {description}
       </p>
       {actionLabel && (
@@ -33,17 +40,31 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           {actionHref ? (
             <a
               href={actionHref}
-              className="inline-flex items-center justify-center px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-sm font-medium transition shadow-xs"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-150"
+              style={{ background: 'var(--db-primary)' }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-dark)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'var(--db-primary)';
+              }}
             >
               {actionLabel}
             </a>
           ) : (
-            <Button
+            <button
               onClick={onAction}
-              className="bg-stone-900 hover:bg-stone-800 text-white shadow-xs"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-150"
+              style={{ background: 'var(--db-primary)' }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'var(--db-primary-dark)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'var(--db-primary)';
+              }}
             >
               {actionLabel}
-            </Button>
+            </button>
           )}
         </div>
       )}

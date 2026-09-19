@@ -122,7 +122,7 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
     { key: 'CONFIRMED', label: 'Confirmed', color: 'text-blue-700' },
     { key: 'PREPARING', label: 'Preparing', color: 'text-purple-700' },
     { key: 'READY', label: 'Ready', color: 'text-teal-700' },
-    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', color: 'text-orange-700' },
+    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', color: 'text-[#006199]' },
     { key: 'DELIVERED', label: 'Delivered', color: 'text-green-700' },
     { key: 'PICKED_UP', label: 'Picked Up', color: 'text-emerald-700' },
     { key: 'CANCELLED', label: 'Cancelled', color: 'text-red-700' },
@@ -131,10 +131,10 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 font-sans">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0f2231] font-sans">
           Bakery Dashboard
         </h1>
-        <p className="text-xs sm:text-sm text-stone-500 mt-1">
+        <p className="text-xs sm:text-sm text-[#4a6275] mt-1">
           Real-time overview of Cake Box Kakinada operations.
         </p>
       </div>
@@ -145,28 +145,28 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
           label="Today's Revenue"
           value={formatCurrency(o.today_revenue)}
           icon={IndianRupee}
-          variant="emerald"
+          variant="light"
           sub="Live today"
         />
         <StatCard
           label="Total Orders"
           value={o.total}
           icon={ShoppingBag}
-          variant="stone"
+          variant="neutral"
           sub={`${o.by_status['DELIVERED'] || 0} delivered`}
         />
         <StatCard
           label="Active Orders"
           value={active}
           icon={Clock}
-          variant="amber"
+          variant="accent"
           sub="In progress"
         />
         <StatCard
           label="Pending Enquiries"
           value={co.by_status['PENDING'] || 0}
           icon={Cake}
-          variant="purple"
+          variant="primary"
           sub="Custom cake requests"
         />
       </div>
@@ -179,10 +179,10 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
             return (
               <div
                 key={key}
-                className="text-center p-4 bg-stone-50/60 rounded-xl border border-stone-100"
+                className="text-center p-4 bg-[#f0f5f9]/60 rounded-xl border border-[#e8f2f9]"
               >
                 <p className={`text-2xl font-bold ${color}`}>{count}</p>
-                <p className="text-[11px] text-stone-500 mt-0.5 font-medium">{label}</p>
+                <p className="text-[11px] text-[#4a6275] mt-0.5 font-medium">{label}</p>
               </div>
             );
           })}
@@ -196,13 +196,13 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
             <span className="text-3xl font-bold text-emerald-700">
               {formatCurrency(o.total_revenue)}
             </span>
-            <span className="text-xs text-stone-400 mb-1">from {o.total} orders</span>
+            <span className="text-xs text-[#7a9db3] mb-1">from {o.total} orders</span>
           </div>
-          <div className="mt-4 pt-4 border-t border-stone-100">
-            <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
+          <div className="mt-4 pt-4 border-t border-[#e8f2f9]">
+            <p className="text-xs font-semibold text-[#4a6275] uppercase tracking-wider mb-2">
               Today
             </p>
-            <span className="text-xl font-bold text-stone-900">
+            <span className="text-xl font-bold text-[#0f2231]">
               {formatCurrency(o.today_revenue)}
             </span>
           </div>
@@ -213,12 +213,12 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
             {[
               { label: 'Pending Review', key: 'PENDING', color: 'bg-yellow-100 text-yellow-800' },
               { label: 'Accepted', key: 'ACCEPTED', color: 'bg-blue-100 text-blue-800' },
-              { label: 'Quote Sent', key: 'QUOTED', color: 'bg-amber-100 text-amber-800' },
+              { label: 'Quote Sent', key: 'QUOTED', color: 'bg-[#e0f3fd] text-[#004d7a]' },
               { label: 'Confirmed', key: 'CONFIRMED', color: 'bg-green-100 text-green-800' },
               { label: 'Rejected', key: 'REJECTED', color: 'bg-red-100 text-red-800' },
             ].map(({ label, key, color }) => (
               <div key={key} className="flex items-center justify-between">
-                <span className="text-xs text-stone-600">{label}</span>
+                <span className="text-xs text-[#4a6275]">{label}</span>
                 <span
                   className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${color}`}
                 >
@@ -237,7 +237,7 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
         action={
           <Link
             to="/owner/products"
-            className="text-xs font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1"
+            className="text-xs font-semibold text-[#006199] hover:text-[#004d7a] flex items-center gap-1"
           >
             Manage Products <ExternalLink className="w-3 h-3" />
           </Link>
@@ -245,25 +245,25 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
       >
         {catalogueLoading ? (
           <div className="h-20 flex items-center justify-center">
-            <Loader2 className="w-5 h-5 animate-spin text-stone-400" />
+            <Loader2 className="w-5 h-5 animate-spin text-[#7a9db3]" />
           </div>
         ) : !catalogueStats ? (
-          <p className="text-xs text-stone-400 italic">Could not load catalogue data.</p>
+          <p className="text-xs text-[#7a9db3] italic">Could not load catalogue data.</p>
         ) : (
           <div className="space-y-4">
             {/* Summary numbers */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
-                { label: 'Total Products', value: catalogueStats.total, color: 'text-stone-900' },
+                { label: 'Total Products', value: catalogueStats.total, color: 'text-[#0f2231]' },
                 { label: 'Available', value: catalogueStats.available, color: 'text-emerald-700' },
-                { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-stone-500' },
-                { label: 'Hidden', value: catalogueStats.hidden, color: 'text-stone-400' },
-                { label: 'Variants', value: catalogueStats.variants, color: 'text-amber-700' },
+                { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-[#4a6275]' },
+                { label: 'Hidden', value: catalogueStats.hidden, color: 'text-[#7a9db3]' },
+                { label: 'Variants', value: catalogueStats.variants, color: 'text-[#006199]' },
                 { label: 'Categories', value: catalogueStats.categories, color: 'text-blue-700' },
               ].map(({ label, value, color }) => (
-                <div key={label} className="text-center p-3 bg-stone-50/60 rounded-xl border border-stone-100">
+                <div key={label} className="text-center p-3 bg-[#f0f5f9]/60 rounded-xl border border-[#e8f2f9]">
                   <p className={`text-xl font-bold ${color}`}>{value}</p>
-                  <p className="text-[10px] text-stone-500 mt-0.5 font-medium">{label}</p>
+                  <p className="text-[10px] text-[#4a6275] mt-0.5 font-medium">{label}</p>
                 </div>
               ))}
             </div>
@@ -271,14 +271,14 @@ const OwnerOverviewTab: React.FC<{ stats: OwnerStats | null; error: string }> = 
             {/* Category Breakdown */}
             {catalogueStats.category_breakdown?.length > 0 && (
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-stone-400 mb-2">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#7a9db3] mb-2">
                   Products by Category
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {catalogueStats.category_breakdown.map((cat: any) => (
-                    <div key={cat.id} className="flex items-center justify-between px-3 py-2 bg-white border border-stone-100 rounded-lg">
-                      <span className="text-xs text-stone-700 truncate pr-2">{cat.name}</span>
-                      <span className="text-xs font-bold text-stone-900 shrink-0">{cat.count}</span>
+                    <div key={cat.id} className="flex items-center justify-between px-3 py-2 bg-white border border-[#e8f2f9] rounded-lg">
+                      <span className="text-xs text-[#0f2231] truncate pr-2">{cat.name}</span>
+                      <span className="text-xs font-bold text-[#0f2231] shrink-0">{cat.count}</span>
                     </div>
                   ))}
                 </div>
@@ -368,15 +368,15 @@ const OwnerOrdersTab: React.FC = () => {
       <PageHeader title="Order Management" subtitle="View, filter, and update all customer orders." />
 
       {/* Controls */}
-      <div className="bg-white rounded-xl border border-stone-200/80 p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white rounded-xl border border-[#d1e3ef] p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#7a9db3] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by order # or customer..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#8ACFF8]/20 focus:border-[#006199]"
           />
         </div>
 
@@ -384,7 +384,7 @@ const OwnerOrdersTab: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+            className="text-xs border border-[#d1e3ef] rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-[#006199] flex-1 sm:flex-none"
           >
             <option value="">All Statuses</option>
             {statusOptions.map((s) => (
@@ -396,7 +396,7 @@ const OwnerOrdersTab: React.FC = () => {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+            className="text-xs border border-[#d1e3ef] rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-[#006199] flex-1 sm:flex-none"
           >
             <option value="">All Types</option>
             <option value="DELIVERY">Delivery</option>
@@ -404,7 +404,7 @@ const OwnerOrdersTab: React.FC = () => {
           </select>
           <button
             onClick={load}
-            className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition"
+            className="p-1.5 rounded-lg bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40 transition"
             title="Refresh"
           >
             <RefreshCw className="w-4 h-4" />
@@ -433,22 +433,22 @@ const OwnerOrdersTab: React.FC = () => {
             return (
               <div
                 key={order.id}
-                className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden"
+                className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs overflow-hidden"
               >
                 {/* Order Header Row */}
                 <div
-                  className="p-4 flex items-start justify-between gap-3 cursor-pointer hover:bg-stone-50/50 transition"
+                  className="p-4 flex items-start justify-between gap-3 cursor-pointer hover:bg-[#f0f5f9]/50 transition"
                   onClick={() => setExpandedId(isExpanded ? null : order.id)}
                 >
                   <div className="space-y-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-bold text-stone-900 text-sm">
+                      <span className="font-bold text-[#0f2231] text-sm">
                         #{order.order_number}
                       </span>
                       <span
                         className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${
                           order.delivery_type === 'DELIVERY'
-                            ? 'bg-orange-50 text-orange-700 border-orange-200'
+                            ? 'bg-[#e0f3fd] text-[#006199] border-[#8ACFF8]'
                             : 'bg-teal-50 text-teal-700 border-teal-200'
                         }`}
                       >
@@ -456,10 +456,10 @@ const OwnerOrdersTab: React.FC = () => {
                       </span>
                       <StatusBadge status={order.status} />
                     </div>
-                    <p className="text-xs text-stone-400">{formatDateTime(order.created_at)}</p>
+                    <p className="text-xs text-[#7a9db3]">{formatDateTime(order.created_at)}</p>
                     {customer && (
-                      <p className="text-xs text-stone-600 flex items-center gap-1.5">
-                        <User className="w-3 h-3 text-stone-400" />
+                      <p className="text-xs text-[#4a6275] flex items-center gap-1.5">
+                        <User className="w-3 h-3 text-[#7a9db3]" />
                         {customer.full_name || 'Customer'}
                         {customer.phone && ` · ${customer.phone}`}
                       </p>
@@ -467,36 +467,36 @@ const OwnerOrdersTab: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3 shrink-0">
-                    <span className="font-bold text-stone-900 text-sm">
+                    <span className="font-bold text-[#0f2231] text-sm">
                       {formatCurrency(order.total)}
                     </span>
                     {isExpanded ? (
-                      <ChevronUp className="w-4 h-4 text-stone-400" />
+                      <ChevronUp className="w-4 h-4 text-[#7a9db3]" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-stone-400" />
+                      <ChevronDown className="w-4 h-4 text-[#7a9db3]" />
                     )}
                   </div>
                 </div>
 
                 {/* Expanded Detail */}
                 {isExpanded && (
-                  <div className="border-t border-stone-100 p-4 space-y-4 bg-stone-50/30">
+                  <div className="border-t border-[#e8f2f9] p-4 space-y-4 bg-[#f0f5f9]/30">
                     {/* Items */}
                     {order.order_items?.length > 0 && (
-                      <div className="bg-white rounded-xl border border-stone-100 overflow-hidden">
-                        <div className="px-4 py-2 bg-stone-50 border-b border-stone-100">
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
+                      <div className="bg-white rounded-xl border border-[#e8f2f9] overflow-hidden">
+                        <div className="px-4 py-2 bg-[#f0f5f9] border-b border-[#e8f2f9]">
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-[#4a6275]">
                             Order Items
                           </p>
                         </div>
-                        <div className="divide-y divide-stone-50">
+                        <div className="divide-y divide-[#e8f2f9]">
                           {order.order_items.map((item: any) => (
                             <div key={item.id} className="px-4 py-2.5 flex justify-between text-xs">
-                              <span className="text-stone-700">
+                              <span className="text-[#0f2231]">
                                 {item.quantity}× {item.product_name_snapshot}
-                                <span className="text-stone-400 ml-1">({item.variant_name_snapshot})</span>
+                                <span className="text-[#7a9db3] ml-1">({item.variant_name_snapshot})</span>
                               </span>
-                              <span className="font-semibold text-stone-900">
+                              <span className="font-semibold text-[#0f2231]">
                                 {formatCurrency(item.line_total)}
                               </span>
                             </div>
@@ -507,16 +507,16 @@ const OwnerOrdersTab: React.FC = () => {
 
                     {/* Notes */}
                     {order.customer_notes && (
-                      <div className="bg-amber-50 rounded-xl px-4 py-2.5 border border-amber-100 text-xs text-stone-700">
-                        <span className="font-semibold text-amber-700">Customer note: </span>
+                      <div className="bg-[#e0f3fd] rounded-xl px-4 py-2.5 border border-[#d1e3ef] text-xs text-[#0f2231]">
+                        <span className="font-semibold text-[#006199]">Customer note: </span>
                         {order.customer_notes}
                       </div>
                     )}
 
                     {/* Delivery address */}
                     {order.delivery_type === 'DELIVERY' && order.delivery_address && (
-                      <div className="text-xs text-stone-500 flex items-start gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-stone-400 mt-0.5 shrink-0" />
+                      <div className="text-xs text-[#4a6275] flex items-start gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-[#7a9db3] mt-0.5 shrink-0" />
                         <span>
                           {order.delivery_address.address_line1},{' '}
                           {order.delivery_address.city}
@@ -526,8 +526,8 @@ const OwnerOrdersTab: React.FC = () => {
 
                     {/* Status transition buttons */}
                     {nextStatuses.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-2 border-t border-stone-100">
-                        <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider self-center mr-1">
+                      <div className="flex flex-wrap gap-2 pt-2 border-t border-[#e8f2f9]">
+                        <span className="text-[11px] font-semibold text-[#7a9db3] uppercase tracking-wider self-center mr-1">
                           Move to:
                         </span>
                         {nextStatuses
@@ -537,7 +537,7 @@ const OwnerOrdersTab: React.FC = () => {
                               key={next}
                               onClick={() => setConfirmAction({ orderId: order.id, status: next })}
                               disabled={isUpdating}
-                              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-amber-700 text-white font-semibold hover:bg-amber-800 disabled:opacity-50 transition"
+                              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-[#006199] text-white font-semibold hover:bg-[#004d7a] disabled:opacity-50 transition"
                             >
                               {isUpdating ? (
                                 <Loader2 className="w-3 h-3 animate-spin" />
@@ -659,7 +659,7 @@ const OwnerCustomCakesTab: React.FC = () => {
       />
 
       {/* Filter bar */}
-      <div className="bg-white rounded-xl border border-stone-200/80 p-4 shadow-xs flex flex-wrap gap-2 items-center justify-between">
+      <div className="bg-white rounded-xl border border-[#d1e3ef] p-4 shadow-xs flex flex-wrap gap-2 items-center justify-between">
         <div className="flex items-center gap-1.5 flex-wrap">
           {statusFilters.map((f) => (
             <button
@@ -667,8 +667,8 @@ const OwnerCustomCakesTab: React.FC = () => {
               onClick={() => setFilterStatus(f.id)}
               className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
                 filterStatus === f.id
-                  ? 'bg-stone-900 text-white font-semibold'
-                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                  ? 'text-white bg-[#006199] font-semibold'
+                  : 'bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40'
               }`}
             >
               {f.label}
@@ -677,7 +677,7 @@ const OwnerCustomCakesTab: React.FC = () => {
         </div>
         <button
           onClick={load}
-          className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition"
+          className="p-1.5 rounded-lg bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40 transition"
         >
           <RefreshCw className="w-4 h-4" />
         </button>
@@ -703,48 +703,48 @@ const OwnerCustomCakesTab: React.FC = () => {
             return (
               <div
                 key={co.id}
-                className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden"
+                className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs overflow-hidden"
               >
                 {/* Header */}
                 <div
-                  className="p-4 flex items-start justify-between gap-3 cursor-pointer hover:bg-stone-50/50 transition"
+                  className="p-4 flex items-start justify-between gap-3 cursor-pointer hover:bg-[#f0f5f9]/50 transition"
                   onClick={() => setExpandedId(isExpanded ? null : co.id)}
                 >
                   <div className="space-y-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-bold text-stone-900 text-sm">
+                      <span className="font-bold text-[#0f2231] text-sm">
                         {co.occasion || 'Custom Cake'}
                       </span>
                       <StatusBadge status={co.status} />
                     </div>
-                    <p className="text-xs text-stone-400">
+                    <p className="text-xs text-[#7a9db3]">
                       Event: {co.required_date ? formatDate(co.required_date) : 'TBD'}
                       {co.preferred_time && ` at ${co.preferred_time}`}
                     </p>
                     {customer && (
-                      <p className="text-xs text-stone-600 flex items-center gap-1.5">
-                        <User className="w-3 h-3 text-stone-400" />
+                      <p className="text-xs text-[#4a6275] flex items-center gap-1.5">
+                        <User className="w-3 h-3 text-[#7a9db3]" />
                         {customer.full_name || 'Customer'} · {co.mobile_number}
                       </p>
                     )}
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     {co.final_price && (
-                      <span className="text-sm font-bold text-stone-900">
+                      <span className="text-sm font-bold text-[#0f2231]">
                         {formatCurrency(co.final_price)}
                       </span>
                     )}
                     {isExpanded ? (
-                      <ChevronUp className="w-4 h-4 text-stone-400" />
+                      <ChevronUp className="w-4 h-4 text-[#7a9db3]" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-stone-400" />
+                      <ChevronDown className="w-4 h-4 text-[#7a9db3]" />
                     )}
                   </div>
                 </div>
 
                 {/* Expanded */}
                 {isExpanded && (
-                  <div className="border-t border-stone-100 p-4 space-y-4 bg-stone-50/30">
+                  <div className="border-t border-[#e8f2f9] p-4 space-y-4 bg-[#f0f5f9]/30">
                     {/* Details grid */}
                     <div className="grid grid-cols-2 gap-3">
                       {[
@@ -756,17 +756,17 @@ const OwnerCustomCakesTab: React.FC = () => {
                       ]
                         .filter((r) => r.val)
                         .map(({ label, val }) => (
-                          <div key={label} className="bg-white rounded-lg p-2.5 border border-stone-100">
-                            <p className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider">
+                          <div key={label} className="bg-white rounded-lg p-2.5 border border-[#e8f2f9]">
+                            <p className="text-[10px] font-semibold text-[#7a9db3] uppercase tracking-wider">
                               {label}
                             </p>
-                            <p className="text-xs font-medium text-stone-800 mt-0.5">{val}</p>
+                            <p className="text-xs font-medium text-[#0f2231] mt-0.5">{val}</p>
                           </div>
                         ))}
                     </div>
 
                     {co.additional_requirements && (
-                      <div className="text-xs text-stone-600 bg-stone-50 rounded-xl px-3 py-2.5 border border-stone-100">
+                      <div className="text-xs text-[#4a6275] bg-[#f0f5f9] rounded-xl px-3 py-2.5 border border-[#e8f2f9]">
                         <span className="font-semibold">Additional Requirements: </span>
                         {co.additional_requirements}
                       </div>
@@ -774,7 +774,7 @@ const OwnerCustomCakesTab: React.FC = () => {
 
                     {/* Internal Notes */}
                     <div>
-                      <label className="text-[11px] font-bold text-stone-500 uppercase tracking-wider block mb-1.5">
+                      <label className="text-[11px] font-bold text-[#4a6275] uppercase tracking-wider block mb-1.5">
                         Internal Notes
                       </label>
                       <div className="flex gap-2">
@@ -788,7 +788,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                             }))
                           }
                           placeholder="Add internal notes..."
-                          className="flex-1 text-xs border border-stone-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-amber-400"
+                          className="flex-1 text-xs border border-[#d1e3ef] rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#006199]"
                         />
                         <button
                           onClick={() =>
@@ -798,7 +798,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                             })
                           }
                           disabled={isUpdating}
-                          className="px-3 py-1.5 rounded-lg bg-stone-100 text-stone-700 text-xs font-semibold hover:bg-stone-200 transition disabled:opacity-50"
+                          className="px-3 py-1.5 rounded-lg bg-[#e0f3fd] text-[#0f2231] text-xs font-semibold hover:bg-[#8ACFF8]/40 transition disabled:opacity-50"
                         >
                           Save
                         </button>
@@ -806,7 +806,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-2 border-t border-stone-100 flex flex-wrap gap-2">
+                    <div className="pt-2 border-t border-[#e8f2f9] flex flex-wrap gap-2">
                       {co.status === 'PENDING' && (
                         <>
                           <button
@@ -829,7 +829,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                       {co.status === 'ACCEPTED' && (
                         <div className="flex items-end gap-2 w-full">
                           <div className="flex-1">
-                            <label className="text-[11px] font-bold text-stone-500 uppercase tracking-wider block mb-1">
+                            <label className="text-[11px] font-bold text-[#4a6275] uppercase tracking-wider block mb-1">
                               Quote Price (₹)
                             </label>
                             <input
@@ -843,7 +843,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                                 }))
                               }
                               placeholder="e.g. 750"
-                              className="w-full text-sm border border-amber-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-amber-500 bg-amber-50"
+                              className="w-full text-sm border border-[#8ACFF8] rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#006199] bg-[#e0f3fd]"
                             />
                           </div>
                           <button
@@ -859,7 +859,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                               });
                             }}
                             disabled={isUpdating || !quoteInputs[co.id]}
-                            className="flex items-center gap-1.5 text-xs px-4 py-1.5 rounded-lg bg-amber-700 text-white font-semibold hover:bg-amber-800 disabled:opacity-50 transition"
+                            className="flex items-center gap-1.5 text-xs px-4 py-1.5 rounded-lg bg-[#006199] text-white font-semibold hover:bg-[#004d7a] disabled:opacity-50 transition"
                           >
                             {isUpdating ? (
                               <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -872,7 +872,7 @@ const OwnerCustomCakesTab: React.FC = () => {
                       )}
 
                       {co.status === 'QUOTED' && co.final_price && (
-                        <div className="text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200 flex items-center gap-1.5">
+                        <div className="text-xs text-[#006199] bg-[#e0f3fd] px-3 py-1.5 rounded-lg border border-[#8ACFF8] flex items-center gap-1.5">
                           <Clock className="w-3.5 h-3.5" />
                           Quote sent: {formatCurrency(co.final_price)} — awaiting customer
                           confirmation
@@ -920,10 +920,10 @@ const OwnerCustomCakesTab: React.FC = () => {
 function AvailabilityBadge({ availability }: { availability: string }) {
   const map: Record<string, { label: string; cls: string }> = {
     AVAILABLE: { label: 'Available', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
-    UNAVAILABLE: { label: 'Unavailable', cls: 'bg-stone-100 text-stone-600 border-stone-300' },
-    HIDDEN: { label: 'Hidden', cls: 'bg-stone-50 text-stone-400 border-stone-200' },
+    UNAVAILABLE: { label: 'Unavailable', cls: 'bg-[#e0f3fd] text-[#4a6275] border-[#d1e3ef]' },
+    HIDDEN: { label: 'Hidden', cls: 'bg-[#f0f5f9] text-[#7a9db3] border-[#d1e3ef]' },
   };
-  const { label, cls } = map[availability] || { label: availability, cls: 'bg-stone-100 text-stone-600 border-stone-200' };
+  const { label, cls } = map[availability] || { label: availability, cls: 'bg-[#e0f3fd] text-[#4a6275] border-[#d1e3ef]' };
   return (
     <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${cls}`}>
       <span className="w-1.5 h-1.5 rounded-full bg-current opacity-70" />
@@ -1091,13 +1091,13 @@ const OwnerProductsTab: React.FC = () => {
       {/* Header with Stats */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-stone-900">Products</h2>
-          <p className="text-xs text-stone-500 mt-0.5">Manage catalogue availability and variant pricing.</p>
+          <h2 className="text-xl font-bold tracking-tight text-[#0f2231]">Products</h2>
+          <p className="text-xs text-[#4a6275] mt-0.5">Manage catalogue availability and variant pricing.</p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowAddWarning(true)}
-            className="flex items-center gap-1.5 text-xs px-3.5 py-2 rounded-lg bg-stone-900 text-white font-semibold hover:bg-stone-800 transition shadow-xs"
+            className="flex items-center gap-1.5 text-xs px-3.5 py-2 rounded-lg text-white bg-[#006199] font-semibold hover:bg-[#004d7a] transition shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" /> Add Product
           </button>
@@ -1108,38 +1108,38 @@ const OwnerProductsTab: React.FC = () => {
       {catalogueStats && (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {[
-            { label: 'Total', value: catalogueStats.total, color: 'text-stone-900' },
+            { label: 'Total', value: catalogueStats.total, color: 'text-[#0f2231]' },
             { label: 'Available', value: catalogueStats.available, color: 'text-emerald-700' },
-            { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-stone-600' },
-            { label: 'Hidden', value: catalogueStats.hidden, color: 'text-stone-400' },
-            { label: 'Variants', value: catalogueStats.variants, color: 'text-amber-700' },
+            { label: 'Unavailable', value: catalogueStats.unavailable, color: 'text-[#4a6275]' },
+            { label: 'Hidden', value: catalogueStats.hidden, color: 'text-[#7a9db3]' },
+            { label: 'Variants', value: catalogueStats.variants, color: 'text-[#006199]' },
             { label: 'Categories', value: catalogueStats.categories, color: 'text-blue-700' },
           ].map(({ label, value, color }) => (
-            <div key={label} className="bg-white rounded-xl border border-stone-200/80 shadow-xs px-4 py-3 text-center">
+            <div key={label} className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs px-4 py-3 text-center">
               <p className={`text-xl font-bold ${color}`}>{value}</p>
-              <p className="text-[10px] text-stone-500 font-medium mt-0.5">{label}</p>
+              <p className="text-[10px] text-[#4a6275] font-medium mt-0.5">{label}</p>
             </div>
           ))}
         </div>
       )}
 
       {/* Controls Toolbar */}
-      <div className="bg-white rounded-xl border border-stone-200/80 p-3 shadow-xs flex flex-wrap gap-2 items-center">
+      <div className="bg-white rounded-xl border border-[#d1e3ef] p-3 shadow-xs flex flex-wrap gap-2 items-center">
         <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#7a9db3] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => handleSearchInput(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8ACFF8]/20 focus:border-[#006199]"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+          className="text-xs border border-[#d1e3ef] rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-[#006199] flex-1 sm:flex-none"
         >
           <option value="">All Categories</option>
           {categories.map((c) => (
@@ -1150,7 +1150,7 @@ const OwnerProductsTab: React.FC = () => {
         <select
           value={filterAvailability}
           onChange={(e) => setFilterAvailability(e.target.value)}
-          className="text-xs border border-stone-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-amber-400 flex-1 sm:flex-none"
+          className="text-xs border border-[#d1e3ef] rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:border-[#006199] flex-1 sm:flex-none"
         >
           <option value="">All Availability</option>
           <option value="AVAILABLE">Available</option>
@@ -1161,7 +1161,7 @@ const OwnerProductsTab: React.FC = () => {
         {(filterCategory || filterAvailability || search) && (
           <button
             onClick={() => { setFilterCategory(''); setFilterAvailability(''); setSearch(''); }}
-            className="text-xs text-stone-500 hover:text-stone-800 px-2 py-1.5 rounded-lg hover:bg-stone-100 transition flex items-center gap-1"
+            className="text-xs text-[#4a6275] hover:text-[#0f2231] px-2 py-1.5 rounded-lg hover:bg-[#e0f3fd] transition flex items-center gap-1"
           >
             <X className="w-3 h-3" /> Clear
           </button>
@@ -1169,7 +1169,7 @@ const OwnerProductsTab: React.FC = () => {
 
         <button
           onClick={load}
-          className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition ml-auto"
+          className="p-1.5 rounded-lg bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40 transition ml-auto"
           title="Refresh"
         >
           <RefreshCw className="w-4 h-4" />
@@ -1183,9 +1183,9 @@ const OwnerProductsTab: React.FC = () => {
       ) : products.length === 0 ? (
         <EmptyState icon={Package} title="No products found" description="Try adjusting your filters." />
       ) : (
-        <div className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden">
+        <div className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs overflow-hidden">
           {/* Table Header */}
-          <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_auto] px-4 py-2.5 bg-stone-50 border-b border-stone-100 text-[10px] font-bold uppercase tracking-wider text-stone-400 gap-3">
+          <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_auto] px-4 py-2.5 bg-[#f0f5f9] border-b border-[#e8f2f9] text-[10px] font-bold uppercase tracking-wider text-[#7a9db3] gap-3">
             <span>Product</span>
             <span>Category</span>
             <span>Variants</span>
@@ -1195,7 +1195,7 @@ const OwnerProductsTab: React.FC = () => {
             <span className="w-28 text-right">Actions</span>
           </div>
 
-          <div className="divide-y divide-stone-100">
+          <div className="divide-y divide-[#e8f2f9]">
             {products.map((product) => {
               const isExpanded = expandedProductId === product.id;
               const isToggling = togglingId === product.id;
@@ -1216,19 +1216,19 @@ const OwnerProductsTab: React.FC = () => {
                         <img
                           src={product.image_url}
                           alt={product.name}
-                          className="w-9 h-9 rounded-lg object-cover shrink-0 border border-stone-100"
+                          className="w-9 h-9 rounded-lg object-cover shrink-0 border border-[#e8f2f9]"
                         />
                       ) : (
-                        <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center shrink-0">
-                          <Cake className="w-4 h-4 text-stone-300" />
+                        <div className="w-9 h-9 rounded-lg bg-[#e0f3fd] flex items-center justify-center shrink-0">
+                          <Cake className="w-4 h-4 text-[#7a9db3]" />
                         </div>
                       )}
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <p className="font-semibold text-stone-900 text-sm truncate">{product.name}</p>
+                          <p className="font-semibold text-[#0f2231] text-sm truncate">{product.name}</p>
                           {product.is_featured && (
-                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold rounded bg-amber-100 text-amber-800 shrink-0">
-                              <Star className="w-2.5 h-2.5 fill-amber-600 text-amber-600" /> Featured
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#e0f3fd] text-[#004d7a] shrink-0">
+                              <Star className="w-2.5 h-2.5 fill-[#FFD444] text-[#006199]" /> Featured
                             </span>
                           )}
                         </div>
@@ -1244,14 +1244,14 @@ const OwnerProductsTab: React.FC = () => {
 
                     {/* Category */}
                     <div className="hidden md:block">
-                      <span className="text-xs text-stone-500 truncate block">
+                      <span className="text-xs text-[#4a6275] truncate block">
                         {product.category?.name || '—'}
                       </span>
                     </div>
 
                     {/* Variants */}
                     <div className="hidden md:block">
-                      <span className="text-xs font-medium text-stone-700">
+                      <span className="text-xs font-medium text-[#0f2231]">
                         {variants.length} {variants.length === 1 ? 'variant' : 'variants'}
                       </span>
                     </div>
@@ -1259,12 +1259,12 @@ const OwnerProductsTab: React.FC = () => {
                     {/* Price */}
                     <div className="hidden md:block">
                       {displayPrice !== null ? (
-                        <span className="text-xs font-bold text-stone-900">
+                        <span className="text-xs font-bold text-[#0f2231]">
                           ₹{Number(displayPrice).toFixed(0)}
-                          {variants.length > 1 && <span className="text-stone-400 font-normal"> onwards</span>}
+                          {variants.length > 1 && <span className="text-[#7a9db3] font-normal"> onwards</span>}
                         </span>
                       ) : (
-                        <span className="text-xs text-stone-400 italic">—</span>
+                        <span className="text-xs text-[#7a9db3] italic">—</span>
                       )}
                     </div>
 
@@ -1278,7 +1278,7 @@ const OwnerProductsTab: React.FC = () => {
                       <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isMenuSource
                           ? 'bg-blue-50 text-blue-700 border border-blue-100'
-                          : 'bg-amber-50 text-amber-700 border border-amber-100'
+                          : 'bg-[#e0f3fd] text-[#006199] border border-[#d1e3ef]'
                       }`}>
                         {isMenuSource ? 'Approved Menu' : 'Manual'}
                       </span>
@@ -1299,14 +1299,14 @@ const OwnerProductsTab: React.FC = () => {
                         }
                         className={`p-1.5 rounded-lg transition disabled:opacity-30 ${
                           product.is_featured
-                            ? 'text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700'
-                            : 'text-stone-300 hover:text-amber-600 hover:bg-stone-100'
+                            ? 'text-[#006199] bg-[#e0f3fd] hover:bg-[#e0f3fd] hover:text-[#006199]'
+                            : 'text-[#7a9db3] hover:text-[#006199] hover:bg-[#e0f3fd]'
                         }`}
                       >
                         {togglingFeaturedId === product.id ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
                         ) : (
-                          <Star className={`w-4 h-4 ${product.is_featured ? 'fill-amber-500 text-amber-500' : ''}`} />
+                          <Star className={`w-4 h-4 ${product.is_featured ? 'fill-[#FFD444] text-[#FFD444]' : ''}`} />
                         )}
                       </button>
 
@@ -1315,7 +1315,7 @@ const OwnerProductsTab: React.FC = () => {
                         onClick={() => handleCycleAvailability(product.id, product.availability)}
                         disabled={isToggling}
                         title={`Currently ${product.availability}. Click to cycle.`}
-                        className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition disabled:opacity-50"
+                        className="p-1.5 rounded-lg text-[#7a9db3] hover:text-[#0f2231] hover:bg-[#e0f3fd] transition disabled:opacity-50"
                       >
                         {isToggling ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -1324,14 +1324,14 @@ const OwnerProductsTab: React.FC = () => {
                         ) : product.availability === 'AVAILABLE' ? (
                           <ToggleRight className="w-4 h-4 text-emerald-600" />
                         ) : (
-                          <ToggleLeft className="w-4 h-4 text-stone-400" />
+                          <ToggleLeft className="w-4 h-4 text-[#7a9db3]" />
                         )}
                       </button>
 
                       {/* Expand Variants */}
                       <button
                         onClick={() => setExpandedProductId(isExpanded ? null : product.id)}
-                        className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
+                        className="p-1.5 rounded-lg text-[#7a9db3] hover:text-[#0f2231] hover:bg-[#e0f3fd] transition"
                         title="Manage variants"
                       >
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -1342,7 +1342,7 @@ const OwnerProductsTab: React.FC = () => {
                         href={`/product/${product.slug || product.id}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="p-1.5 rounded-lg text-stone-400 hover:text-amber-700 hover:bg-amber-50 transition"
+                        className="p-1.5 rounded-lg text-[#7a9db3] hover:text-[#006199] hover:bg-[#e0f3fd] transition"
                         title="View in storefront"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -1352,36 +1352,36 @@ const OwnerProductsTab: React.FC = () => {
 
                   {/* Mobile pill row */}
                   <div className="md:hidden px-4 pb-3 -mt-1 flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] text-stone-400">{product.category?.name}</span>
+                    <span className="text-[10px] text-[#7a9db3]">{product.category?.name}</span>
                     <AvailabilityBadge availability={product.availability} />
                     {product.is_featured && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 flex items-center gap-1">
-                        <Star className="w-2.5 h-2.5 fill-amber-500 text-amber-500" /> Featured
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#e0f3fd] text-[#006199] border border-[#8ACFF8] flex items-center gap-1">
+                        <Star className="w-2.5 h-2.5 fill-[#FFD444] text-[#FFD444]" /> Featured
                       </span>
                     )}
                     {displayPrice !== null && (
-                      <span className="text-xs font-bold text-stone-900">₹{Number(displayPrice).toFixed(0)}</span>
+                      <span className="text-xs font-bold text-[#0f2231]">₹{Number(displayPrice).toFixed(0)}</span>
                     )}
                   </div>
 
                   {/* Expanded Variants */}
                   {isExpanded && variants.length > 0 && (
-                    <div className="border-t border-stone-100 bg-stone-50/40">
-                      <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                    <div className="border-t border-[#e8f2f9] bg-[#e0f3fd]/30">
+                      <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-[#7a9db3]">
                         Variants
                       </div>
                       {variants.map((v: any) => (
                         <div
                           key={v.id}
-                          className="px-4 py-2.5 flex items-center justify-between gap-3 border-t border-stone-100/70"
+                          className="px-4 py-2.5 flex items-center justify-between gap-3 border-t border-[#e8f2f9]/70"
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <Tag className="w-3.5 h-3.5 text-stone-300 shrink-0" />
-                            <span className="text-xs text-stone-700 flex-1 truncate">{v.name}</span>
+                            <Tag className="w-3.5 h-3.5 text-[#7a9db3] shrink-0" />
+                            <span className="text-xs text-[#0f2231] flex-1 truncate">{v.name}</span>
                             <AvailabilityBadge availability={v.availability || 'AVAILABLE'} />
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
-                            <span className="text-xs font-bold text-stone-900">
+                            <span className="text-xs font-bold text-[#0f2231]">
                               ₹{Number(v.price).toFixed(0)}
                             </span>
                             <button
@@ -1389,7 +1389,7 @@ const OwnerProductsTab: React.FC = () => {
                                 setEditingVariant({ id: v.id, name: v.name, price: v.price });
                                 setNewPrice(String(v.price));
                               }}
-                              className="p-1 rounded text-stone-400 hover:text-amber-700 hover:bg-amber-50 transition"
+                              className="p-1 rounded text-[#7a9db3] hover:text-[#006199] hover:bg-[#e0f3fd] transition"
                               title="Edit price"
                             >
                               <Pencil className="w-3 h-3" />
@@ -1411,19 +1411,19 @@ const OwnerProductsTab: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-stone-900">Edit Variant Price</h3>
+              <h3 className="font-bold text-[#0f2231]">Edit Variant Price</h3>
               <button
                 onClick={() => setEditingVariant(null)}
-                className="p-1 rounded text-stone-400 hover:text-stone-700"
+                className="p-1 rounded text-[#7a9db3] hover:text-[#0f2231]"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-sm text-stone-600 mb-4">
+            <p className="text-sm text-[#4a6275] mb-4">
               <span className="font-semibold">{editingVariant.name}</span>
             </p>
             <div className="mb-4">
-              <label className="text-xs font-semibold text-stone-600 block mb-1.5">
+              <label className="text-xs font-semibold text-[#4a6275] block mb-1.5">
                 New Price (₹)
               </label>
               <input
@@ -1431,21 +1431,21 @@ const OwnerProductsTab: React.FC = () => {
                 min={1}
                 value={newPrice}
                 onChange={(e) => setNewPrice(e.target.value)}
-                className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                 autoFocus
               />
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setEditingVariant(null)}
-                className="flex-1 px-4 py-2 text-sm rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50"
+                className="flex-1 px-4 py-2 text-sm rounded-xl border border-[#d1e3ef] text-[#4a6275] hover:bg-[#f0f5f9]"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSavePrice}
                 disabled={savingPrice || !newPrice}
-                className="flex-1 px-4 py-2 text-sm rounded-xl bg-amber-700 text-white font-semibold hover:bg-amber-800 disabled:opacity-50 transition"
+                className="flex-1 px-4 py-2 text-sm rounded-xl bg-[#006199] text-white font-semibold hover:bg-[#004d7a] disabled:opacity-50 transition"
               >
                 {savingPrice ? (
                   <Loader2 className="w-4 h-4 animate-spin mx-auto" />
@@ -1474,39 +1474,39 @@ const OwnerProductsTab: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-bold text-stone-900">Add Verified Product</h3>
-              <button onClick={() => setShowAddForm(false)} className="p-1 rounded text-stone-400 hover:text-stone-700">
+              <h3 className="font-bold text-[#0f2231]">Add Verified Product</h3>
+              <button onClick={() => setShowAddForm(false)} className="p-1 rounded text-[#7a9db3] hover:text-[#0f2231]">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Strong provenance warning */}
-            <div className="flex items-start gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 mb-4">
-              <AlertTriangle className="w-4 h-4 text-amber-700 mt-0.5 shrink-0" />
-              <p className="text-[11px] text-amber-800 leading-relaxed">
+            <div className="flex items-start gap-2.5 bg-[#e0f3fd] border border-[#8ACFF8] rounded-xl px-3 py-2.5 mb-4">
+              <AlertTriangle className="w-4 h-4 text-[#006199] mt-0.5 shrink-0" />
+              <p className="text-[11px] text-[#004d7a] leading-relaxed">
                 <strong>Catalogue Warning:</strong> Only add items verified against the approved Cake Box Kakinada menu. Unverified products must not be published to customers.
               </p>
             </div>
 
             <form onSubmit={handleAddProduct} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-stone-700 block mb-1">Product Name (from approved menu)</label>
+                <label className="text-xs font-semibold text-[#0f2231] block mb-1">Product Name (from approved menu)</label>
                 <input
                   type="text"
                   required
                   value={addForm.name}
                   onChange={(e) => setAddForm({ ...addForm, name: e.target.value })}
                   placeholder="e.g. Black Forest Cake"
-                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                  className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-stone-700 block mb-1">Category</label>
+                <label className="text-xs font-semibold text-[#0f2231] block mb-1">Category</label>
                 <select
                   required
                   value={addForm.category_id}
                   onChange={(e) => setAddForm({ ...addForm, category_id: e.target.value })}
-                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                  className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                 >
                   <option value="">Select category...</option>
                   {categories.map((c) => (
@@ -1516,18 +1516,18 @@ const OwnerProductsTab: React.FC = () => {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-stone-700 block mb-1">Variant Name</label>
+                  <label className="text-xs font-semibold text-[#0f2231] block mb-1">Variant Name</label>
                   <input
                     type="text"
                     required
                     value={addForm.variant_name}
                     onChange={(e) => setAddForm({ ...addForm, variant_name: e.target.value })}
                     placeholder="Standard"
-                    className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                    className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-stone-700 block mb-1">Price (₹)</label>
+                  <label className="text-xs font-semibold text-[#0f2231] block mb-1">Price (₹)</label>
                   <input
                     type="number"
                     required
@@ -1535,16 +1535,16 @@ const OwnerProductsTab: React.FC = () => {
                     value={addForm.price}
                     onChange={(e) => setAddForm({ ...addForm, price: e.target.value })}
                     placeholder="0"
-                    className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                    className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-xs font-semibold text-stone-700 block mb-1">Availability</label>
+                <label className="text-xs font-semibold text-[#0f2231] block mb-1">Availability</label>
                 <select
                   value={addForm.availability}
                   onChange={(e) => setAddForm({ ...addForm, availability: e.target.value })}
-                  className="w-full text-sm border border-stone-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+                  className="w-full text-sm border border-[#d1e3ef] rounded-xl px-3 py-2 focus:outline-none focus:border-[#006199]"
                 >
                   <option value="AVAILABLE">Available</option>
                   <option value="UNAVAILABLE">Unavailable</option>
@@ -1555,14 +1555,14 @@ const OwnerProductsTab: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddForm(false)}
-                  className="flex-1 px-4 py-2 text-sm rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50"
+                  className="flex-1 px-4 py-2 text-sm rounded-xl border border-[#d1e3ef] text-[#4a6275] hover:bg-[#f0f5f9]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={addSaving}
-                  className="flex-1 px-4 py-2 text-sm rounded-xl bg-amber-700 text-white font-semibold hover:bg-amber-800 disabled:opacity-50 transition flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 text-sm rounded-xl bg-[#006199] text-white font-semibold hover:bg-[#004d7a] disabled:opacity-50 transition flex items-center justify-center gap-2"
                 >
                   {addSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Add to Catalogue'}
                 </button>
@@ -1612,22 +1612,22 @@ const OwnerCategoriesTab: React.FC = () => {
       ) : error ? (
         <ErrorState message={error} onRetry={load} />
       ) : (
-        <div className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden">
-          <div className="divide-y divide-stone-100">
+        <div className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs overflow-hidden">
+          <div className="divide-y divide-[#e8f2f9]">
             {categories.map((cat, idx) => (
               <div key={cat.id} className="px-5 py-3.5 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="w-6 h-6 rounded-full bg-stone-100 text-stone-600 text-[11px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-6 h-6 rounded-full bg-[#e0f3fd] text-[#4a6275] text-[11px] font-bold flex items-center justify-center shrink-0">
                     {cat.display_order || idx + 1}
                   </span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-stone-900 text-sm truncate">{cat.name}</p>
+                    <p className="font-semibold text-[#0f2231] text-sm truncate">{cat.name}</p>
                     {cat.description && (
-                      <p className="text-[11px] text-stone-400 truncate">{cat.description}</p>
+                      <p className="text-[11px] text-[#7a9db3] truncate">{cat.description}</p>
                     )}
                   </div>
                 </div>
-                <span className="text-xs font-bold px-2.5 py-1 bg-stone-100 text-stone-700 rounded-full shrink-0">
+                <span className="text-xs font-bold px-2.5 py-1 bg-[#e0f3fd] text-[#0f2231] rounded-full shrink-0">
                   {cat.product_count ?? 0} products
                 </span>
               </div>
@@ -1682,20 +1682,20 @@ const OwnerCustomersTab: React.FC = () => {
         subtitle={`${customers.length} registered customers.`}
       />
 
-      <div className="bg-white rounded-xl border border-stone-200/80 p-4 shadow-xs flex gap-3">
+      <div className="bg-white rounded-xl border border-[#d1e3ef] p-4 shadow-xs flex gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#7a9db3] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name, email or phone..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-hidden focus:border-amber-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#f0f5f9] border border-[#d1e3ef] rounded-lg focus:outline-hidden focus:border-[#006199]"
           />
         </div>
         <button
           onClick={load}
-          className="p-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition"
+          className="p-1.5 rounded-lg bg-[#e0f3fd] text-[#4a6275] hover:bg-[#8ACFF8]/40 transition"
         >
           <RefreshCw className="w-4 h-4" />
         </button>
@@ -1708,42 +1708,42 @@ const OwnerCustomersTab: React.FC = () => {
       ) : filtered.length === 0 ? (
         <EmptyState icon={Users} title="No customers found" description="Registered customers will appear here." />
       ) : (
-        <div className="bg-white rounded-xl border border-stone-200/80 shadow-xs overflow-hidden">
+        <div className="bg-white rounded-xl border border-[#d1e3ef] shadow-xs overflow-hidden">
           {/* Desktop header */}
-          <div className="hidden sm:grid grid-cols-4 px-5 py-3 bg-stone-50 border-b border-stone-100 text-[11px] font-bold uppercase tracking-wider text-stone-400">
+          <div className="hidden sm:grid grid-cols-4 px-5 py-3 bg-[#f0f5f9] border-b border-[#e8f2f9] text-[11px] font-bold uppercase tracking-wider text-[#7a9db3]">
             <span>Customer</span>
             <span>Contact</span>
             <span className="text-center">Orders</span>
             <span className="text-right">Total Spent</span>
           </div>
 
-          <div className="divide-y divide-stone-100">
+          <div className="divide-y divide-[#e8f2f9]">
             {filtered.map((c) => (
               <div
                 key={c.id}
                 className="px-5 py-3.5 grid sm:grid-cols-4 gap-2 sm:gap-0 items-center"
               >
                 <div>
-                  <p className="font-semibold text-stone-900 text-xs sm:text-sm">
+                  <p className="font-semibold text-[#0f2231] text-xs sm:text-sm">
                     {c.full_name || '—'}
                   </p>
-                  <p className="text-[11px] text-stone-400 truncate">{c.email}</p>
+                  <p className="text-[11px] text-[#7a9db3] truncate">{c.email}</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs text-stone-600">
+                <div className="flex items-center gap-1.5 text-xs text-[#4a6275]">
                   {c.phone ? (
                     <>
-                      <Phone className="w-3 h-3 text-stone-400" />
+                      <Phone className="w-3 h-3 text-[#7a9db3]" />
                       {c.phone}
                     </>
                   ) : (
-                    <span className="text-stone-300 italic">No phone</span>
+                    <span className="text-[#7a9db3] italic">No phone</span>
                   )}
                 </div>
                 <div className="text-center">
-                  <span className="text-xs font-bold text-stone-800">
+                  <span className="text-xs font-bold text-[#0f2231]">
                     {c.order_count || 0}
                   </span>
-                  <span className="text-[10px] text-stone-400 ml-1 sm:hidden">orders</span>
+                  <span className="text-[10px] text-[#7a9db3] ml-1 sm:hidden">orders</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs font-bold text-emerald-700">
@@ -1774,54 +1774,54 @@ const OwnerDeliveryTab: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SectionCard title="Delivery Configuration" subtitle="Active delivery rules">
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-2.5 border-b border-stone-100">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
-                <MapPin className="w-4 h-4 text-amber-600" />
+            <div className="flex items-center justify-between py-2.5 border-b border-[#e8f2f9]">
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
+                <MapPin className="w-4 h-4 text-[#006199]" />
                 <span>Maximum Delivery Radius</span>
               </div>
-              <span className="text-sm font-bold text-stone-900">10 km</span>
+              <span className="text-sm font-bold text-[#0f2231]">10 km</span>
             </div>
-            <div className="flex items-center justify-between py-2.5 border-b border-stone-100">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
-                <IndianRupee className="w-4 h-4 text-amber-600" />
+            <div className="flex items-center justify-between py-2.5 border-b border-[#e8f2f9]">
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
+                <IndianRupee className="w-4 h-4 text-[#006199]" />
                 <span>Delivery Charge</span>
               </div>
-              <span className="text-sm font-bold text-stone-900">₹7 per km</span>
+              <span className="text-sm font-bold text-[#0f2231]">₹7 per km</span>
             </div>
             <div className="flex items-center justify-between py-2.5">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
-                <Truck className="w-4 h-4 text-amber-600" />
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
+                <Truck className="w-4 h-4 text-[#006199]" />
                 <span>Free Delivery Threshold</span>
               </div>
-              <span className="text-sm font-bold text-stone-500 italic">None</span>
+              <span className="text-sm font-bold text-[#4a6275] italic">None</span>
             </div>
           </div>
         </SectionCard>
 
         <SectionCard title="Pickup Configuration" subtitle="In-store pickup settings">
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-2.5 border-b border-stone-100">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
+            <div className="flex items-center justify-between py-2.5 border-b border-[#e8f2f9]">
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
                 <IndianRupee className="w-4 h-4 text-teal-600" />
                 <span>Pickup Charge</span>
               </div>
               <span className="text-sm font-bold text-green-700">Free (₹0)</span>
             </div>
-            <div className="flex items-center justify-between py-2.5 border-b border-stone-100">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
+            <div className="flex items-center justify-between py-2.5 border-b border-[#e8f2f9]">
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
                 <MapPin className="w-4 h-4 text-teal-600" />
                 <span>Pickup Location</span>
               </div>
-              <span className="text-xs font-semibold text-stone-700 text-right max-w-[160px]">
+              <span className="text-xs font-semibold text-[#0f2231] text-right max-w-[160px]">
                 Cake Box Store, Kakinada
               </span>
             </div>
             <div className="flex items-center justify-between py-2.5">
-              <div className="flex items-center gap-2 text-xs text-stone-600">
+              <div className="flex items-center gap-2 text-xs text-[#4a6275]">
                 <Clock className="w-4 h-4 text-teal-600" />
                 <span>Available Hours</span>
               </div>
-              <span className="text-sm font-bold text-stone-900">10 AM – 10 PM</span>
+              <span className="text-sm font-bold text-[#0f2231]">10 AM – 10 PM</span>
             </div>
           </div>
         </SectionCard>
@@ -1852,7 +1852,7 @@ const OwnerDeliveryTab: React.FC = () => {
                     >
                       {idx + 1}
                     </div>
-                    <span className="text-xs text-stone-700 font-medium">{step}</span>
+                    <span className="text-xs text-[#0f2231] font-medium">{step}</span>
                     {idx < steps.length - 1 && (
                       <ArrowRight className={`w-3 h-3 text-${color}-400 ml-auto`} />
                     )}
@@ -1888,9 +1888,9 @@ const OwnerSettingsTab: React.FC = () => {
               { label: 'Phone', value: '+91 99939 99528' },
               { label: 'Service Area', value: 'Kakinada city (within 10 km)' },
             ].map(({ label, value }) => (
-              <div key={label} className="flex items-start justify-between gap-4 py-2 border-b border-stone-100 last:border-0">
-                <span className="text-xs text-stone-500 shrink-0">{label}</span>
-                <span className="text-xs font-semibold text-stone-800 text-right">{value}</span>
+              <div key={label} className="flex items-start justify-between gap-4 py-2 border-b border-[#e8f2f9] last:border-0">
+                <span className="text-xs text-[#4a6275] shrink-0">{label}</span>
+                <span className="text-xs font-semibold text-[#0f2231] text-right">{value}</span>
               </div>
             ))}
           </div>
@@ -1898,11 +1898,11 @@ const OwnerSettingsTab: React.FC = () => {
 
         <SectionCard title="Operating Hours" subtitle="Store open hours">
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between items-center py-2 border-b border-stone-100">
-              <span className="text-stone-500">Monday – Sunday</span>
-              <span className="font-bold text-stone-900">10:00 AM – 10:00 PM</span>
+            <div className="flex justify-between items-center py-2 border-b border-[#e8f2f9]">
+              <span className="text-[#4a6275]">Monday – Sunday</span>
+              <span className="font-bold text-[#0f2231]">10:00 AM – 10:00 PM</span>
             </div>
-            <div className="py-2 bg-amber-50 rounded-lg px-3 border border-amber-100 text-amber-800 text-[11px]">
+            <div className="py-2 bg-[#e0f3fd] rounded-lg px-3 border border-[#d1e3ef] text-[#004d7a] text-[11px]">
               <Info className="w-3.5 h-3.5 inline mr-1.5" />
               Open every day of the week, including public holidays.
             </div>
@@ -1911,25 +1911,25 @@ const OwnerSettingsTab: React.FC = () => {
       </div>
 
       <SectionCard title="Policies" subtitle="Business and customer service policies">
-        <div className="space-y-4 text-xs text-stone-700 leading-relaxed">
+        <div className="space-y-4 text-xs text-[#0f2231] leading-relaxed">
           <div>
-            <p className="font-bold text-stone-900 mb-1">Cancellation Policy</p>
+            <p className="font-bold text-[#0f2231] mb-1">Cancellation Policy</p>
             <p>
               Orders can be cancelled before they reach the PREPARING status. Once the bakery
               begins preparation, cancellations may not be possible. Please contact the store
               at +91 99939 99528 for assistance.
             </p>
           </div>
-          <div className="border-t border-stone-100 pt-3">
-            <p className="font-bold text-stone-900 mb-1">Refund Policy</p>
+          <div className="border-t border-[#e8f2f9] pt-3">
+            <p className="font-bold text-[#0f2231] mb-1">Refund Policy</p>
             <p>
               Refunds are evaluated on a case-by-case basis. Quality issues reported within 2
               hours of delivery or pickup may be eligible for a replacement or store credit.
               Contact us directly.
             </p>
           </div>
-          <div className="border-t border-stone-100 pt-3">
-            <p className="font-bold text-stone-900 mb-1">Custom Cake Policy</p>
+          <div className="border-t border-[#e8f2f9] pt-3">
+            <p className="font-bold text-[#0f2231] mb-1">Custom Cake Policy</p>
             <p>
               Custom cakes require a confirmed quotation before preparation begins. Payment terms
               are agreed upon acceptance of the quote. Minimum 24–48 hours notice required
@@ -1985,27 +1985,27 @@ const OwnerKnowledgeTab: React.FC = () => {
               label="Total Chunks"
               value={stats.total_chunks || 0}
               icon={BookOpen}
-              variant="amber"
+              variant="accent"
             />
             <StatCard
               label="DOCX Chunks"
               value={stats.sources?.['docx:master_info'] ?? stats.by_source?.['docx:master_info'] ?? 0}
               icon={FileText}
-              variant="stone"
+              variant="neutral"
               sub="Master info document"
             />
             <StatCard
               label="XLSX Chunks"
               value={stats.sources?.['xlsx:menu'] ?? stats.by_source?.['xlsx:menu'] ?? 0}
               icon={Table2}
-              variant="purple"
+              variant="primary"
               sub="Menu data"
             />
             <StatCard
               label="With Embeddings"
               value={stats.embedded_chunks ?? stats.chunks_with_embeddings ?? stats.total_chunks ?? 0}
               icon={Cpu}
-              variant="emerald"
+              variant="light"
             />
           </div>
 
@@ -2018,9 +2018,9 @@ const OwnerKnowledgeTab: React.FC = () => {
                   { label: 'Provider', value: 'Google Gemini API' },
                   { label: 'Storage', value: 'Supabase pgvector' },
                 ].map(({ label, value }) => (
-                  <div key={label} className="flex justify-between py-1.5 border-b border-stone-100 last:border-0">
-                    <span className="text-stone-500">{label}</span>
-                    <span className="font-semibold text-stone-800">{value}</span>
+                  <div key={label} className="flex justify-between py-1.5 border-b border-[#e8f2f9] last:border-0">
+                    <span className="text-[#4a6275]">{label}</span>
+                    <span className="font-semibold text-[#0f2231]">{value}</span>
                   </div>
                 ))}
               </div>
@@ -2048,7 +2048,7 @@ const OwnerKnowledgeTab: React.FC = () => {
                   return (
                     <div
                       key={source}
-                      className="flex items-center justify-between p-3 rounded-xl border border-stone-100 bg-stone-50/50"
+                      className="flex items-center justify-between p-3 rounded-xl border border-[#e8f2f9] bg-[#f0f5f9]/50"
                     >
                       <div className="flex items-center gap-3">
                         <div
@@ -2057,11 +2057,11 @@ const OwnerKnowledgeTab: React.FC = () => {
                           <Icon className={`w-4 h-4 ${color}`} />
                         </div>
                         <div>
-                          <p className="text-xs font-semibold text-stone-800">{label}</p>
-                          <p className="text-[11px] text-stone-400">{source}</p>
+                          <p className="text-xs font-semibold text-[#0f2231]">{label}</p>
+                          <p className="text-[11px] text-[#7a9db3]">{source}</p>
                         </div>
                       </div>
-                      <span className="text-sm font-bold text-stone-900">{count} chunks</span>
+                      <span className="text-sm font-bold text-[#0f2231]">{count} chunks</span>
                     </div>
                   );
                 })}
@@ -2080,9 +2080,9 @@ const OwnerKnowledgeTab: React.FC = () => {
               ].map(({ label, status }) => (
                 <div
                   key={label}
-                  className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0 text-xs"
+                  className="flex items-center justify-between py-2 border-b border-[#e8f2f9] last:border-0 text-xs"
                 >
-                  <span className="text-stone-600">{label}</span>
+                  <span className="text-[#4a6275]">{label}</span>
                   <span className="text-emerald-700 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     {status}
@@ -2142,7 +2142,7 @@ export const OwnerDashboardPage: React.FC = () => {
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#faf8f5]">
-        <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#006199]" />
       </div>
     );
   }
@@ -2168,10 +2168,10 @@ export const OwnerDashboardPage: React.FC = () => {
     // Unrecognised sub-route → redirect
     return (
       <div className="text-center py-16">
-        <p className="text-stone-500 text-sm">Page not found in owner portal.</p>
+        <p className="text-[#4a6275] text-sm">Page not found in owner portal.</p>
         <button
           onClick={() => navigate('/owner')}
-          className="mt-3 text-xs text-amber-700 font-semibold hover:underline"
+          className="mt-3 text-xs text-[#006199] font-semibold hover:underline"
         >
           Go to Overview
         </button>
@@ -2192,3 +2192,4 @@ export const OwnerDashboardPage: React.FC = () => {
 };
 
 export default OwnerDashboardPage;
+

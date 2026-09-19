@@ -6,39 +6,53 @@ export interface StatusBadgeProps {
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'sm' }) => {
-  const map: Record<string, { label: string; cls: string }> = {
-    // Order lifecycles
-    PENDING: { label: 'Pending', cls: 'bg-amber-50 text-amber-800 border-amber-200' },
-    CONFIRMED: { label: 'Confirmed', cls: 'bg-blue-50 text-blue-800 border-blue-200' },
-    PREPARING: { label: 'Preparing', cls: 'bg-purple-50 text-purple-800 border-purple-200' },
-    READY: { label: 'Ready for Pickup', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
-    OUT_FOR_DELIVERY: { label: 'Out for Delivery', cls: 'bg-orange-50 text-orange-800 border-orange-200' },
-    DELIVERED: { label: 'Delivered', cls: 'bg-green-50 text-green-800 border-green-200' },
-    PICKED_UP: { label: 'Picked Up', cls: 'bg-green-50 text-green-800 border-green-200' },
-    CANCELLED: { label: 'Cancelled', cls: 'bg-red-50 text-red-800 border-red-200' },
+  // Order lifecycle — keep semantic colour clarity (no forced blue/yellow on all)
+  const map: Record<string, { label: string; bg: string; color: string; dot: string }> = {
+    // Regular order statuses
+    PENDING:          { label: 'Pending',          bg: '#FFF8E1', color: '#8a6000', dot: '#FFD444' },
+    CONFIRMED:        { label: 'Confirmed',         bg: 'var(--db-primary-soft)', color: 'var(--db-primary)', dot: 'var(--db-primary)' },
+    PREPARING:        { label: 'Preparing',         bg: '#ede9fe', color: '#5b21b6', dot: '#8b5cf6' },
+    READY:            { label: 'Ready for Pickup',  bg: '#ecfdf5', color: '#065f46', dot: '#10b981' },
+    OUT_FOR_DELIVERY: { label: 'Out for Delivery',  bg: '#e0f3fd', color: 'var(--db-primary-dark)', dot: 'var(--db-primary-light)' },
+    DELIVERED:        { label: 'Delivered',         bg: '#dcfce7', color: '#166534', dot: '#22c55e' },
+    PICKED_UP:        { label: 'Picked Up',         bg: '#dcfce7', color: '#166534', dot: '#22c55e' },
+    CANCELLED:        { label: 'Cancelled',         bg: '#fef2f2', color: '#991b1b', dot: '#ef4444' },
 
     // Custom cake statuses
-    ACCEPTED: { label: 'Accepted', cls: 'bg-blue-50 text-blue-800 border-blue-200' },
-    QUOTED: { label: 'Quote Ready', cls: 'bg-amber-50 text-amber-800 border-amber-200' },
-    REJECTED: { label: 'Rejected', cls: 'bg-red-50 text-red-800 border-red-200' },
+    ACCEPTED:         { label: 'Accepted',          bg: 'var(--db-primary-soft)', color: 'var(--db-primary)', dot: 'var(--db-primary)' },
+    QUOTED:           { label: 'Quote Ready',       bg: '#FFF8E1', color: '#8a6000', dot: '#FFD444' },
+    REJECTED:         { label: 'Rejected',          bg: '#fef2f2', color: '#991b1b', dot: '#ef4444' },
 
-    // Product availability
-    AVAILABLE: { label: 'Available', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
-    UNAVAILABLE: { label: 'Unavailable', cls: 'bg-stone-100 text-stone-700 border-stone-300' },
-    HIDDEN: { label: 'Hidden', cls: 'bg-stone-100 text-stone-500 border-stone-200' },
+    // Product availability — use palette
+    AVAILABLE:        { label: 'Available',         bg: 'var(--db-primary-soft)', color: 'var(--db-primary)',      dot: 'var(--db-primary)' },
+    UNAVAILABLE:      { label: 'Unavailable',       bg: '#f1f5f9', color: '#475569', dot: '#94a3b8' },
+    HIDDEN:           { label: 'Hidden',            bg: '#f1f5f9', color: '#64748b', dot: '#cbd5e1' },
+    FEATURED:         { label: 'Featured',          bg: '#FFF8E1', color: '#8a6000', dot: '#FFD444' },
   };
 
-  const { label, cls } = map[status] || {
+  const entry = map[status] ?? {
     label: status.replace(/_/g, ' '),
-    cls: 'bg-stone-50 text-stone-700 border-stone-200',
+    bg: '#f1f5f9',
+    color: '#475569',
+    dot: '#94a3b8',
   };
 
   const sizeCls = size === 'md' ? 'px-3 py-1 text-xs' : 'px-2.5 py-0.5 text-[11px]';
 
   return (
-    <span className={`inline-flex items-center font-medium rounded-full border ${sizeCls} ${cls}`}>
-      <span className="w-1.5 h-1.5 rounded-full mr-1.5 bg-current opacity-70" />
-      {label}
+    <span
+      className={`inline-flex items-center font-semibold rounded-full border ${sizeCls}`}
+      style={{
+        background: entry.bg,
+        color: entry.color,
+        borderColor: entry.dot + '33',
+      }}
+    >
+      <span
+        className="w-1.5 h-1.5 rounded-full mr-1.5 shrink-0"
+        style={{ background: entry.dot }}
+      />
+      {entry.label}
     </span>
   );
 };

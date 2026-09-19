@@ -82,22 +82,22 @@ export const OrdersPage: React.FC = () => {
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-stone-900">
+        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-[#0f2231]">
           My Orders & Requests
         </h1>
-        <p className="text-xs sm:text-sm text-stone-500 mt-1">
+        <p className="text-xs sm:text-sm text-[#4a6275] mt-1">
           Track your bakery orders and review bespoke custom cake inquiries.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-stone-200">
+      <div className="flex border-b border-[#d1e3ef]">
         <button
           onClick={() => setActiveTab('REGULAR')}
           className={`pb-3 px-4 text-sm font-bold border-b-2 transition-colors cursor-pointer ${
             activeTab === 'REGULAR'
-              ? 'border-amber-800 text-amber-900'
-              : 'border-transparent text-stone-500 hover:text-stone-800'
+              ? 'border-[#006199] text-[#006199]'
+              : 'border-transparent text-[#4a6275] hover:text-[#0f2231]'
           }`}
         >
           Bakery Orders ({regularOrders.length})
@@ -106,11 +106,11 @@ export const OrdersPage: React.FC = () => {
           onClick={() => setActiveTab('CUSTOM')}
           className={`pb-3 px-4 text-sm font-bold border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'CUSTOM'
-              ? 'border-amber-800 text-amber-900'
-              : 'border-transparent text-stone-500 hover:text-stone-800'
+              ? 'border-[#006199] text-[#006199]'
+              : 'border-transparent text-[#4a6275] hover:text-[#0f2231]'
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+          <Sparkles className="w-3.5 h-3.5 text-[#006199]" />
           Custom Cake Requests ({customOrders.length})
         </button>
       </div>
@@ -122,14 +122,14 @@ export const OrdersPage: React.FC = () => {
             {regularOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-4"
+                className="bg-white p-5 rounded-2xl border border-[#d1e3ef] shadow-xs space-y-4"
               >
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-stone-100 text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#e8f2f9] text-xs">
                   <div>
-                    <span className="font-bold text-stone-900 text-sm block">
+                    <span className="font-bold text-[#0f2231] text-sm block">
                       Order #{order.order_number}
                     </span>
-                    <span className="text-stone-400">
+                    <span className="text-[#7a9db3]">
                       Placed on {new Date(order.created_at).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
@@ -143,7 +143,7 @@ export const OrdersPage: React.FC = () => {
                     {getStatusBadge(order.status)}
                     <Link
                       to={`/orders/${order.id}`}
-                      className="inline-flex items-center text-xs font-semibold text-amber-800 hover:text-amber-900"
+                      className="inline-flex items-center text-xs font-semibold text-[#006199] hover:text-[#004d7a]"
                     >
                       Details <ChevronRight className="w-4 h-4" />
                     </Link>
@@ -151,21 +151,21 @@ export const OrdersPage: React.FC = () => {
                 </div>
 
                 {/* Items preview */}
-                <div className="space-y-1.5 text-xs text-stone-600">
+                <div className="space-y-1.5 text-xs text-[#4a6275]">
                   {order.order_items?.map((item) => (
                     <div key={item.id} className="flex justify-between items-center">
                       <span>
                         {item.quantity}x {item.product_name_snapshot}{' '}
-                        <span className="text-stone-400">({item.variant_name_snapshot})</span>
+                        <span className="text-[#7a9db3]">({item.variant_name_snapshot})</span>
                       </span>
-                      <span className="font-semibold text-stone-900">₹{item.line_total}</span>
+                      <span className="font-semibold text-[#0f2231]">₹{item.line_total}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Order Summary & Footer */}
-                <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                  <div className="space-x-3 text-stone-500">
+                <div className="pt-3 border-t border-[#e8f2f9] flex items-center justify-between text-xs">
+                  <div className="space-x-3 text-[#4a6275]">
                     <span>
                       Method: <strong>{order.delivery_type}</strong>
                     </span>
@@ -175,18 +175,18 @@ export const OrdersPage: React.FC = () => {
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className="text-stone-500 mr-2">Total:</span>
-                    <span className="text-base font-extrabold text-stone-900">₹{order.total}</span>
+                    <span className="text-[#4a6275] mr-2">Total:</span>
+                    <span className="text-base font-extrabold text-[#0f2231]">₹{order.total}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-6">
-            <Package className="w-12 h-12 text-stone-300 mx-auto mb-2" />
-            <h3 className="font-bold text-stone-800 font-serif">No bakery orders yet</h3>
-            <p className="text-xs text-stone-500 mt-1 mb-4">
+          <div className="text-center py-16 bg-white rounded-3xl border border-[#d1e3ef] p-6">
+            <Package className="w-12 h-12 text-[#7a9db3] mx-auto mb-2" />
+            <h3 className="font-bold text-[#0f2231] font-serif">No bakery orders yet</h3>
+            <p className="text-xs text-[#4a6275] mt-1 mb-4">
               Explore our freshly baked treats and place your first order.
             </p>
             <Link to="/menu">
@@ -203,14 +203,14 @@ export const OrdersPage: React.FC = () => {
             {customOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-4"
+                className="bg-white p-5 rounded-2xl border border-[#d1e3ef] shadow-xs space-y-4"
               >
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-stone-100 text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#e8f2f9] text-xs">
                   <div>
-                    <span className="font-bold text-stone-900 text-sm block">
+                    <span className="font-bold text-[#0f2231] text-sm block">
                       Custom Cake: {order.occasion || 'Celebration'}
                     </span>
-                    <span className="text-stone-400">
+                    <span className="text-[#7a9db3]">
                       Required by:{' '}
                       <strong>{new Date(order.required_date).toLocaleDateString('en-IN')}</strong>{' '}
                       {order.preferred_time && `(${order.preferred_time})`}
@@ -220,45 +220,45 @@ export const OrdersPage: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-                  <div className="p-2.5 bg-stone-50 rounded-xl">
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Flavour</span>
-                    <span className="font-semibold text-stone-800">{order.flavour || 'Standard'}</span>
+                  <div className="p-2.5 bg-[#f0f5f9] rounded-xl">
+                    <span className="text-[10px] uppercase font-bold text-[#7a9db3] block">Flavour</span>
+                    <span className="font-semibold text-[#0f2231]">{order.flavour || 'Standard'}</span>
                   </div>
-                  <div className="p-2.5 bg-stone-50 rounded-xl">
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Weight</span>
-                    <span className="font-semibold text-stone-800">{order.weight || '1 kg'}</span>
+                  <div className="p-2.5 bg-[#f0f5f9] rounded-xl">
+                    <span className="text-[10px] uppercase font-bold text-[#7a9db3] block">Weight</span>
+                    <span className="font-semibold text-[#0f2231]">{order.weight || '1 kg'}</span>
                   </div>
-                  <div className="p-2.5 bg-stone-50 rounded-xl">
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Theme</span>
-                    <span className="font-semibold text-stone-800">{order.theme || 'Custom design'}</span>
+                  <div className="p-2.5 bg-[#f0f5f9] rounded-xl">
+                    <span className="text-[10px] uppercase font-bold text-[#7a9db3] block">Theme</span>
+                    <span className="font-semibold text-[#0f2231]">{order.theme || 'Custom design'}</span>
                   </div>
                 </div>
 
                 {order.cake_message && (
-                  <div className="text-xs text-stone-600 bg-amber-50/60 p-2.5 rounded-xl border border-amber-100">
-                    <span className="font-bold text-amber-900">Message on cake:</span> "
+                  <div className="text-xs text-[#4a6275] bg-[#F4EB6C]/30 p-2.5 rounded-xl border border-[#FFD444]/60">
+                    <span className="font-bold text-[#004d7a]">Message on cake:</span> "
                     {order.cake_message}"
                   </div>
                 )}
 
                 {order.additional_requirements && (
-                  <p className="text-xs text-stone-500">
+                  <p className="text-xs text-[#4a6275]">
                     <strong>Notes:</strong> {order.additional_requirements}
                   </p>
                 )}
 
                 {/* Quoted state actions */}
                 {order.status === 'QUOTED' && order.final_price && (
-                  <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="p-4 bg-[#F4EB6C]/30 rounded-xl border border-[#FFD444] flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div>
-                      <span className="text-xs font-bold text-amber-900 block">
+                      <span className="text-xs font-bold text-[#004d7a] block">
                         Official Bakery Quote Issued
                       </span>
-                      <span className="text-xl font-extrabold text-stone-900">
+                      <span className="text-xl font-extrabold text-[#0f2231]">
                         ₹{order.final_price}
                       </span>
                       {order.owner_notes && (
-                        <p className="text-xs text-stone-600 mt-0.5">Note: {order.owner_notes}</p>
+                        <p className="text-xs text-[#4a6275] mt-0.5">Note: {order.owner_notes}</p>
                       )}
                     </div>
                     <Button
@@ -275,10 +275,10 @@ export const OrdersPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-6">
-            <Sparkles className="w-12 h-12 text-stone-300 mx-auto mb-2" />
-            <h3 className="font-bold text-stone-800 font-serif">No custom cake requests</h3>
-            <p className="text-xs text-stone-500 mt-1 mb-4">
+          <div className="text-center py-16 bg-white rounded-3xl border border-[#d1e3ef] p-6">
+            <Sparkles className="w-12 h-12 text-[#7a9db3] mx-auto mb-2" />
+            <h3 className="font-bold text-[#0f2231] font-serif">No custom cake requests</h3>
+            <p className="text-xs text-[#4a6275] mt-1 mb-4">
               Planning a party? Design your bespoke celebration cake today.
             </p>
             <Link to="/custom-cake">

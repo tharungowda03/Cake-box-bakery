@@ -6,7 +6,8 @@ export interface StatCardProps {
   value: string | number;
   sub?: string;
   icon: LucideIcon;
-  variant?: 'amber' | 'emerald' | 'blue' | 'purple' | 'stone';
+  /** Controls the icon container color accent */
+  variant?: 'primary' | 'light' | 'accent' | 'soft' | 'neutral' | string;
   onClick?: () => void;
 }
 
@@ -15,50 +16,65 @@ export const StatCard: React.FC<StatCardProps> = ({
   value,
   sub,
   icon: Icon,
-  variant = 'amber',
+  variant = 'primary',
   onClick,
 }) => {
-  const variantStyles = {
-    amber: {
-      iconBg: 'bg-amber-50 text-amber-700 border-amber-100',
-      valueColor: 'text-stone-900',
-    },
-    emerald: {
-      iconBg: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-      valueColor: 'text-emerald-900',
-    },
-    blue: {
-      iconBg: 'bg-blue-50 text-blue-700 border-blue-100',
-      valueColor: 'text-stone-900',
-    },
-    purple: {
-      iconBg: 'bg-purple-50 text-purple-700 border-purple-100',
-      valueColor: 'text-stone-900',
-    },
-    stone: {
-      iconBg: 'bg-stone-100 text-stone-700 border-stone-200',
-      valueColor: 'text-stone-900',
-    },
-  }[variant];
+  const iconStyleMap: Record<string, { bg: string; color: string }> = {
+    primary: { bg: 'var(--db-primary)',       color: '#ffffff' },
+    light:   { bg: 'var(--db-primary-soft)',  color: 'var(--db-primary)' },
+    accent:  { bg: 'var(--db-accent)',        color: 'var(--db-text)' },
+    soft:    { bg: 'var(--db-accent-soft)',   color: 'var(--db-text)' },
+    neutral: { bg: '#e9eef3',                 color: 'var(--db-text-muted)' },
+    stone:   { bg: '#e9eef3',                 color: 'var(--db-text-muted)' },
+    amber:   { bg: 'var(--db-accent)',        color: 'var(--db-text)' },
+    emerald: { bg: 'var(--db-primary-soft)',  color: 'var(--db-primary)' },
+    purple:  { bg: 'var(--db-primary-soft)',  color: 'var(--db-primary)' },
+  };
+  const iconStyle = iconStyleMap[variant] ?? { bg: 'var(--db-primary-soft)', color: 'var(--db-primary)' };
 
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-xl border border-stone-200/80 shadow-xs p-5 transition-all duration-150 ${
-        onClick ? 'cursor-pointer hover:border-amber-300 hover:shadow-sm' : ''
-      }`}
+      className="bg-white rounded-xl border p-5 transition-all duration-150"
+      style={{
+        borderColor: 'var(--db-border)',
+        boxShadow: '0 1px 3px rgba(0,97,153,0.05)',
+        cursor: onClick ? 'pointer' : undefined,
+      }}
+      onMouseEnter={(e) => {
+        if (onClick) {
+          (e.currentTarget as HTMLElement).style.borderColor = 'var(--db-primary-light)';
+          (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,97,153,0.1)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (onClick) {
+          (e.currentTarget as HTMLElement).style.borderColor = 'var(--db-border)';
+          (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(0,97,153,0.05)';
+        }
+      }}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">
+          <p
+            className="text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: 'var(--db-text-subtle)' }}
+          >
             {label}
           </p>
-          <p className={`text-2xl font-bold tracking-tight font-sans ${variantStyles.valueColor}`}>
+          <p className="text-2xl font-bold tracking-tight font-sans" style={{ color: 'var(--db-text)' }}>
             {value}
           </p>
-          {sub && <p className="text-xs text-stone-400 mt-1 font-medium">{sub}</p>}
+          {sub && (
+            <p className="text-xs mt-1 font-medium" style={{ color: 'var(--db-text-subtle)' }}>
+              {sub}
+            </p>
+          )}
         </div>
-        <div className={`w-11 h-11 rounded-xl flex items-center justify-center border ${variantStyles.iconBg}`}>
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+          style={{ background: iconStyle.bg, color: iconStyle.color }}
+        >
           <Icon className="w-5 h-5" />
         </div>
       </div>
