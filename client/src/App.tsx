@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { Layout } from './components/layout/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { OwnerRoute } from './components/auth/OwnerRoute';
 import { ChatWidget } from './components/chat/ChatWidget';
 import { CartNotification } from './components/cart/CartNotification';
 
@@ -68,20 +69,22 @@ function AppShell() {
             }
           />
           {/* Owner Dashboard — all subroutes handled internally */}
+          {/* OwnerRoute enforces: loading → spinner, no user → /login,
+              not OWNER → 403 page, OWNER → allow. Never flashes owner UI. */}
           <Route
             path="/owner"
             element={
-              <ProtectedRoute requiredRole="OWNER">
+              <OwnerRoute>
                 <OwnerDashboardPage />
-              </ProtectedRoute>
+              </OwnerRoute>
             }
           />
           <Route
             path="/owner/*"
             element={
-              <ProtectedRoute requiredRole="OWNER">
+              <OwnerRoute>
                 <OwnerDashboardPage />
-              </ProtectedRoute>
+              </OwnerRoute>
             }
           />
         </Routes>

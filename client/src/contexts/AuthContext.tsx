@@ -6,6 +6,8 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   role: 'CUSTOMER' | 'OWNER' | null;
+  /** True while session OR profile role is still being determined. Never render
+   *  role-gated UI until this is false. */
   loading: boolean;
   signInWithOtp: (email: string) => Promise<{ error: any }>;
   signInWithPassword: (email: string, password: string) => Promise<{ error: any }>;
@@ -19,44 +21,73 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<'CUSTOMER' | 'OWNER' | null>(null);
+  /**
+   * loading remains TRUE until BOTH:
+   *   1. The Supabase session is resolved, AND
+   *   2. The profile role has been fetched from the database
+   *
+   * This prevents the owner route guard from making a routing decision while
+   * the role is still unknown (which would cause a brief flash of the 403 page
+   * or an incorrect redirect before the real role arrives).
+   */
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchProfileRole = async (userId: string) => {
+  /**
+   * Fetches the user's role from public.profiles.
+   * Always resolves (never throws) — defaults to 'CUSTOMER' on any error.
+   * Returns the resolved role so callers can chain on it.
+   */
+  const fetchProfileRole = async (userId: string): Promise<'CUSTOMER' | 'OWNER'> => {
     try {
       const { data } = await supabase
         .from('profiles')
         .select('role')
         .eq('id', userId)
         .single();
-      if (data?.role) {
-        setRole(data.role as 'CUSTOMER' | 'OWNER');
-      } else {
-        setRole('CUSTOMER');
-      }
+      const resolved = (data?.role as 'CUSTOMER' | 'OWNER' | undefined) ?? 'CUSTOMER';
+      setRole(resolved);
+      return resolved;
     } catch {
       setRole('CUSTOMER');
+      return 'CUSTOMER';
     }
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    // -----------------------------------------------------------------------
+    // Initial session load
+    // -----------------------------------------------------------------------
+    // We must NOT call setLoading(false) until fetchProfileRole() has resolved.
+    // If we call it before, the OwnerRoute guard sees loading=false and role=null
+    // and makes an incorrect routing decision.
+    // -----------------------------------------------------------------------
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchProfileRole(session.user.id);
+        // Await role resolution BEFORE marking loading done
+        await fetchProfileRole(session.user.id);
       }
+      // Role is now known (or user is logged out). Safe to stop loading.
       setLoading(false);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    // -----------------------------------------------------------------------
+    // Subsequent auth state changes (sign-in, sign-out, token refresh)
+    // -----------------------------------------------------------------------
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchProfileRole(session.user.id);
+        // Keep loading true while we re-fetch the role on auth change
+        setLoading(true);
+        await fetchProfileRole(session.user.id);
+        setLoading(false);
       } else {
+        // Signed out — clear role immediately
         setRole(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
